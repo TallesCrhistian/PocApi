@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Contexto\" />
+    <Folder Include="ConfiguracaoEntidade\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Migracoes\" />
+    <Folder Include="DadosIniciais\" />
+    <Folder Include="Entidades\" />
+    <Folder Include="UnidadeDeTrabalho\" />
+    <Folder Include="Repositorios\" />
+  </ItemGroup>
+
+</Project>
