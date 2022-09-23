@@ -6,10 +6,10 @@ namespace PocApi.Aplicacao.Servicos
 {
     public interface IClienteServicos
     {
-        Task<ClienteDTO> Inserir(ClienteDTO clienteDTO);
-        Task<ClienteDTO> Alterar(ClienteDTO clienteDTO);
-        Task<List<ClienteDTO>> Listar(ClienteFiltroDTO clienteDTO);
-        Task<ClienteDTO> ObterPorCodigo(int codigo);
+        Task<RespostaServicoDTO<ClienteDTO>> Inserir(ClienteDTO clienteDTO);
+        Task<RespostaServicoDTO<ClienteDTO>> Alterar(ClienteDTO clienteDTO);
+        Task<RespostaServicoDTO<List<ClienteDTO>>> Listar(ClienteFiltroDTO clienteDTO);
+        Task<RespostaServicoDTO<ClienteDTO>> ObterPorCodigo(int codigo);
 
 
     }

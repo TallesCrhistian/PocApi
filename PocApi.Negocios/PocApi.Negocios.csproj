@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PocApi.Compartilhado\PocApi.Compartilhado.csproj" />
+    <ProjectReference Include="..\PocApi.Data\PocApi.Data.csproj" />
   </ItemGroup>
 
 </Project>

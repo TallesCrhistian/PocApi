@@ -7,9 +7,7 @@
   <ItemGroup>
     <Folder Include="ConfiguracaoEntidade\" />
     <Folder Include="DadosIniciais\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="UnidadeDeTrabalho\" />
-    <Folder Include="Repositorios\" />
   </ItemGroup>
 
   <ItemGroup>

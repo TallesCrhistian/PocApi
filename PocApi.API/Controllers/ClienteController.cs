@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PocApi.Aplicacao.Servicos;
 using PocApi.Compartilhado.DTOs;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,19 @@ namespace PocApi.API.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        //[HttpPost]
-        //public async Task<IActionResult> Inserir(ClienteDTO clienteDTO)
-        //{
+        private IClienteServicos _clienteServicos;
 
-        //}
+        public ClienteController(IClienteServicos clienteServicos)
+        {
+            _clienteServicos = clienteServicos;
+        }
+
+        [HttpPost]
+        [Route(nameof(Inserir))]
+        public async Task<IActionResult> Inserir([FromBody] ClienteDTO clienteDTO)
+        {
+            RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.Inserir(clienteDTO);
+            return Ok(respostaServicoDTO);
+        }
     }
 }

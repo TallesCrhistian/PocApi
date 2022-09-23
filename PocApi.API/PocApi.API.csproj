@@ -19,8 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PocApi.Aplicacao\PocApi.Aplicacao.csproj" />
     <ProjectReference Include="..\PocApi.Compartilhado\PocApi.Compartilhado.csproj" />
     <ProjectReference Include="..\PocApi.Data\PocApi.Data.csproj" />
+    <ProjectReference Include="..\PocApi.Negocios\PocApi.Negocios.csproj" />
   </ItemGroup>
 
 </Project>

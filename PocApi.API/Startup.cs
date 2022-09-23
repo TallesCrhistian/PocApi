@@ -28,6 +28,9 @@ namespace PocApi.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AdicionaBancoDeDados(_configuration);
+            services.AdicionarRepositorios();
+            services.AdicionarNegocios();
+            services.AdicionarServicos();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
