@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="Utils\" />
-    <Folder Include="Servicos\" />
     <Folder Include="PerfisDeMapeamento\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PocApi.Data\PocApi.Data.csproj" />
   </ItemGroup>
 
 </Project>

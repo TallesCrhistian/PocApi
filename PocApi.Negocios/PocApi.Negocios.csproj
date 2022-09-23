@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <ProjectReference Include="..\PocApi.Compartilhado\PocApi.Compartilhado.csproj" />
   </ItemGroup>
 
 </Project>

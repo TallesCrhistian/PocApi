@@ -6,9 +6,8 @@
 
   <ItemGroup>
     <Folder Include="ConfiguracaoEntidade\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Migracoes\" />
     <Folder Include="DadosIniciais\" />
+    <Folder Include="Interfaces\" />
     <Folder Include="UnidadeDeTrabalho\" />
     <Folder Include="Repositorios\" />
   </ItemGroup>
@@ -24,6 +23,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PocApi.Compartilhado\PocApi.Compartilhado.csproj" />
   </ItemGroup>
 
 </Project>
