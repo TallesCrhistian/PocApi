@@ -25,7 +25,9 @@ namespace PocApi.API.Controllers
         public async Task<IActionResult> Inserir([FromBody] ClienteDTO clienteDTO)
         {
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.Inserir(clienteDTO);
+            
             return Ok(respostaServicoDTO);
+
         }
     }
 }
