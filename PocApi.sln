@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32901.82
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.API", "PocApi.API\PocApi.API.csproj", "{6A0812DC-FF2E-49FB-8EF2-E8F2265542AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocApi.API", "PocApi.API\PocApi.API.csproj", "{6A0812DC-FF2E-49FB-8EF2-E8F2265542AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.Aplicacao", "PocApi.Aplicacao\PocApi.Aplicacao.csproj", "{E39029DB-1590-463A-BF60-A7E5DF972EAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocApi.Aplicacao", "PocApi.Aplicacao\PocApi.Aplicacao.csproj", "{E39029DB-1590-463A-BF60-A7E5DF972EAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.Dominio", "PocApi.Dominio\PocApi.Dominio.csproj", "{8D82BAF6-2D68-40F0-9F53-D2805F01F3D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocApi.Data", "PocApi.Data\PocApi.Data.csproj", "{F5BE624C-71D1-4372-9044-AE7C26657B5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.Data", "PocApi.Data\PocApi.Data.csproj", "{F5BE624C-71D1-4372-9044-AE7C26657B5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocApi.Compartilhado", "PocApi.Compartilhado\PocApi.Compartilhado.csproj", "{0262BAF4-1653-4F89-AF99-B7B9076C87F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.Compartilhado", "PocApi.Compartilhado\PocApi.Compartilhado.csproj", "{0262BAF4-1653-4F89-AF99-B7B9076C87F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocApi.Negocios", "PocApi.Negocios\PocApi.Negocios.csproj", "{F8DA7C5C-E00B-4716-A307-31B2EF25C6FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.Negocios", "PocApi.Negocios\PocApi.Negocios.csproj", "{F8DA7C5C-E00B-4716-A307-31B2EF25C6FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.Entidades", "Entidades\PocApi.Entidades.csproj", "{788BE1CB-2E6B-487D-B901-ED30FACF21A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.ModelosDeVisualizacao", "PocApi.ModelosDeVisualizacao\PocApi.ModelosDeVisualizacao.csproj", "{A65200E3-4630-4FD1-8283-3C0CF1458E31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +31,6 @@ Global
 		{E39029DB-1590-463A-BF60-A7E5DF972EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E39029DB-1590-463A-BF60-A7E5DF972EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E39029DB-1590-463A-BF60-A7E5DF972EAA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8D82BAF6-2D68-40F0-9F53-D2805F01F3D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D82BAF6-2D68-40F0-9F53-D2805F01F3D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D82BAF6-2D68-40F0-9F53-D2805F01F3D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D82BAF6-2D68-40F0-9F53-D2805F01F3D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F5BE624C-71D1-4372-9044-AE7C26657B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F5BE624C-71D1-4372-9044-AE7C26657B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5BE624C-71D1-4372-9044-AE7C26657B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +43,14 @@ Global
 		{F8DA7C5C-E00B-4716-A307-31B2EF25C6FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8DA7C5C-E00B-4716-A307-31B2EF25C6FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8DA7C5C-E00B-4716-A307-31B2EF25C6FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{788BE1CB-2E6B-487D-B901-ED30FACF21A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{788BE1CB-2E6B-487D-B901-ED30FACF21A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{788BE1CB-2E6B-487D-B901-ED30FACF21A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{788BE1CB-2E6B-487D-B901-ED30FACF21A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A65200E3-4630-4FD1-8283-3C0CF1458E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A65200E3-4630-4FD1-8283-3C0CF1458E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A65200E3-4630-4FD1-8283-3C0CF1458E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A65200E3-4630-4FD1-8283-3C0CF1458E31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

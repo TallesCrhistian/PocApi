@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entidades;
+using Microsoft.EntityFrameworkCore;
 using PocApi.Data.Entidades;
 using System;
 using System.Collections.Generic;

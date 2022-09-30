@@ -8,7 +8,7 @@ namespace PocApi.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Cliente",
+                name: "Clientes",
                 columns: table => new
                 {
                     IdCliente = table.Column<int>(type: "int", nullable: false)
@@ -20,11 +20,11 @@ namespace PocApi.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Cliente", x => x.IdCliente);
+                    table.PrimaryKey("PK_Clientes", x => x.IdCliente);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItemPedido",
+                name: "ItensPedido",
                 columns: table => new
                 {
                     IdPedido = table.Column<int>(type: "int", nullable: false)
@@ -36,11 +36,11 @@ namespace PocApi.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItemPedido", x => x.IdPedido);
+                    table.PrimaryKey("PK_ItensPedido", x => x.IdPedido);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pedido",
+                name: "Pedidos",
                 columns: table => new
                 {
                     IdPedido = table.Column<int>(type: "int", nullable: false)
@@ -51,11 +51,11 @@ namespace PocApi.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pedido", x => x.IdPedido);
+                    table.PrimaryKey("PK_Pedidos", x => x.IdPedido);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Produto",
+                name: "Produtos",
                 columns: table => new
                 {
                     IdProduto = table.Column<int>(type: "int", nullable: false)
@@ -68,11 +68,11 @@ namespace PocApi.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produto", x => x.IdProduto);
+                    table.PrimaryKey("PK_Produtos", x => x.IdProduto);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuario",
+                name: "Usuarios",
                 columns: table => new
                 {
                     IdUsuario = table.Column<int>(type: "int", nullable: false)
@@ -86,26 +86,26 @@ namespace PocApi.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuario", x => x.IdUsuario);
+                    table.PrimaryKey("PK_Usuarios", x => x.IdUsuario);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cliente");
+                name: "Clientes");
 
             migrationBuilder.DropTable(
                 name: "ItensPedido");
 
             migrationBuilder.DropTable(
-                name: "Pedido");
+                name: "Pedidos");
 
             migrationBuilder.DropTable(
-                name: "Produto");
+                name: "Produtos");
 
             migrationBuilder.DropTable(
-                name: "Usuario");
+                name: "Usuarios");
         }
     }
 }

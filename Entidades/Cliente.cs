@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PocApi.Data.Entidades
+namespace Entidades
 {
     public class Cliente
     {

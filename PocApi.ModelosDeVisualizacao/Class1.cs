@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PocApi.Data
+namespace PocApi.ModelosDeVisualizacao
 {
     public class Class1
     {

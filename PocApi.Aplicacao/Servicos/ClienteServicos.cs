@@ -38,7 +38,7 @@ namespace PocApi.Aplicacao.Servicos
             catch (Exception ex)
             {
                 respostaServicoDTO.Sucesso = false;
-                respostaServicoDTO.Mensagem = ex.Message;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
             }
             return respostaServicoDTO;
         }

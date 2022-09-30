@@ -33,5 +33,6 @@ namespace PocApi.API
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             return services;
         }
+       
     }
 }

@@ -1,4 +1,4 @@
-﻿using PocApi.Data.Entidades;
+﻿using Entidades;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

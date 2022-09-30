@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Entidades\PocApi.Entidades.csproj" />
     <ProjectReference Include="..\PocApi.Compartilhado\PocApi.Compartilhado.csproj" />
   </ItemGroup>
 

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PocApi.Compartilhado.PerfisDeMapeamento;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,7 @@ namespace PocApi.API
             services.AdicionarNegocios();
             services.AdicionarServicos();
             services.AddControllers();
+            services.AddAutoMapper(typeof(PerfilDeMapeamento));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PocApi.API", Version = "v1" });

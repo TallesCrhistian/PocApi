@@ -1,4 +1,6 @@
-﻿using PocApi.Compartilhado.DTOs;
+﻿using AutoMapper;
+using Entidades;
+using PocApi.Compartilhado.DTOs;
 using PocApi.Data.Entidades;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
@@ -10,9 +12,11 @@ namespace PocApi.Negocios
 {
     public class ClienteNegocios : IClienteNegocios
     {
+        private readonly IMapper _mapper;
         private IClienteRepositorio _clienteRepositorio;
-        public ClienteNegocios(IClienteRepositorio clienteRepositorio)
+        public ClienteNegocios(IMapper mapper, IClienteRepositorio clienteRepositorio)
         {
+            _mapper = mapper;
             _clienteRepositorio = clienteRepositorio;
         }
         public async Task<ClienteDTO> Alterar(ClienteDTO clienteDTO)
@@ -23,10 +27,9 @@ namespace PocApi.Negocios
 
         public async Task<ClienteDTO> Inserir(ClienteDTO clienteDTO)
         {
-            Cliente cliente = await _clienteRepositorio.Inserir(new Cliente());
-            ClienteDTO _clienteDTO = new ClienteDTO {IdCliente=cliente.IdCliente, Nome = cliente.Nome };
-            return _clienteDTO;
-
+            Cliente cliente = _mapper.Map<Cliente>(clienteDTO);
+            cliente = await _clienteRepositorio.Inserir(cliente);
+            return _mapper.Map<ClienteDTO>(cliente);
         }
 
         public async Task<List<ClienteDTO>> Listar(ClienteFiltroDTO clienteDTO)
