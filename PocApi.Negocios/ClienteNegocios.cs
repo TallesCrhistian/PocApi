@@ -21,7 +21,9 @@ namespace PocApi.Negocios
         }
         public async Task<ClienteDTO> Alterar(ClienteDTO clienteDTO)
         {
-            throw new NotImplementedException();
+            Cliente cliente = _mapper.Map<Cliente>(clienteDTO);
+            cliente = await _clienteRepositorio.Alterar(cliente);
+            return _mapper.Map<ClienteDTO>(cliente);
         }
 
 
@@ -32,9 +34,12 @@ namespace PocApi.Negocios
             return _mapper.Map<ClienteDTO>(cliente);
         }
 
-        public async Task<List<ClienteDTO>> Listar(ClienteFiltroDTO clienteDTO)
+        public async Task<List<ClienteDTO>> Listar(ClienteFiltroDTO clienteFiltroDTO)
         {
-            throw new NotImplementedException();
+            List<Cliente> cliente = await _clienteRepositorio.Listar(clienteFiltroDTO);
+            List<ClienteDTO> clienteDTO = _mapper.Map<List<ClienteDTO>>(cliente);
+            return clienteDTO;
+            
         }
 
         public async Task<ClienteDTO> ObterPorCodigo(int codigo)

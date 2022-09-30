@@ -1,4 +1,5 @@
 ﻿using PocApi.Compartilhado.DTOs;
+using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,17 +9,20 @@ namespace PocApi.Aplicacao.Servicos
 {
     public class ClienteServicos : IClienteServicos
     {
-        private IClienteNegocios _clienteNegocios;
-        public ClienteServicos(IClienteNegocios clienteNegocios)
+        private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
+        private readonly IClienteNegocios _clienteNegocios;
+        public ClienteServicos(IClienteNegocios clienteNegocios, IUnidadeDeTrabalho unidadeDeTrabalho)
         {
+            _unidadeDeTrabalho = unidadeDeTrabalho;
             _clienteNegocios = clienteNegocios;
         }
         public async Task<RespostaServicoDTO<ClienteDTO>> Alterar(ClienteDTO clienteDTO)
         {
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = new RespostaServicoDTO<ClienteDTO>();
+            
             try
             {
-
+                respostaServicoDTO.Dados = await _clienteNegocios.Alterar(clienteDTO);
             }
             catch(Exception ex)
             {
@@ -34,6 +38,25 @@ namespace PocApi.Aplicacao.Servicos
             try
             {
                 respostaServicoDTO.Dados = await _clienteNegocios.Inserir(clienteDTO);
+                             
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
+
+        public async Task<RespostaServicoDTO<List<ClienteDTO>>> Listar(ClienteFiltroDTO clienteDTO)
+        {
+            RespostaServicoDTO<List<ClienteDTO>> respostaServicoDTO = new RespostaServicoDTO<List<ClienteDTO>>();
+            try
+            {
+                respostaServicoDTO.Dados = await _clienteNegocios.Listar(clienteDTO);
+                            
             }
             catch (Exception ex)
             {
@@ -41,11 +64,6 @@ namespace PocApi.Aplicacao.Servicos
                 respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
             }
             return respostaServicoDTO;
-        }
-
-        public async Task<RespostaServicoDTO<List<ClienteDTO>>> Listar(ClienteFiltroDTO clienteDTO)
-        {
-            throw new System.NotImplementedException();
         }
 
         public async Task<RespostaServicoDTO<ClienteDTO>> ObterPorCodigo(int codigo)

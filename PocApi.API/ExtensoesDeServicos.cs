@@ -5,6 +5,7 @@ using PocApi.Aplicacao.Servicos;
 using PocApi.Data.Contexto;
 using PocApi.Data.Interfaces;
 using PocApi.Data.Repositorios;
+using PocApi.Data.UnidadeDeTrabalho;
 using PocApi.Negocios;
 using PocApi.Negocios.Interfaces;
 
@@ -18,21 +19,30 @@ namespace PocApi.API
             
             return services;
         }
+
         public static IServiceCollection AdicionarServicos(this IServiceCollection services)
         {
             services.AddScoped<IClienteServicos, ClienteServicos>();
             return services;
         }
+
         public static IServiceCollection AdicionarNegocios(this IServiceCollection services)
         {
             services.AddScoped<IClienteNegocios, ClienteNegocios>();
             return services;
         }
+
         public static IServiceCollection AdicionarRepositorios(this IServiceCollection services)
         {
             services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
             return services;
         }
-       
+
+        public static IServiceCollection UnidadeDeTrabalho(this IServiceCollection services)
+        {
+            services.AddScoped<IUnidadeDeTrabalho, UnidadeDeTrabalho>();
+            return services;
+        }
+
     }
 }

@@ -29,6 +29,7 @@ namespace PocApi.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AdicionaBancoDeDados(_configuration);
+            services.UnidadeDeTrabalho();
             services.AdicionarRepositorios();
             services.AdicionarNegocios();
             services.AdicionarServicos();

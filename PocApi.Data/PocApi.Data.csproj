@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="ConfiguracaoEntidade\" />
     <Folder Include="DadosIniciais\" />
-    <Folder Include="UnidadeDeTrabalho\" />
   </ItemGroup>
 
   <ItemGroup>
