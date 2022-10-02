@@ -10,16 +10,23 @@ namespace PocApi.Data.UnidadeDeTrabalho
         public UnidadeDeTrabalho(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
+            _appDbContext.Database.BeginTransaction();
         }
 
-        public async Task CommitAsync()
+        public async Task SaveChangesAsync()
         {
             await _appDbContext.SaveChangesAsync();
         }
 
+        public async Task CommitAsync()
+        {
+            await _appDbContext.Database.CommitTransactionAsync();
+        }
+
         public void Rollback()
         {
-            
+            _appDbContext.Database.RollbackTransaction();
         }
+
     }
 }

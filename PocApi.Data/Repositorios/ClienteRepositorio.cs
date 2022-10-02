@@ -27,7 +27,8 @@ namespace PocApi.Data.Repositorios
 
         public async Task<Cliente> Inserir(Cliente cliente)
         {
-            await _appDbContext.Clientes.AddAsync(cliente);
+            await _appDbContext.Set<Cliente>().AddAsync(cliente);
+            await _appDbContext.SaveChangesAsync();
             
             return cliente;
         }
