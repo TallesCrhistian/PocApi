@@ -36,8 +36,11 @@ namespace PocApi.Data.Repositorios
         {
             IQueryable<Cliente> clientes = _appDbContext.Clientes
                 .Where(x => clienteFiltroDTO.IdCliente != 0 ? x.IdCliente == clienteFiltroDTO.IdCliente : true)
-                .Where(x => clienteFiltroDTO.Ativo != null ? x.Ativo == clienteFiltroDTO.Ativo : (x.Ativo == true || x.Ativo == false) );
-
+                .Where(x => clienteFiltroDTO.Ativo != null ? x.Ativo == clienteFiltroDTO.Ativo : (x.Ativo == true || x.Ativo == false))
+                .Where(x => clienteFiltroDTO.Nome != null ? x.Nome == clienteFiltroDTO.Nome : true)
+                .Where(x => clienteFiltroDTO.SobreNome != null ? x.SobreNome == clienteFiltroDTO.SobreNome : true)
+                .Where(x => clienteFiltroDTO.Cpf != null ? x.Cpf == clienteFiltroDTO.Cpf : true);
+            
             List<Cliente> cliente = await clientes
                 .AsNoTracking()
                 .ToListAsync();
