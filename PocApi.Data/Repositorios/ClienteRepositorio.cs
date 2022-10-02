@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Data.Contexto;
 using PocApi.Data.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -38,9 +39,9 @@ namespace PocApi.Data.Repositorios
             IQueryable<Cliente> clientes = _appDbContext.Clientes
                 .Where(x => clienteFiltroDTO.IdCliente != 0 ? x.IdCliente == clienteFiltroDTO.IdCliente : true)
                 .Where(x => clienteFiltroDTO.Ativo != null ? x.Ativo == clienteFiltroDTO.Ativo : (x.Ativo == true || x.Ativo == false))
-                .Where(x => clienteFiltroDTO.Nome != null ? x.Nome == clienteFiltroDTO.Nome : true)
-                .Where(x => clienteFiltroDTO.SobreNome != null ? x.SobreNome == clienteFiltroDTO.SobreNome : true)
-                .Where(x => clienteFiltroDTO.Cpf != null ? x.Cpf == clienteFiltroDTO.Cpf : true);
+                .Where(x => string.IsNullOrWhiteSpace(clienteFiltroDTO.Nome)  ? x.Nome == clienteFiltroDTO.Nome : true)
+                .Where(x => string.IsNullOrWhiteSpace(clienteFiltroDTO.SobreNome) ? x.SobreNome == clienteFiltroDTO.SobreNome : true)
+                .Where(x => string.IsNullOrWhiteSpace(clienteFiltroDTO.Cpf) ? x.Cpf == clienteFiltroDTO.Cpf : true);
             
             List<Cliente> cliente = await clientes
                 .AsNoTracking()
