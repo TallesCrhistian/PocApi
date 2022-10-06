@@ -28,5 +28,9 @@ namespace PocApi.Data.UnidadeDeTrabalho
             _appDbContext.Database.RollbackTransaction();
         }
 
+        public async Task DeleteAsync()
+        {
+           await _appDbContext.Database.EnsureDeletedAsync();
+        }
     }
 }

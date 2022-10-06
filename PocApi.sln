@@ -13,9 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocApi.Compartilhado", "Poc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocApi.Negocios", "PocApi.Negocios\PocApi.Negocios.csproj", "{F8DA7C5C-E00B-4716-A307-31B2EF25C6FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.Entidades", "Entidades\PocApi.Entidades.csproj", "{788BE1CB-2E6B-487D-B901-ED30FACF21A1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocApi.ModelosDeVisualizacao", "PocApi.ModelosDeVisualizacao\PocApi.ModelosDeVisualizacao.csproj", "{A65200E3-4630-4FD1-8283-3C0CF1458E31}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PocApi.Entidades", "Entidades\PocApi.Entidades.csproj", "{788BE1CB-2E6B-487D-B901-ED30FACF21A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{788BE1CB-2E6B-487D-B901-ED30FACF21A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{788BE1CB-2E6B-487D-B901-ED30FACF21A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{788BE1CB-2E6B-487D-B901-ED30FACF21A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A65200E3-4630-4FD1-8283-3C0CF1458E31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A65200E3-4630-4FD1-8283-3C0CF1458E31}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A65200E3-4630-4FD1-8283-3C0CF1458E31}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A65200E3-4630-4FD1-8283-3C0CF1458E31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

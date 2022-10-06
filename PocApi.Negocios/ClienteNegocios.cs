@@ -26,6 +26,12 @@ namespace PocApi.Negocios
             return _mapper.Map<ClienteDTO>(cliente);
         }
 
+        public async Task<ClienteDTO> Deletar(int idCliente)
+        {
+            Cliente cliente = await _clienteRepositorio.Deletar(idCliente);
+            ClienteDTO clienteDTO = _mapper.Map<ClienteDTO>(cliente);
+            return clienteDTO;
+        }
 
         public async Task<ClienteDTO> Inserir(ClienteDTO clienteDTO)
         {

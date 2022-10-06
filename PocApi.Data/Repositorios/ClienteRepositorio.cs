@@ -26,6 +26,20 @@ namespace PocApi.Data.Repositorios
             return cliente;
         }
 
+        public async Task<Cliente> Deletar(int idCliente)
+        {
+
+            Cliente cliente = await _appDbContext.Clientes.Where(x => x.IdCliente == idCliente).FirstOrDefaultAsync();
+            if (cliente == null)
+            {
+                throw new Exception("Registro não encontrado!!");
+            }
+            cliente.Ativo = false;
+            _appDbContext.Set<Cliente>().Update(cliente);
+            await _appDbContext.SaveChangesAsync();
+            return cliente;
+        }
+
         public async Task<Cliente> Inserir(Cliente cliente)
         {
             await _appDbContext.Set<Cliente>().AddAsync(cliente);

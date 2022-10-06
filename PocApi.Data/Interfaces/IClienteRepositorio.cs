@@ -11,6 +11,7 @@ namespace PocApi.Data.Interfaces
         Task<Cliente> Alterar(Cliente cliente);
         Task <List<Cliente>> Listar(ClienteFiltroDTO clienteFiltroDTO);
         Task<Cliente> ObterPorCodigo(int idCliente);
+        Task<Cliente> Deletar(int idCliente);
 
     }
 }

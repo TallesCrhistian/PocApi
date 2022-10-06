@@ -1,10 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PocApi.Aplicacao.Servicos;
 using PocApi.Compartilhado.DTOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PocApi.API.Controllers
@@ -35,7 +32,7 @@ namespace PocApi.API.Controllers
         public async Task<IActionResult> Alterar([FromBody] ClienteDTO clienteDTO)
         {
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.Alterar(clienteDTO);
-            
+
             return Ok(respostaServicoDTO);
         }
 
@@ -44,6 +41,13 @@ namespace PocApi.API.Controllers
         public async Task<IActionResult> Listar([FromBody] ClienteFiltroDTO clienteFiltroDTO)
         {
             RespostaServicoDTO<List<ClienteDTO>> respostaServicoDTO = await _clienteServicos.Listar(clienteFiltroDTO);
+            return Ok(respostaServicoDTO);
+        }
+
+        [HttpDelete("{idCliente:int}")]
+        public async Task<ActionResult> Deletar(int idCliente)
+        {
+            RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.Deletar(idCliente);
             return Ok(respostaServicoDTO);
         }
     }

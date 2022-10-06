@@ -32,13 +32,29 @@ namespace PocApi.Aplicacao.Servicos
             return respostaServicoDTO;
         }
 
+        public async Task<RespostaServicoDTO<ClienteDTO>> Deletar(int idCliente)
+        {
+            RespostaServicoDTO<ClienteDTO> respostaServicoDTO = new RespostaServicoDTO<ClienteDTO>();
+
+            try
+            {
+                respostaServicoDTO.Dados = await _clienteNegocios.Deletar(idCliente);
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.Message;
+            }
+            return respostaServicoDTO;
+        }
+
         public async Task<RespostaServicoDTO<ClienteDTO>> Inserir(ClienteDTO clienteDTO)
         {
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = new RespostaServicoDTO<ClienteDTO>();
             try
             {
                 respostaServicoDTO.Dados = await _clienteNegocios.Inserir(clienteDTO);
-                             
+
                 await _unidadeDeTrabalho.CommitAsync();
             }
             catch (Exception ex)
@@ -56,7 +72,7 @@ namespace PocApi.Aplicacao.Servicos
             try
             {
                 respostaServicoDTO.Dados = await _clienteNegocios.Listar(clienteDTO);
-                            
+
             }
             catch (Exception ex)
             {
