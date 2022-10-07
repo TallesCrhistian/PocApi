@@ -5,6 +5,6 @@ namespace PocApi.Aplicacao.Interfaces
 {
     public interface IPedidoServicos
     {
-        Task<RespostaServicoDTO<PedidoDTO>> Iserir(PedidoDTO pedidoDTO);
+        Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO);
     }
 }

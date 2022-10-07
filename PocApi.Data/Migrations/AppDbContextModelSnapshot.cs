@@ -43,7 +43,7 @@ namespace PocApi.Data.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("PocApi.Data.Entidades.ItemPedido", b =>
+            modelBuilder.Entity("Entidades.ItemPedido", b =>
                 {
                     b.Property<int>("IdPedido")
                         .ValueGeneratedOnAdd()
@@ -67,7 +67,7 @@ namespace PocApi.Data.Migrations
                     b.ToTable("ItensPedido");
                 });
 
-            modelBuilder.Entity("PocApi.Data.Entidades.Pedido", b =>
+            modelBuilder.Entity("Entidades.Pedido", b =>
                 {
                     b.Property<int>("IdPedido")
                         .ValueGeneratedOnAdd()
@@ -88,7 +88,7 @@ namespace PocApi.Data.Migrations
                     b.ToTable("Pedidos");
                 });
 
-            modelBuilder.Entity("PocApi.Data.Entidades.Produto", b =>
+            modelBuilder.Entity("Entidades.Produto", b =>
                 {
                     b.Property<int>("IdProduto")
                         .ValueGeneratedOnAdd()
@@ -115,7 +115,7 @@ namespace PocApi.Data.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("PocApi.Data.Entidades.Usuario", b =>
+            modelBuilder.Entity("Entidades.Usuario", b =>
                 {
                     b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd()

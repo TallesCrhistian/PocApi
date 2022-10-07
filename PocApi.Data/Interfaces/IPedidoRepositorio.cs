@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Entidades;
 using System.Threading.Tasks;
 
 namespace PocApi.Data.Interfaces
 {
-    interface IPedidoRepositorio
+    public interface IPedidoRepositorio
     {
+        Task<Pedido> Inserir(Pedido pedido);
     }
 }

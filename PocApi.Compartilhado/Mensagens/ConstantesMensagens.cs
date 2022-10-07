@@ -5,5 +5,6 @@ namespace PocApi.Compartilhado.Menssagens
     {
         public const string OperacaoConcluidaComSucesso = "Operação concluída com sucesso!";
         public const string NenhumRegistroLocalizado = "Nenhum registro localizado!";
+        public const string ClienteNaoLocalizado = "Cliente não localizado";
     }
 }

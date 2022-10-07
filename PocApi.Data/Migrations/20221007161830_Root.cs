@@ -13,7 +13,7 @@ namespace PocApi.Data.Migrations
                 {
                     IdCliente = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: true),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SobreNome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Cpf = table.Column<string>(type: "nvarchar(max)", nullable: true)

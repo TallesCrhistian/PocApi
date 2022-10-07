@@ -10,7 +10,7 @@ using PocApi.Data.Contexto;
 namespace PocApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220930005508_Root")]
+    [Migration("20221007161830_Root")]
     partial class Root
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,7 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Ativo")
+                    b.Property<bool?>("Ativo")
                         .HasColumnType("bit");
 
                     b.Property<string>("Cpf")
@@ -45,7 +45,7 @@ namespace PocApi.Data.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("PocApi.Data.Entidades.ItemPedido", b =>
+            modelBuilder.Entity("Entidades.ItemPedido", b =>
                 {
                     b.Property<int>("IdPedido")
                         .ValueGeneratedOnAdd()
@@ -69,7 +69,7 @@ namespace PocApi.Data.Migrations
                     b.ToTable("ItensPedido");
                 });
 
-            modelBuilder.Entity("PocApi.Data.Entidades.Pedido", b =>
+            modelBuilder.Entity("Entidades.Pedido", b =>
                 {
                     b.Property<int>("IdPedido")
                         .ValueGeneratedOnAdd()
@@ -90,7 +90,7 @@ namespace PocApi.Data.Migrations
                     b.ToTable("Pedidos");
                 });
 
-            modelBuilder.Entity("PocApi.Data.Entidades.Produto", b =>
+            modelBuilder.Entity("Entidades.Produto", b =>
                 {
                     b.Property<int>("IdProduto")
                         .ValueGeneratedOnAdd()
@@ -117,7 +117,7 @@ namespace PocApi.Data.Migrations
                     b.ToTable("Produtos");
                 });
 
-            modelBuilder.Entity("PocApi.Data.Entidades.Usuario", b =>
+            modelBuilder.Entity("Entidades.Usuario", b =>
                 {
                     b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd()

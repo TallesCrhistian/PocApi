@@ -1,5 +1,6 @@
 ﻿using PocApi.Aplicacao.Interfaces;
 using PocApi.Compartilhado.DTOs;
+using PocApi.Compartilhado.Menssagens;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
@@ -11,16 +12,23 @@ namespace PocApi.Aplicacao.Servicos
     {
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
         private readonly IPedidoNegocios _pedidoNegocios;
-        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios)
+        private readonly IClienteNegocios _clienteNegocios;
+        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios,IClienteNegocios clienteNegocios)
         {
+            _clienteNegocios = clienteNegocios;
             _pedidoNegocios = pedidoNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
         }
-        public async Task<RespostaServicoDTO<PedidoDTO>> Iserir(PedidoDTO pedidoDTO)
+        public async Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO)
         {
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
             try
             {
+                if(! await Validar(respostaServicoDTO, pedidoDTO))
+                {
+                    return respostaServicoDTO;
+                }
+
                 respostaServicoDTO.Dados = await _pedidoNegocios.Inserir(pedidoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
@@ -32,6 +40,17 @@ namespace PocApi.Aplicacao.Servicos
             }
             return respostaServicoDTO;
 
+        }
+        public async Task<bool> Validar(RespostaServicoDTO<PedidoDTO> respostaServicoDTO, PedidoDTO pedidoDTO)
+        {
+            bool pedidoValido = true; 
+            ClienteDTO clienteDTO = await _clienteNegocios.ObterPorCodigo(pedidoDTO.ClienteDTO.IdCliente);
+            if(clienteDTO == null || clienteDTO.IdCliente == 0)
+            {
+                respostaServicoDTO.Mensagem = ConstantesMensagens.ClienteNaoLocalizado;
+                pedidoValido = false;
+            }
+            return pedidoValido;
         }
     }
 }
