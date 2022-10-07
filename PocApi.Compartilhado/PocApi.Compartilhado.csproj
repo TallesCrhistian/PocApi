@@ -5,16 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Enumeradores\" />
     <Folder Include="Filtros\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="11.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Entidades\PocApi.Entidades.csproj" />
   </ItemGroup>
 
 </Project>

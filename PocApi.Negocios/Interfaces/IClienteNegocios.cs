@@ -9,7 +9,7 @@ namespace PocApi.Negocios.Interfaces
         Task<ClienteDTO> Inserir(ClienteDTO clienteDTO);
         Task<ClienteDTO> Alterar(ClienteDTO clienteDTO);
         Task<List<ClienteDTO>> Listar(ClienteFiltroDTO clienteDTO);
-        Task<ClienteDTO> ObterPorCodigo(int codigo);
+        Task<ClienteDTO> ObterPorCodigo(int idCliente);
         Task<ClienteDTO> Deletar(int idCliente);
     }
 }

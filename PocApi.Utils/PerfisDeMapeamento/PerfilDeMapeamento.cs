@@ -2,7 +2,7 @@
 using Entidades;
 using PocApi.Compartilhado.DTOs;
 
-namespace PocApi.Compartilhado.PerfisDeMapeamento
+namespace PocApi.Utils.PerfisDeMapeamento
 {
     public class PerfilDeMapeamento : Profile
     {

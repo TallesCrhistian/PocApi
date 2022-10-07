@@ -1,4 +1,5 @@
 ﻿using PocApi.Compartilhado.DTOs;
+using PocApi.Compartilhado.Menssagens;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
@@ -19,15 +20,17 @@ namespace PocApi.Aplicacao.Servicos
         public async Task<RespostaServicoDTO<ClienteDTO>> Alterar(ClienteDTO clienteDTO)
         {
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = new RespostaServicoDTO<ClienteDTO>();
-            
+
             try
             {
                 respostaServicoDTO.Dados = await _clienteNegocios.Alterar(clienteDTO);
+                await _unidadeDeTrabalho.CommitAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 respostaServicoDTO.Sucesso = false;
                 respostaServicoDTO.Mensagem = ex.Message;
+                _unidadeDeTrabalho.Rollback();
             }
             return respostaServicoDTO;
         }
@@ -39,11 +42,17 @@ namespace PocApi.Aplicacao.Servicos
             try
             {
                 respostaServicoDTO.Dados = await _clienteNegocios.Deletar(idCliente);
+                if (respostaServicoDTO.Dados.IdCliente == 0)
+                {
+                    respostaServicoDTO.Mensagem = ConstantesMensagens.NenhumRegistroLocalizado;
+                }
+                await _unidadeDeTrabalho.CommitAsync();
             }
             catch (Exception ex)
             {
                 respostaServicoDTO.Sucesso = false;
                 respostaServicoDTO.Mensagem = ex.Message;
+                _unidadeDeTrabalho.Rollback();
             }
             return respostaServicoDTO;
         }
@@ -54,7 +63,6 @@ namespace PocApi.Aplicacao.Servicos
             try
             {
                 respostaServicoDTO.Dados = await _clienteNegocios.Inserir(clienteDTO);
-
                 await _unidadeDeTrabalho.CommitAsync();
             }
             catch (Exception ex)
@@ -82,9 +90,26 @@ namespace PocApi.Aplicacao.Servicos
             return respostaServicoDTO;
         }
 
-        public async Task<RespostaServicoDTO<ClienteDTO>> ObterPorCodigo(int codigo)
+        public async Task<RespostaServicoDTO<ClienteDTO>> ObterPorCodigo(int idCliente)
         {
-            throw new System.NotImplementedException();
+            RespostaServicoDTO<ClienteDTO> respostaServicoDTO = new RespostaServicoDTO<ClienteDTO>();
+
+            try
+            {
+                respostaServicoDTO.Dados = await _clienteNegocios.ObterPorCodigo(idCliente);
+                if (respostaServicoDTO.Dados.IdCliente == 0)
+                {
+                    respostaServicoDTO.Mensagem = ConstantesMensagens.NenhumRegistroLocalizado;
+                }
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.Message;
+                
+            }
+            return respostaServicoDTO;
         }
     }
 }

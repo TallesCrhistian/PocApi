@@ -1,6 +1,6 @@
 ﻿namespace PocApi.Compartilhado.DTOs
 {
-    public class ClienteFiltroModelView
+    public class ClienteFiltroViewModel
     {
         public int IdCliente { get; set; }
         public bool? Ativo { get; set; } 

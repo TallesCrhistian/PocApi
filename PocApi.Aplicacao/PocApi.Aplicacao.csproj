@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Utils\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PocApi.Data\PocApi.Data.csproj" />
     <ProjectReference Include="..\PocApi.Negocios\PocApi.Negocios.csproj" />
   </ItemGroup>

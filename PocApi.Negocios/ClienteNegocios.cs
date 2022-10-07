@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Entidades;
 using PocApi.Compartilhado.DTOs;
-using PocApi.Data.Entidades;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
@@ -28,8 +27,9 @@ namespace PocApi.Negocios
 
         public async Task<ClienteDTO> Deletar(int idCliente)
         {
+            
             Cliente cliente = await _clienteRepositorio.Deletar(idCliente);
-            ClienteDTO clienteDTO = _mapper.Map<ClienteDTO>(cliente);
+            ClienteDTO clienteDTO = (cliente != null) ? _mapper.Map<ClienteDTO>(cliente) : new ClienteDTO();
             return clienteDTO;
         }
 
@@ -48,9 +48,11 @@ namespace PocApi.Negocios
             
         }
 
-        public async Task<ClienteDTO> ObterPorCodigo(int codigo)
+        public async Task<ClienteDTO> ObterPorCodigo(int idCliente)
         {
-            throw new NotImplementedException();
+            Cliente cliente = await _clienteRepositorio.ObterPorCodigo(idCliente);
+            ClienteDTO clienteDTO = (cliente != null) ? _mapper.Map<ClienteDTO>(cliente) : new ClienteDTO();
+            return clienteDTO;
         }
     }
 }

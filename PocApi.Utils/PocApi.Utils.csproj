@@ -5,12 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Entidades\PocApi.Entidades.csproj" />
     <ProjectReference Include="..\PocApi.Compartilhado\PocApi.Compartilhado.csproj" />
-    <ProjectReference Include="..\PocApi.Data\PocApi.Data.csproj" />
   </ItemGroup>
 
 </Project>

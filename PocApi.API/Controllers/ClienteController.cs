@@ -50,5 +50,11 @@ namespace PocApi.API.Controllers
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.Deletar(idCliente);
             return Ok(respostaServicoDTO);
         }
+        [HttpPost("{idCliente:int}")]
+        public async Task<IActionResult> ObterPorCodigo(int idCliente)
+        {
+            RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.ObterPorCodigo(idCliente);
+            return Ok(respostaServicoDTO);
+        }
     }
 }
