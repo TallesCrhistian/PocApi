@@ -77,13 +77,15 @@ namespace PocApi.Data.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdCliente")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int?>("idCliente")
+                        .HasColumnType("int");
+
                     b.HasKey("IdPedido");
+
+                    b.HasIndex("idCliente");
 
                     b.ToTable("Pedidos");
                 });
@@ -143,6 +145,20 @@ namespace PocApi.Data.Migrations
                     b.HasKey("IdUsuario");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("Entidades.Pedido", b =>
+                {
+                    b.HasOne("Entidades.Cliente", "Cliente")
+                        .WithMany("Pedidos")
+                        .HasForeignKey("idCliente");
+
+                    b.Navigation("Cliente");
+                });
+
+            modelBuilder.Entity("Entidades.Cliente", b =>
+                {
+                    b.Navigation("Pedidos");
                 });
 #pragma warning restore 612, 618
         }
