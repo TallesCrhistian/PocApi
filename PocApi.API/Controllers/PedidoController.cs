@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PocApi.Aplicacao.Interfaces;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Compartilhado.ModeloDeVisualizacao;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PocApi.API.Controllers
@@ -23,12 +20,21 @@ namespace PocApi.API.Controllers
             _pedidoServicos = pedidoServicos;
             _mapper = mapper;
         }
+
         [HttpPost]
         [Route(nameof(Inserir))]
         public async Task<IActionResult> Inserir([FromBody] PedidoInserirViewModel pedidoInserirViewModel)
         {
             PedidoDTO pedidoDTO = _mapper.Map<PedidoDTO>(pedidoInserirViewModel);
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = await _pedidoServicos.Inserir(pedidoDTO);
+            return Ok(respostaServicoDTO);
+        }
+
+        [HttpPost]
+        [Route(nameof(Listar))]
+        public async Task<IActionResult> Listar([FromBody] PedidoDTO pedidoDTO)
+        {
+            RespostaServicoDTO<List<PedidoDTO>> respostaServicoDTO = await _pedidoServicos.Listar(pedidoDTO);
             return Ok(respostaServicoDTO);
         }
     }
