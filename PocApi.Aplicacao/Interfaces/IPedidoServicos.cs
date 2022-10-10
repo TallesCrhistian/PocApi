@@ -7,6 +7,6 @@ namespace PocApi.Aplicacao.Interfaces
     public interface IPedidoServicos
     {
         Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO);
-        Task<RespostaServicoDTO<List<PedidoDTO>>> Listar(PedidoDTO pedidoDTO);
+        Task<RespostaServicoDTO<List<PedidoDTO>>> Listar(PedidoFiltroDTO pedidofiltroDTO);
     }
 }

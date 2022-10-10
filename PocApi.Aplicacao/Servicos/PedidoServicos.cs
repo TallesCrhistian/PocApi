@@ -4,6 +4,7 @@ using PocApi.Compartilhado.Menssagens;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PocApi.Aplicacao.Servicos
@@ -41,6 +42,8 @@ namespace PocApi.Aplicacao.Servicos
             return respostaServicoDTO;
 
         }
+
+
         public async Task<bool> Validar(RespostaServicoDTO<PedidoDTO> respostaServicoDTO, PedidoDTO pedidoDTO)
         {
             bool pedidoValido = true; 
@@ -51,6 +54,21 @@ namespace PocApi.Aplicacao.Servicos
                 pedidoValido = false;
             }
             return pedidoValido;
+        }
+        public async Task<RespostaServicoDTO<List<PedidoDTO>>> Listar(PedidoFiltroDTO pedidoFiltroDTO)
+        {
+            RespostaServicoDTO<List<PedidoDTO>> respostaServicoDTO = new RespostaServicoDTO<List<PedidoDTO>>();
+            try
+            {
+                respostaServicoDTO.Dados = await _pedidoNegocios.Listar(pedidoFiltroDTO);
+
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
+            }
+            return respostaServicoDTO;
         }
     }
 }

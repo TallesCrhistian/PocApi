@@ -1,6 +1,10 @@
 ﻿using Entidades;
+using Microsoft.EntityFrameworkCore;
+using PocApi.Compartilhado.DTOs;
 using PocApi.Data.Contexto;
 using PocApi.Data.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PocApi.Data.Repositorios
@@ -18,6 +22,18 @@ namespace PocApi.Data.Repositorios
             await _appDbContext.Set<Pedido>().AddAsync(pedido);
             await _appDbContext.SaveChangesAsync();
 
+            return pedido;
+        }
+
+        public async Task<List<Pedido>> Listar(PedidoFiltroDTO pedidoFiltroDTO)
+        {
+            IQueryable<Pedido> pedidos = _appDbContext.Pedidos
+                .Include(x => x.Cliente)
+               .Where(x => pedidoFiltroDTO.IdPedido != 0 ? x.IdPedido == pedidoFiltroDTO.IdPedido : true);
+
+            List<Pedido> pedido = await pedidos
+                .AsNoTracking()
+                .ToListAsync();
             return pedido;
         }
     }

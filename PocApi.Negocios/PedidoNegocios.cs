@@ -3,6 +3,7 @@ using Entidades;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PocApi.Negocios
@@ -23,6 +24,13 @@ namespace PocApi.Negocios
             Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);
             pedido = await _pedidoRepositorio.Inserir(pedido);
             return _mapper.Map<PedidoDTO>(pedido);
+        }
+
+        public async Task<List<PedidoDTO>> Listar(PedidoFiltroDTO pedidoFiltroDTO)
+        {
+            List<Pedido> pedido = await _pedidoRepositorio.Listar(pedidoFiltroDTO);
+            List<PedidoDTO> pedidoDTO = _mapper.Map<List<PedidoDTO>>(pedido);
+            return pedidoDTO;
         }
 
     }

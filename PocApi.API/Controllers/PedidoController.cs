@@ -32,9 +32,9 @@ namespace PocApi.API.Controllers
 
         [HttpPost]
         [Route(nameof(Listar))]
-        public async Task<IActionResult> Listar([FromBody] PedidoDTO pedidoDTO)
+        public async Task<IActionResult> Listar([FromBody] PedidoFiltroDTO pedidoFiltroDTO)
         {
-            RespostaServicoDTO<List<PedidoDTO>> respostaServicoDTO = await _pedidoServicos.Listar(pedidoDTO);
+            RespostaServicoDTO<List<PedidoDTO>> respostaServicoDTO = await _pedidoServicos.Listar(pedidoFiltroDTO);
             return Ok(respostaServicoDTO);
         }
     }

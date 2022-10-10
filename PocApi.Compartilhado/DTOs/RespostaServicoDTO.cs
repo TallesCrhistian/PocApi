@@ -6,6 +6,7 @@ namespace PocApi.Compartilhado.DTOs
         public T Dados { get; set; }
         public bool Sucesso { get; set; } = true;
         public string Mensagem { get; set; } = ConstantesMensagens.OperacaoConcluidaComSucesso;
+
     }
 }
 
