@@ -77,15 +77,15 @@ namespace PocApi.Data.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("IdCliente")
                         .HasColumnType("int");
 
-                    b.Property<int?>("idCliente")
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("IdPedido");
 
-                    b.HasIndex("idCliente");
+                    b.HasIndex("IdCliente");
 
                     b.ToTable("Pedidos");
                 });
@@ -151,7 +151,9 @@ namespace PocApi.Data.Migrations
                 {
                     b.HasOne("Entidades.Cliente", "Cliente")
                         .WithMany("Pedidos")
-                        .HasForeignKey("idCliente");
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Cliente");
                 });

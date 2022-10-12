@@ -80,7 +80,7 @@ namespace PocApi.Data.Migrations
                 {
                     IdPedido = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    idCliente = table.Column<int>(type: "int", nullable: true),
+                    IdCliente = table.Column<int>(type: "int", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
@@ -88,17 +88,17 @@ namespace PocApi.Data.Migrations
                 {
                     table.PrimaryKey("PK_Pedidos", x => x.IdPedido);
                     table.ForeignKey(
-                        name: "FK_Pedidos_Clientes_idCliente",
-                        column: x => x.idCliente,
+                        name: "FK_Pedidos_Clientes_IdCliente",
+                        column: x => x.IdCliente,
                         principalTable: "Clientes",
                         principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_idCliente",
+                name: "IX_Pedidos_IdCliente",
                 table: "Pedidos",
-                column: "idCliente");
+                column: "IdCliente");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
