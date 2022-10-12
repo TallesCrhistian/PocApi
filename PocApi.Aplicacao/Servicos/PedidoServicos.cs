@@ -47,7 +47,7 @@ namespace PocApi.Aplicacao.Servicos
         public async Task<bool> Validar(RespostaServicoDTO<PedidoDTO> respostaServicoDTO, PedidoDTO pedidoDTO)
         {
             bool pedidoValido = true; 
-            ClienteDTO clienteDTO = await _clienteNegocios.ObterPorCodigo(pedidoDTO.ClienteDTO.IdCliente);
+            ClienteDTO clienteDTO = await _clienteNegocios.ObterPorCodigo(pedidoDTO.IdCliente);
             if(clienteDTO == null || clienteDTO.IdCliente == 0)
             {
                 respostaServicoDTO.Mensagem = ConstantesMensagens.ClienteNaoLocalizado;
