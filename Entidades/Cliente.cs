@@ -11,6 +11,6 @@ namespace Entidades
         public string Nome { get; set; }
         public string SobreNome { get; set; }
         public string Cpf { get; set; }
-        public List<Pedido> Pedidos { get; set; }
+        public virtual List<Pedido> Pedidos { get; set; }
     }
 }

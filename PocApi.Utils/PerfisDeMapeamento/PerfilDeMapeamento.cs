@@ -12,9 +12,14 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<ClienteViewModel, ClienteDTO>().ReverseMap();
             CreateMap<ClienteDTO, Cliente>().ReverseMap();
 
-            CreateMap<PedidoInserirViewModel, PedidoDTO>().ReverseMap();                
-            CreateMap<PedidoDTO, Pedido>().ReverseMap();
-                       
+            CreateMap<PedidoInserirViewModel, PedidoDTO>().ReverseMap();            
+
+            CreateMap<PedidoDTO, Pedido>()
+                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.ClienteDTO));
+
+            CreateMap<Pedido, PedidoDTO>()
+                .ForMember(dest => dest.ClienteDTO, opt => opt.MapFrom(src => src.Cliente));
+
         }
     }
 }

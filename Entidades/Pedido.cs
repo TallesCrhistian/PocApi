@@ -9,10 +9,10 @@ namespace Entidades
     {
         [Key]
         public int IdPedido { get; set; }
-        [ForeignKey("IdCliente")]
-        [Required]
-        public Cliente Cliente { get; set; }
+        public int IdCliente { get; set; }
         public DateTime Data { get; set; }
         public PedidoStatusEnum Status { get; set; }
+        [ForeignKey("IdCliente")]
+        public virtual Cliente Cliente { get; set; }
     }
 }
