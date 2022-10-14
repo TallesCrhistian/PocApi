@@ -12,7 +12,7 @@ namespace Entidades
         public int IdCliente { get; set; }
         public DateTime Data { get; set; }
         public PedidoStatusEnum Status { get; set; }
-        [ForeignKey("IdCliente")]
+        [ForeignKey(nameof(IdCliente))]
         public virtual Cliente Cliente { get; set; }
     }
 }
