@@ -6,7 +6,7 @@ namespace PocApi.Compartilhado.DTOs
     {
         public int IdPedido { get; set; }
         public int IdCliente { get; set; }
-        public ClienteDTO ClienteDTO { get; set; } = new ClienteDTO();
+        public ClienteDTO ClienteDTO { get; set; } 
         public DateTime Data { get; set; }
         public int Status { get; set; }
     }
