@@ -19,6 +19,13 @@ namespace PocApi.Negocios
             _mapper = mapper;
         }
 
+        public async Task<PedidoDTO> Alterar(PedidoDTO pedidoDTO)
+        {
+            Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);
+            pedido = await _pedidoRepositorio.Alterar(pedido);
+            return _mapper.Map<PedidoDTO>(pedido);
+        }
+
         public async Task<PedidoDTO> Inserir(PedidoDTO pedidoDTO)
         {
             Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);
@@ -33,5 +40,11 @@ namespace PocApi.Negocios
             return pedidoDTO;
         }
 
+        public async Task<PedidoDTO> ObterPorCodigo(int codigo)
+        {
+            Pedido pedido = await _pedidoRepositorio.ObterPorCodigo(codigo);
+            PedidoDTO pedidoDTO = (pedido != null) ? _mapper.Map<PedidoDTO>(pedido) : new PedidoDTO();
+            return pedidoDTO;
+        }
     }
 }

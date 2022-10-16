@@ -82,6 +82,9 @@ namespace PocApi.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdCliente = table.Column<int>(type: "int", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValorProdutos = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ValorDesconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Frete = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

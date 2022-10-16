@@ -37,5 +37,21 @@ namespace PocApi.API.Controllers
             RespostaServicoDTO<List<PedidoDTO>> respostaServicoDTO = await _pedidoServicos.Listar(pedidoFiltroDTO);
             return Ok(respostaServicoDTO);
         }
+        [HttpPut]
+        [Route(nameof(Alterar))]
+        public async Task<IActionResult> Alterar([FromBody] PedidoAlterarViewModel pedidoAlterarViewModel)
+        {
+            PedidoDTO pedidoDTO = _mapper.Map<PedidoDTO>(pedidoAlterarViewModel);
+            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = await _pedidoServicos.Alterar(pedidoDTO);
+
+            return Ok(respostaServicoDTO);
+        }
+        [HttpPost("{codigo:int}")]
+        public async Task<IActionResult> ObterPorCodigo(int codigo)
+        {
+            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = await _pedidoServicos.ObterPorCodigo(codigo);
+            return Ok(respostaServicoDTO);
+        }
+
     }
 }

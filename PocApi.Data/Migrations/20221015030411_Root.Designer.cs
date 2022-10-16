@@ -10,7 +10,7 @@ using PocApi.Data.Contexto;
 namespace PocApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221014133133_Root")]
+    [Migration("20221015030411_Root")]
     partial class Root
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,11 +79,20 @@ namespace PocApi.Data.Migrations
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
+                    b.Property<decimal>("Frete")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("IdCliente")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<decimal>("ValorDesconto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("ValorProdutos")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdPedido");
 

@@ -8,5 +8,7 @@ namespace PocApi.Aplicacao.Interfaces
     {
         Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO);
         Task<RespostaServicoDTO<List<PedidoDTO>>> Listar(PedidoFiltroDTO pedidofiltroDTO);
+        Task<RespostaServicoDTO<PedidoDTO>> Alterar(PedidoDTO pedidoDTO);
+        Task<RespostaServicoDTO<PedidoDTO>> ObterPorCodigo(int codigo);
     }
 }

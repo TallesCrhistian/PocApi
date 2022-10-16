@@ -8,5 +8,7 @@ namespace PocApi.Negocios.Interfaces
     {
         Task<PedidoDTO> Inserir(PedidoDTO pedidoDTO);
         Task<List<PedidoDTO>> Listar(PedidoFiltroDTO pedidoFiltroDTO);
+        Task<PedidoDTO> ObterPorCodigo(int codigo);
+        Task<PedidoDTO> Alterar(PedidoDTO pedidoDTO);
     }
 }

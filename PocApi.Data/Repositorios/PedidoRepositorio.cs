@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using Microsoft.EntityFrameworkCore;
 using PocApi.Compartilhado.DTOs;
+using PocApi.Compartilhado.Enumeradores;
 using PocApi.Data.Contexto;
 using PocApi.Data.Interfaces;
 using System.Collections.Generic;
@@ -17,6 +18,20 @@ namespace PocApi.Data.Repositorios
         {
             _appDbContext = appDbContext;
         }
+
+        public async Task<Pedido> Alterar(Pedido pedido)
+        {
+            if (pedido != null)
+            {
+                pedido.Status = PedidoStatusEnum.Fechado;
+                _appDbContext.Set<Pedido>().Update(pedido);
+                await _appDbContext.SaveChangesAsync();
+            }
+
+
+            return pedido;
+        }
+
         public async Task<Pedido> Inserir(Pedido pedido)
         {
             await _appDbContext.Set<Pedido>().AddAsync(pedido);
@@ -34,6 +49,14 @@ namespace PocApi.Data.Repositorios
             List<Pedido> pedido = await pedidos
                 .AsNoTracking()
                 .ToListAsync();
+            return pedido;
+        }
+
+        public async Task<Pedido> ObterPorCodigo(int codigo)
+        {
+            Pedido pedido = await _appDbContext.Pedidos.Where(x => x.IdPedido == codigo).FirstOrDefaultAsync();
+            if (pedido != null) await _appDbContext.SaveChangesAsync();
+
             return pedido;
         }
     }

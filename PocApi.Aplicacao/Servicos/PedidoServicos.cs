@@ -14,7 +14,7 @@ namespace PocApi.Aplicacao.Servicos
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
         private readonly IPedidoNegocios _pedidoNegocios;
         private readonly IClienteNegocios _clienteNegocios;
-        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios,IClienteNegocios clienteNegocios)
+        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios)
         {
             _clienteNegocios = clienteNegocios;
             _pedidoNegocios = pedidoNegocios;
@@ -25,7 +25,7 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
             try
             {
-                if(! await Validar(respostaServicoDTO, pedidoDTO))
+                if (!await Validar(respostaServicoDTO, pedidoDTO))
                 {
                     return respostaServicoDTO;
                 }
@@ -43,23 +43,12 @@ namespace PocApi.Aplicacao.Servicos
 
         }
 
-
-        public async Task<bool> Validar(RespostaServicoDTO<PedidoDTO> respostaServicoDTO, PedidoDTO pedidoDTO)
-        {
-            bool pedidoValido = true; 
-            ClienteDTO clienteDTO = await _clienteNegocios.ObterPorCodigo(pedidoDTO.IdCliente);
-            if(clienteDTO == null || clienteDTO.IdCliente == 0)
-            {
-                respostaServicoDTO.Mensagem = ConstantesMensagens.ClienteNaoLocalizado;
-                pedidoValido = false;
-            }
-            return pedidoValido;
-        }
         public async Task<RespostaServicoDTO<List<PedidoDTO>>> Listar(PedidoFiltroDTO pedidoFiltroDTO)
         {
             RespostaServicoDTO<List<PedidoDTO>> respostaServicoDTO = new RespostaServicoDTO<List<PedidoDTO>>();
             try
             {
+
                 respostaServicoDTO.Dados = await _pedidoNegocios.Listar(pedidoFiltroDTO);
 
             }
@@ -70,5 +59,73 @@ namespace PocApi.Aplicacao.Servicos
             }
             return respostaServicoDTO;
         }
+
+        public async Task<RespostaServicoDTO<PedidoDTO>> ObterPorCodigo(int codigo)
+        {
+            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
+
+            try
+            {
+                respostaServicoDTO.Dados = await _pedidoNegocios.ObterPorCodigo(codigo);
+                if (respostaServicoDTO.Dados.IdPedido == 0)
+                {
+                    respostaServicoDTO.Mensagem = ConstantesMensagens.NenhumRegistroLocalizado;
+                }
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.Message;
+
+            }
+            return respostaServicoDTO;
+        }
+
+        public async Task<RespostaServicoDTO<PedidoDTO>> Alterar(PedidoDTO pedidoDTO)
+        {
+            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
+
+            try
+            {
+                if (!await ValidarPorCodigo(respostaServicoDTO, pedidoDTO))
+                {
+                    return respostaServicoDTO;
+                }
+                respostaServicoDTO.Dados = await _pedidoNegocios.Alterar(pedidoDTO);
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
+        public async Task<bool> Validar(RespostaServicoDTO<PedidoDTO> respostaServicoDTO, PedidoDTO pedidoDTO)
+        {
+            bool pedidoValido = true;
+            ClienteDTO clienteDTO = await _clienteNegocios.ObterPorCodigo(pedidoDTO.IdCliente);
+            if (clienteDTO == null || clienteDTO.IdCliente == 0)
+            {
+                respostaServicoDTO.Mensagem = ConstantesMensagens.ClienteNaoLocalizado;
+                pedidoValido = false;
+            }
+            return pedidoValido;
+        }
+        public async Task<bool> ValidarPorCodigo(RespostaServicoDTO<PedidoDTO> respostaServicoDTO, PedidoDTO pedidoDTO)
+        {
+            bool pedidoValido = true;
+            await _pedidoNegocios.ObterPorCodigo(pedidoDTO.IdPedido);
+            if (pedidoDTO == null || pedidoDTO.IdPedido == 0)
+            {
+                respostaServicoDTO.Mensagem = ConstantesMensagens.PedidoNaoEncontrado;
+                pedidoValido = false;
+            }
+            return pedidoValido;
+        }
+
+
     }
 }

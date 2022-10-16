@@ -9,5 +9,7 @@ namespace PocApi.Data.Interfaces
     {
         Task<Pedido> Inserir(Pedido pedido);
         Task<List<Pedido>> Listar(PedidoFiltroDTO pedidoFiltroDTO);
+        Task<Pedido> ObterPorCodigo(int codigo);
+        Task<Pedido> Alterar(Pedido pedido);
     }
 }
