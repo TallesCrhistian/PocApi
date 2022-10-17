@@ -64,7 +64,7 @@ namespace PocApi.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EMail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     SenhaHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     SenhaSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
