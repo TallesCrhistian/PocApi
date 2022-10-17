@@ -21,13 +21,9 @@ namespace PocApi.Data.Repositorios
 
         public async Task<Pedido> Alterar(Pedido pedido)
         {
-            if (pedido != null)
-            {
-                pedido.Status = PedidoStatusEnum.Fechado;
-                _appDbContext.Set<Pedido>().Update(pedido);
-                await _appDbContext.SaveChangesAsync();
-            }
-
+            pedido.Status = PedidoStatusEnum.Fechado;
+            _appDbContext.Set<Pedido>().Update(pedido);
+            await _appDbContext.SaveChangesAsync();
 
             return pedido;
         }

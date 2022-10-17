@@ -32,5 +32,10 @@ namespace PocApi.Data.UnidadeDeTrabalho
         {
            await _appDbContext.Database.EnsureDeletedAsync();
         }
+
+        public void DesvincularEntidade<T>()
+        {
+            
+        }
     }
 }

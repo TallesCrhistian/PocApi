@@ -92,8 +92,9 @@ namespace PocApi.Aplicacao.Servicos
                 {
                     return respostaServicoDTO;
                 }
-                respostaServicoDTO.Dados = await _pedidoNegocios.Alterar(pedidoDTO);
-                await _unidadeDeTrabalho.CommitAsync();
+                await _unidadeDeTrabalho.SaveChangesAsync();
+
+                respostaServicoDTO.Dados = await _pedidoNegocios.Alterar(pedidoDTO);               
             }
             catch (Exception ex)
             {

@@ -6,6 +6,7 @@ namespace PocApi.Data.Interfaces
     {
         Task CommitAsync();
         Task SaveChangesAsync();
+        void DesvincularEntidade<T>();
         void Rollback();
     }
 }
