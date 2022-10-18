@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Microsoft.EntityFrameworkCore;
 using PocApi.Data.Contexto;
 using PocApi.Data.Interfaces;
 using System;
@@ -20,6 +21,16 @@ namespace PocApi.Data.Repositorios
         {
             await _appDbContext.Set<Usuario>().AddAsync(usuario);
             await _appDbContext.SaveChangesAsync();
+
+            return usuario;
+        }
+
+        public async Task<Usuario> ObterPorEmail(string email)
+        {
+            Usuario usuario = await _appDbContext
+                .Usuarios
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Email == email);
 
             return usuario;
         }

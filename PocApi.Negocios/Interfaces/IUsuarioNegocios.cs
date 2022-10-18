@@ -6,5 +6,6 @@ namespace PocApi.Negocios.Interfaces
     public interface IUsuarioNegocios
     {
         Task<UsuarioDTO> Inserir(UsuarioDTO usuarioDTO);
+        Task<UsuarioDTO> ObterPorEmail(string email);
     }
 }

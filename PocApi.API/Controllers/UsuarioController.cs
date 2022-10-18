@@ -25,14 +25,22 @@ namespace PocApi.API.Controllers
         }
 
         [HttpPost]
-        [Route (nameof(Inserir))]
+        [Route (nameof(Registrar))]
 
-        public async Task<IActionResult> Inserir([FromBody] UsuarioInserirViewModel usuarioInserirViewModel)
+        public async Task<IActionResult> Registrar([FromBody] UsuarioInserirViewModel usuarioInserirViewModel)
         {
             UsuarioDTO usuarioDTO =  _mapper.Map<UsuarioDTO>(usuarioInserirViewModel);
-            RespostaServicoDTO<UsuarioDTO> respostaServicoDTO = await _usuarioServicos.Iserir(usuarioDTO);
+            RespostaServicoDTO<UsuarioDTO> respostaServicoDTO = await _usuarioServicos.Registrar(usuarioDTO);            
             return Ok(respostaServicoDTO);
         }
-        
+        [HttpPost]
+        [Route(nameof(Login))]
+
+        public async Task<IActionResult> Login([FromBody] UsuarioInserirViewModel usuarioInserirViewModel)
+        {
+            UsuarioDTO usuarioDTO = _mapper.Map<UsuarioDTO>(usuarioInserirViewModel);
+            RespostaServicoDTO<UsuarioDTO> respostaServicoDTO = await _usuarioServicos.Login(usuarioDTO);
+            return Ok(respostaServicoDTO);
+        }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace PocApi.Negocios
 {
-     public class UsuarioNegocios : IUsuarioNegocios
+    public class UsuarioNegocios : IUsuarioNegocios
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
         private readonly IMapper _mapper;
@@ -19,14 +19,27 @@ namespace PocApi.Negocios
         public UsuarioNegocios(IUsuarioRepositorio usuarioRepositorio, IMapper mapper)
         {
             _usuarioRepositorio = usuarioRepositorio;
-            _mapper = mapper; 
+            _mapper = mapper;
         }
 
         public async Task<UsuarioDTO> Inserir(UsuarioDTO usuarioDTO)
         {
             Usuario usuario = _mapper.Map<Usuario>(usuarioDTO);
             usuario = await _usuarioRepositorio.Inserir(usuario);
-            return _mapper.Map <UsuarioDTO>(usuario);
+            return _mapper.Map<UsuarioDTO>(usuario);
+        }
+
+        public async Task<UsuarioDTO> ObterPorEmail(string email)
+        {
+            UsuarioDTO usuarioDTO = new UsuarioDTO();
+            Usuario usuario = await _usuarioRepositorio.ObterPorEmail(email);
+
+            if(usuario != null)
+            {
+                usuarioDTO = _mapper.Map<UsuarioDTO>(usuario);
+            }
+                
+            return usuarioDTO;
         }
     }
 }

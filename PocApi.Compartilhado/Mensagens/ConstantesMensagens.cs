@@ -7,5 +7,8 @@ namespace PocApi.Compartilhado.Menssagens
         public const string NenhumRegistroLocalizado = "Nenhum registro localizado!";
         public const string ClienteNaoLocalizado = "Cliente não localizado";
         public const string PedidoNaoEncontrado = "Pedido não encontrado";
+        public const string SenhaInvalida = "Senha inválida";
+        public static  string EmailJaExiste(string email) => $"Email {email} já cadastrado!";
+        
     }
 }
