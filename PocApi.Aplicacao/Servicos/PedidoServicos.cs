@@ -85,16 +85,13 @@ namespace PocApi.Aplicacao.Servicos
         public async Task<RespostaServicoDTO<PedidoDTO>> Alterar(PedidoDTO pedidoDTO)
         {
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
-
+            
             try
             {
-                if (!await ValidarPorCodigo(respostaServicoDTO, pedidoDTO))
-                {
-                    return respostaServicoDTO;
-                }
-                await _unidadeDeTrabalho.SaveChangesAsync();
+                respostaServicoDTO.Dados = await _pedidoNegocios.Alterar(pedidoDTO);
+                
+                await _unidadeDeTrabalho.CommitAsync();
 
-                respostaServicoDTO.Dados = await _pedidoNegocios.Alterar(pedidoDTO);               
             }
             catch (Exception ex)
             {
@@ -111,17 +108,6 @@ namespace PocApi.Aplicacao.Servicos
             if (clienteDTO == null || clienteDTO.IdCliente == 0)
             {
                 respostaServicoDTO.Mensagem = ConstantesMensagens.ClienteNaoLocalizado;
-                pedidoValido = false;
-            }
-            return pedidoValido;
-        }
-        public async Task<bool> ValidarPorCodigo(RespostaServicoDTO<PedidoDTO> respostaServicoDTO, PedidoDTO pedidoDTO)
-        {
-            bool pedidoValido = true;
-            await _pedidoNegocios.ObterPorCodigo(pedidoDTO.IdPedido);
-            if (pedidoDTO == null || pedidoDTO.IdPedido == 0)
-            {
-                respostaServicoDTO.Mensagem = ConstantesMensagens.PedidoNaoEncontrado;
                 pedidoValido = false;
             }
             return pedidoValido;
