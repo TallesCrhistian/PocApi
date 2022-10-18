@@ -13,10 +13,9 @@ namespace PocApi.Aplicacao.Servicos
     {
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
         private readonly IPedidoNegocios _pedidoNegocios;
-        private readonly IClienteNegocios _clienteNegocios;
+        
         public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios)
-        {
-            _clienteNegocios = clienteNegocios;
+        {            
             _pedidoNegocios = pedidoNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
         }
@@ -25,11 +24,7 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
             try
             {
-                if (!await Validar(respostaServicoDTO, pedidoDTO))
-                {
-                    return respostaServicoDTO;
-                }
-
+                
                 respostaServicoDTO.Dados = await _pedidoNegocios.Inserir(pedidoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
@@ -85,11 +80,11 @@ namespace PocApi.Aplicacao.Servicos
         public async Task<RespostaServicoDTO<PedidoDTO>> Alterar(PedidoDTO pedidoDTO)
         {
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
-            
+
             try
             {
+                pedidoDTO = await _pedidoNegocios.ObterPorCodigo(pedidoDTO.IdPedido);
                 respostaServicoDTO.Dados = await _pedidoNegocios.Alterar(pedidoDTO);
-                
                 await _unidadeDeTrabalho.CommitAsync();
 
             }
@@ -101,18 +96,6 @@ namespace PocApi.Aplicacao.Servicos
             }
             return respostaServicoDTO;
         }
-        public async Task<bool> Validar(RespostaServicoDTO<PedidoDTO> respostaServicoDTO, PedidoDTO pedidoDTO)
-        {
-            bool pedidoValido = true;
-            ClienteDTO clienteDTO = await _clienteNegocios.ObterPorCodigo(pedidoDTO.IdCliente);
-            if (clienteDTO == null || clienteDTO.IdCliente == 0)
-            {
-                respostaServicoDTO.Mensagem = ConstantesMensagens.ClienteNaoLocalizado;
-                pedidoValido = false;
-            }
-            return pedidoValido;
-        }
-
 
     }
 }

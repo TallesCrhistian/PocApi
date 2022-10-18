@@ -50,8 +50,12 @@ namespace PocApi.Data.Repositorios
 
         public async Task<Pedido> ObterPorCodigo(int codigo)
         {
-            Pedido pedido = await _appDbContext.Pedidos.Where(x => x.IdPedido == codigo).FirstOrDefaultAsync();
+            Pedido pedido = await _appDbContext.Pedidos.Where(x => x.IdPedido == codigo)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
             if (pedido != null) await _appDbContext.SaveChangesAsync();
+                      
 
             return pedido;
         }

@@ -12,15 +12,21 @@ namespace PocApi.Negocios
     {
         private readonly IMapper _mapper;
         private readonly IPedidoRepositorio _pedidoRepositorio;
+        private readonly IClienteRepositorio _clienteRepositorio;
 
-        public PedidoNegocios(IPedidoRepositorio pedidoRepositorio, IMapper mapper)
+        public PedidoNegocios(IPedidoRepositorio pedidoRepositorio, IMapper mapper, IClienteRepositorio clienteRepositorio)
         {
             _pedidoRepositorio = pedidoRepositorio;
             _mapper = mapper;
+            _clienteRepositorio = clienteRepositorio;
         }
 
         public async Task<PedidoDTO> Alterar(PedidoDTO pedidoDTO)
         {
+            if (!await Validar(pedidoDTO))
+            {
+                return pedidoDTO;
+            }
             Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);
             pedido = await _pedidoRepositorio.Alterar(pedido);
             return _mapper.Map<PedidoDTO>(pedido);
@@ -28,6 +34,10 @@ namespace PocApi.Negocios
 
         public async Task<PedidoDTO> Inserir(PedidoDTO pedidoDTO)
         {
+            if (!await Validar(pedidoDTO))
+            {
+                return pedidoDTO;
+            }
             Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);
             pedido = await _pedidoRepositorio.Inserir(pedido);
             return _mapper.Map<PedidoDTO>(pedido);
@@ -46,5 +56,17 @@ namespace PocApi.Negocios
             PedidoDTO pedidoDTO = (pedido != null) ? _mapper.Map<PedidoDTO>(pedido) : new PedidoDTO();
             return pedidoDTO;
         }
+
+        public async Task<bool> Validar(PedidoDTO pedidoDTO)
+        {
+            bool pedidoValido = true;
+            Cliente cliente = await _clienteRepositorio.ObterPorCodigo(pedidoDTO.IdCliente);
+            if (cliente == null || cliente.IdCliente == 0)
+            {
+                pedidoValido = false;
+            }
+            return pedidoValido;
+        }
+
     }
 }
