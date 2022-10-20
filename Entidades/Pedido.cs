@@ -1,5 +1,6 @@
 ﻿using PocApi.Compartilhado.Enumeradores;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,6 @@ namespace Entidades
         public PedidoStatusEnum Status { get; set; }
         [ForeignKey(nameof(IdCliente))]
         public virtual Cliente Cliente { get; set; }
+        public virtual List<ItemPedido> ItensPedido { get; set; }
     }
 }
