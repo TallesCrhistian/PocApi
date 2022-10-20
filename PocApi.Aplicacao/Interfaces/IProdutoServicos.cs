@@ -6,5 +6,6 @@ namespace PocApi.Aplicacao.Interfaces
     public interface IProdutoServicos
     {
         Task<RespostaServicoDTO<ProdutoDTO>> Inserir(ProdutoDTO produtoDTO);
+        Task<RespostaServicoDTO<ProdutoDTO>> ObterPorCodigo(int codigo);
     }
 }

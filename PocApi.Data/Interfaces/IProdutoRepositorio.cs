@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,7 @@ namespace PocApi.Data.Interfaces
 {
      public interface IProdutoRepositorio
     {
+        Task<Produto> Inserir(Produto produto);
+        Task<Produto> ObterPorCodigo(int codigo);
     }
 }

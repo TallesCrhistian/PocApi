@@ -25,7 +25,13 @@ namespace PocApi.API.Controllers
         public async Task<IActionResult> Inserir(ProdutoInserirViewModel produtoInserirViewModel)
         {
             ProdutoDTO produtoDTO = _mapper.Map<ProdutoDTO>(produtoInserirViewModel);
-            RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = _produtoServicos.Inserir(produtoDTO);
+            RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = await _produtoServicos.Inserir(produtoDTO);
+            return Ok(respostaServicoDTO);
+        }
+        [HttpPost("{codigo:int}")]
+        public async Task<IActionResult> ObterPorCodigo(int codigo)
+        {
+            RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = await _produtoServicos.ObterPorCodigo(codigo);
             return Ok(respostaServicoDTO);
         }
     }
