@@ -1,12 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Entidades
+﻿
+namespace PocApi.Compartilhado.ModeloDeVisualizacao
 {
-    public class Produto
+    public class ProdutoAlterarViewModel
     {
-        [Key]
         public int IdProduto { get; set; }
-        public bool? Ativo { get; set; } = true;
         public string Descricao { get; set; }
         public string EAN { get; set; }
         public decimal PrecoCusto { get; set; }

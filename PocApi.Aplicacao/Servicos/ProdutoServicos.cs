@@ -17,6 +17,43 @@ namespace PocApi.Aplicacao.Servicos
             _prodrutoNegocios = prodrutoNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
         }
+
+        public async Task<RespostaServicoDTO<ProdutoDTO>> Alterar(ProdutoDTO produtoDTO)
+        {
+            RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = new RespostaServicoDTO<ProdutoDTO>();
+            try
+            {
+
+                respostaServicoDTO.Dados = await _prodrutoNegocios.Alterar(produtoDTO);
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
+
+        public async Task<RespostaServicoDTO<ProdutoDTO>> Deletar(int codigo)
+        {
+            RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = new RespostaServicoDTO<ProdutoDTO>();
+            try
+            {
+
+                respostaServicoDTO.Dados = await _prodrutoNegocios.Deletar(codigo);
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
+
         public async Task<RespostaServicoDTO<ProdutoDTO>> Inserir(ProdutoDTO produtoDTO)
         {
             RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = new RespostaServicoDTO<ProdutoDTO>();

@@ -11,5 +11,7 @@ namespace PocApi.Data.Interfaces
     {
         Task<Produto> Inserir(Produto produto);
         Task<Produto> ObterPorCodigo(int codigo);
+        Task<Produto> Deletar(int codigo);
+        Task<Produto> Alterar(Produto produto);
     }
 }

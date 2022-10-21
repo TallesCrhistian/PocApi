@@ -16,6 +16,21 @@ namespace PocApi.Negocios
             _produtoRepositorio = produtoRepositorio;
             _mapper = mapper;
         }
+
+        public async Task<ProdutoDTO> Alterar(ProdutoDTO produtoDTO)
+        {
+            Produto produto = _mapper.Map<Produto>(produtoDTO);
+            produto = await _produtoRepositorio.Alterar(produto);
+            return _mapper.Map<ProdutoDTO>(produto);
+        }
+
+        public async Task<ProdutoDTO> Deletar(int codigo)
+        {
+            Produto produto = await _produtoRepositorio.Deletar(codigo);
+            ProdutoDTO produtoDTO = (produto != null) ? _mapper.Map<ProdutoDTO>(produto) : new ProdutoDTO();
+            return produtoDTO;
+        }
+
         public async Task<ProdutoDTO> Inserir(ProdutoDTO produtoDTO)
         {
             Produto produto = _mapper.Map<Produto>(produtoDTO);

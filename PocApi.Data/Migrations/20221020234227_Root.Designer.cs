@@ -10,7 +10,7 @@ using PocApi.Data.Contexto;
 namespace PocApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221017231643_Root")]
+    [Migration("20221020234227_Root")]
     partial class Root
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,6 +58,9 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("Ordem")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PedidoIdPedido")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("PrecoCusto")
                         .HasColumnType("decimal(18,2)");
 
@@ -65,6 +68,10 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdPedido");
+
+                    b.HasIndex("IdProduto");
+
+                    b.HasIndex("PedidoIdPedido");
 
                     b.ToTable("ItensPedido");
                 });
@@ -108,7 +115,7 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("Ativo")
+                    b.Property<bool?>("Ativo")
                         .HasColumnType("bit");
 
                     b.Property<string>("Descricao")
@@ -158,6 +165,21 @@ namespace PocApi.Data.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("Entidades.ItemPedido", b =>
+                {
+                    b.HasOne("Entidades.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("IdProduto")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Entidades.Pedido", null)
+                        .WithMany("ItensPedido")
+                        .HasForeignKey("PedidoIdPedido");
+
+                    b.Navigation("Produto");
+                });
+
             modelBuilder.Entity("Entidades.Pedido", b =>
                 {
                     b.HasOne("Entidades.Cliente", "Cliente")
@@ -172,6 +194,11 @@ namespace PocApi.Data.Migrations
             modelBuilder.Entity("Entidades.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
+                });
+
+            modelBuilder.Entity("Entidades.Pedido", b =>
+                {
+                    b.Navigation("ItensPedido");
                 });
 #pragma warning restore 612, 618
         }

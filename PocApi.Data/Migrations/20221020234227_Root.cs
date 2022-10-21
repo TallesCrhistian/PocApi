@@ -24,32 +24,16 @@ namespace PocApi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ItensPedido",
-                columns: table => new
-                {
-                    IdPedido = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ordem = table.Column<int>(type: "int", nullable: false),
-                    IdProduto = table.Column<int>(type: "int", nullable: false),
-                    PrecoCusto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PrecoVenda = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ItensPedido", x => x.IdPedido);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Produtos",
                 columns: table => new
                 {
                     IdProduto = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Ativo = table.Column<bool>(type: "bit", nullable: true),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EAN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PrecoCusto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PrecoVenda = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Ativo = table.Column<bool>(type: "bit", nullable: false)
+                    PrecoVenda = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,6 +82,45 @@ namespace PocApi.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ItensPedido",
+                columns: table => new
+                {
+                    IdPedido = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ordem = table.Column<int>(type: "int", nullable: false),
+                    IdProduto = table.Column<int>(type: "int", nullable: false),
+                    PrecoCusto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PrecoVenda = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PedidoIdPedido = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItensPedido", x => x.IdPedido);
+                    table.ForeignKey(
+                        name: "FK_ItensPedido_Pedidos_PedidoIdPedido",
+                        column: x => x.PedidoIdPedido,
+                        principalTable: "Pedidos",
+                        principalColumn: "IdPedido",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ItensPedido_Produtos_IdProduto",
+                        column: x => x.IdProduto,
+                        principalTable: "Produtos",
+                        principalColumn: "IdProduto",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensPedido_IdProduto",
+                table: "ItensPedido",
+                column: "IdProduto");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensPedido_PedidoIdPedido",
+                table: "ItensPedido",
+                column: "PedidoIdPedido");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_IdCliente",
                 table: "Pedidos",
@@ -110,13 +133,13 @@ namespace PocApi.Data.Migrations
                 name: "ItensPedido");
 
             migrationBuilder.DropTable(
+                name: "Usuarios");
+
+            migrationBuilder.DropTable(
                 name: "Pedidos");
 
             migrationBuilder.DropTable(
                 name: "Produtos");
-
-            migrationBuilder.DropTable(
-                name: "Usuarios");
 
             migrationBuilder.DropTable(
                 name: "Clientes");

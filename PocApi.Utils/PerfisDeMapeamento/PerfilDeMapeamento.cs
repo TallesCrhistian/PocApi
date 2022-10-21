@@ -34,9 +34,12 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<UsuarioDTO, Usuario>()
                 .ReverseMap();
 
+
             CreateMap<ProdutoInserirViewModel, ProdutoDTO>()
                 .ReverseMap();
             CreateMap<ProdutoDTO, Produto>()
+                .ReverseMap();
+            CreateMap<ProdutoAlterarViewModel, ProdutoDTO>()
                 .ReverseMap();
 
         }

@@ -7,5 +7,7 @@ namespace PocApi.Aplicacao.Interfaces
     {
         Task<RespostaServicoDTO<ProdutoDTO>> Inserir(ProdutoDTO produtoDTO);
         Task<RespostaServicoDTO<ProdutoDTO>> ObterPorCodigo(int codigo);
+        Task<RespostaServicoDTO<ProdutoDTO>> Deletar(int codigo);
+        Task<RespostaServicoDTO<ProdutoDTO>> Alterar(ProdutoDTO produtoDTO);
     }
 }

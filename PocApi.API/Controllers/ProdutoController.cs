@@ -22,7 +22,7 @@ namespace PocApi.API.Controllers
 
         [HttpPost]
         [Route(nameof(Inserir))]
-        public async Task<IActionResult> Inserir(ProdutoInserirViewModel produtoInserirViewModel)
+        public async Task<IActionResult> Inserir([FromBody] ProdutoInserirViewModel produtoInserirViewModel)
         {
             ProdutoDTO produtoDTO = _mapper.Map<ProdutoDTO>(produtoInserirViewModel);
             RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = await _produtoServicos.Inserir(produtoDTO);
@@ -32,6 +32,20 @@ namespace PocApi.API.Controllers
         public async Task<IActionResult> ObterPorCodigo(int codigo)
         {
             RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = await _produtoServicos.ObterPorCodigo(codigo);
+            return Ok(respostaServicoDTO);
+        }
+        [HttpDelete("{codigo:int}")]
+        public async Task<IActionResult> Deletar(int codigo)
+        {
+            RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = await _produtoServicos.Deletar(codigo);
+            return Ok(respostaServicoDTO);
+        }
+        [HttpPut]
+        [Route(nameof(Alterar))]
+        public async Task<IActionResult> Alterar([FromBody] ProdutoAlterarViewModel produtoAlterarViewModel)
+        {
+            ProdutoDTO produtoDTO = _mapper.Map<ProdutoDTO>(produtoAlterarViewModel);
+            RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = await _produtoServicos.Alterar(produtoDTO);
             return Ok(respostaServicoDTO);
         }
     }

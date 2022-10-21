@@ -14,9 +14,31 @@ namespace PocApi.Data.Repositorios
         {
             _appDbContext = appDbContext;
         }
+
+        public async Task<Produto> Alterar(Produto produto)
+        {
+            _appDbContext.Set<Produto>().Update(produto);
+            await _appDbContext.SaveChangesAsync();
+            return produto;
+        }
+
+        public async Task<Produto> Deletar(int codigo)
+        {
+            Produto produto = await _appDbContext.Produtos.Where(x => x.IdProduto == codigo)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
+            produto.Ativo = false;
+
+            if (produto != null) await _appDbContext.SaveChangesAsync();
+
+            return produto;
+        }
+
         public async Task<Produto> Inserir(Produto produto)
         {
             await _appDbContext.Set<Produto>().AddAsync(produto);
+            produto.Ativo = true;
             await _appDbContext.SaveChangesAsync();
 
             return produto;
