@@ -52,12 +52,10 @@ namespace PocApi.API.Controllers
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = await _pedidoServicos.ObterPorCodigo(codigo);
             return Ok(respostaServicoDTO);
         }
-        [HttpPut]
-        [Route(nameof(Deletar))]
-        public async Task<IActionResult> Deletar([FromBody] PedidoAlterarViewModel pedidoAlterarViewModel)
-        {
-            PedidoDTO pedidoDTO = _mapper.Map<PedidoDTO>(pedidoAlterarViewModel);
-            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = await _pedidoServicos.Deletar(pedidoDTO);
+        [HttpDelete("{codigo:int}")]
+        public async Task<IActionResult> Deletar(int codigo)
+        {            
+            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = await _pedidoServicos.Deletar(codigo);
 
             return Ok(respostaServicoDTO);
         }

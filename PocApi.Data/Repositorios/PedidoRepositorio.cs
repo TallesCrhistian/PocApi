@@ -28,11 +28,17 @@ namespace PocApi.Data.Repositorios
             return pedido;
         }
 
-        public async Task<Pedido> Deletar(Pedido pedido)
+        public async Task<Pedido> Deletar(int codigo)
         {
+            Pedido pedido = await _appDbContext.Pedidos.Where(x => x.IdPedido == codigo)
+                .AsNoTracking()
+                .FirstOrDefaultAsync();
+
             pedido.Status = PedidoStatusEnum.Cancelado;
             _appDbContext.Set<Pedido>().Update(pedido);
-            await _appDbContext.SaveChangesAsync();
+
+            if (pedido != null) await _appDbContext.SaveChangesAsync();
+
 
             return pedido;
         }
@@ -64,7 +70,7 @@ namespace PocApi.Data.Repositorios
                 .FirstOrDefaultAsync();
 
             if (pedido != null) await _appDbContext.SaveChangesAsync();
-                      
+
 
             return pedido;
         }

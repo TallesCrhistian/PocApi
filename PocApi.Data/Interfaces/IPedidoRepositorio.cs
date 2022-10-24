@@ -11,6 +11,6 @@ namespace PocApi.Data.Interfaces
         Task<List<Pedido>> Listar(PedidoFiltroDTO pedidoFiltroDTO);
         Task<Pedido> ObterPorCodigo(int codigo);
         Task<Pedido> Alterar(Pedido pedido);
-        Task<Pedido> Deletar(Pedido pedido);
+        Task<Pedido> Deletar(int codigo);
     }
 }

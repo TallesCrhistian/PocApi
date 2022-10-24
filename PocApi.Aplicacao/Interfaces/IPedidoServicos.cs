@@ -10,6 +10,6 @@ namespace PocApi.Aplicacao.Interfaces
         Task<RespostaServicoDTO<List<PedidoDTO>>> Listar(PedidoFiltroDTO pedidofiltroDTO);
         Task<RespostaServicoDTO<PedidoDTO>> Alterar(PedidoDTO pedidoDTO);
         Task<RespostaServicoDTO<PedidoDTO>> ObterPorCodigo(int codigo);
-        Task<RespostaServicoDTO<PedidoDTO>> Deletar(PedidoDTO pedidoDTO);
+        Task<RespostaServicoDTO<PedidoDTO>> Deletar(int codigo);
     }
 }

@@ -32,14 +32,10 @@ namespace PocApi.Negocios
             return _mapper.Map<PedidoDTO>(pedido);
         }
 
-        public async Task<PedidoDTO> Deletar(PedidoDTO pedidoDTO)
+        public async Task<PedidoDTO> Deletar(int codigo)
         {
-            if (!await Validar(pedidoDTO))
-            {
-                return pedidoDTO;
-            }
-            Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);
-            pedido = await _pedidoRepositorio.Deletar(pedido);
+            Pedido pedido = await _pedidoRepositorio.Deletar(codigo);
+
             return _mapper.Map<PedidoDTO>(pedido);
         }
 
