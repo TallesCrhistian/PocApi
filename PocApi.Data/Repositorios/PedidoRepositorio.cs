@@ -28,6 +28,15 @@ namespace PocApi.Data.Repositorios
             return pedido;
         }
 
+        public async Task<Pedido> Deletar(Pedido pedido)
+        {
+            pedido.Status = PedidoStatusEnum.Cancelado;
+            _appDbContext.Set<Pedido>().Update(pedido);
+            await _appDbContext.SaveChangesAsync();
+
+            return pedido;
+        }
+
         public async Task<Pedido> Inserir(Pedido pedido)
         {
             await _appDbContext.Set<Pedido>().AddAsync(pedido);

@@ -97,5 +97,24 @@ namespace PocApi.Aplicacao.Servicos
             return respostaServicoDTO;
         }
 
+        public async Task<RespostaServicoDTO<PedidoDTO>> Deletar(PedidoDTO pedidoDTO)
+        {
+            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
+
+            try
+            {
+                pedidoDTO = await _pedidoNegocios.ObterPorCodigo(pedidoDTO.IdPedido);
+                respostaServicoDTO.Dados = await _pedidoNegocios.Deletar(pedidoDTO);
+                await _unidadeDeTrabalho.CommitAsync();
+
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
     }
 }
