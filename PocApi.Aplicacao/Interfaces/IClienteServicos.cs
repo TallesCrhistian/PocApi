@@ -11,7 +11,5 @@ namespace PocApi.Aplicacao.Servicos
         Task<RespostaServicoDTO<List<ClienteDTO>>> Listar(ClienteFiltroDTO clienteDTO);
         Task<RespostaServicoDTO<ClienteDTO>> ObterPorCodigo(int codigo);
         Task<RespostaServicoDTO<ClienteDTO>> Deletar(int idCliente);
-
-
     }
 }

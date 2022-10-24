@@ -60,6 +60,7 @@ namespace PocApi.Data.Repositorios
             List<Cliente> cliente = await clientes
                 .AsNoTracking()
                 .ToListAsync();
+
             return cliente;
 
         }

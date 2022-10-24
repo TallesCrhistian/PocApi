@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using PocApi.Compartilhado.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace PocApi.Data.Interfaces
         Task<Produto> ObterPorCodigo(int codigo);
         Task<Produto> Deletar(int codigo);
         Task<Produto> Alterar(Produto produto);
+        Task<List<Produto>> Listar(ProdutoFiltroDTO produtoFiltroDTO);
     }
 }

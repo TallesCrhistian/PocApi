@@ -41,7 +41,11 @@ namespace PocApi.Utils.PerfisDeMapeamento
                 .ReverseMap();
             CreateMap<ProdutoAlterarViewModel, ProdutoDTO>()
                 .ReverseMap();
-
+            CreateMap<ProdutoFiltroViewModel, ProdutoFiltroDTO>()
+                .ReverseMap();
+            CreateMap<ProdutoFiltroDTO, Produto>()
+                .ReverseMap();
+            
         }
     }
 }

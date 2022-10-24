@@ -1,4 +1,5 @@
 ﻿using PocApi.Compartilhado.DTOs;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PocApi.Aplicacao.Interfaces
@@ -9,5 +10,6 @@ namespace PocApi.Aplicacao.Interfaces
         Task<RespostaServicoDTO<ProdutoDTO>> ObterPorCodigo(int codigo);
         Task<RespostaServicoDTO<ProdutoDTO>> Deletar(int codigo);
         Task<RespostaServicoDTO<ProdutoDTO>> Alterar(ProdutoDTO produtoDTO);
+        Task<RespostaServicoDTO<List<ProdutoDTO>>> Listar(ProdutoFiltroDTO produtoFiltroDTO);
     }
 }

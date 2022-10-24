@@ -3,6 +3,7 @@ using PocApi.Compartilhado.DTOs;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PocApi.Aplicacao.Servicos
@@ -72,6 +73,23 @@ namespace PocApi.Aplicacao.Servicos
             return respostaServicoDTO;
         }
 
+        public async Task<RespostaServicoDTO<List<ProdutoDTO>>> Listar(ProdutoFiltroDTO produtoFiltroDTO)
+        {
+            RespostaServicoDTO<List<ProdutoDTO>> respostaServicoDTO = new RespostaServicoDTO<List<ProdutoDTO>>();
+            try
+            {
+                respostaServicoDTO.Dados = await _prodrutoNegocios.Listar(produtoFiltroDTO);
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
+
         public async Task<RespostaServicoDTO<ProdutoDTO>> ObterPorCodigo(int codigo)
         {
             RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = new RespostaServicoDTO<ProdutoDTO>();
@@ -89,5 +107,6 @@ namespace PocApi.Aplicacao.Servicos
             }
             return respostaServicoDTO;
         }
+              
     }
 }
