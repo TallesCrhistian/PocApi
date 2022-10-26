@@ -35,5 +35,23 @@ namespace PocApi.Aplicacao.Servicos
             }
             return respostaServicoDTO;
         }
+
+        public async Task<RespostaServicoDTO<PagamentoDTO>> ObterPorCodigo(int codigo)
+        {
+            RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = new RespostaServicoDTO<PagamentoDTO>();
+            try
+            {
+
+                respostaServicoDTO.Dados = await _pagamentoNegocios.ObterPorCodigo(codigo);
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
     }
 }

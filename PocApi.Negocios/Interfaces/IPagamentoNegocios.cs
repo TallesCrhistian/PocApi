@@ -6,5 +6,6 @@ namespace PocApi.Negocios.Interfaces
     public interface IPagamentoNegocios
     {
         Task<PagamentoDTO> Inserir(PagamentoDTO pagamentoDTO);
+        Task<PagamentoDTO> ObterPorCodigo(int codigo);
     }
 }

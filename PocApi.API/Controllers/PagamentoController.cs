@@ -28,5 +28,11 @@ namespace PocApi.API.Controllers
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = await _pagamentoServico.Inserir(pagamentoDTO);
             return Ok(respostaServicoDTO);
         }
+        [HttpPut("{codigo:int}")]
+        public async Task<IActionResult> ObeterPorCodigo(int codigo)
+        {
+            RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = await _pagamentoServico.ObterPorCodigo(codigo);
+            return Ok(respostaServicoDTO);
+        }
     }
 }

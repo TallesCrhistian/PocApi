@@ -23,5 +23,12 @@ namespace PocApi.Negocios
             pagamento = await _pagamentoRepositorio.Inserir(pagamento);
             return _mapper.Map<PagamentoDTO>(pagamento);
         }
+
+        public async Task<PagamentoDTO> ObterPorCodigo(int codigo)
+        {
+            Pagamento pagamento = await _pagamentoRepositorio.ObterPorCodigo(codigo);
+            PagamentoDTO pagamentoDTO = (codigo != null) ? _mapper.Map<ClienteDTO>(pagamento) : new ClienteDTO();
+            return pagamentoDTO;
+        }
     }
 }

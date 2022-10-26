@@ -6,5 +6,6 @@ namespace PocApi.Aplicacao.Interfaces
     public interface IPagamentoServicos
     {
         Task<RespostaServicoDTO<PagamentoDTO>> Inserir(PagamentoDTO pagamentoDTO);
+        Task<RespostaServicoDTO<PagamentoDTO>> ObterPorCodigo(int codigo);
     }
 }
