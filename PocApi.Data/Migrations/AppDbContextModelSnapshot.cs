@@ -163,6 +163,76 @@ namespace PocApi.Data.Migrations
                     b.ToTable("Usuarios");
                 });
 
+            modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
+                {
+                    b.Property<int>("IdPagamento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool?>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("DiaJuros")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("DiasCarencia")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DiasPagamento")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MultaAtraso")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Parcelas")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdPagamento");
+
+                    b.ToTable("Pagamentos");
+                });
+
+            modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
+                {
+                    b.Property<int?>("IdPedidoPagamento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataLancamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Desconto")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("IdPagamento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdPedido")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PagamentoIdPagamento")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PedidoIdPedido")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("IdPedidoPagamento");
+
+                    b.HasIndex("PagamentoIdPagamento");
+
+                    b.HasIndex("PedidoIdPedido");
+
+                    b.ToTable("PedidosPagamento");
+                });
+
             modelBuilder.Entity("Entidades.ItemPedido", b =>
                 {
                     b.HasOne("Entidades.Produto", "Produto")
@@ -189,6 +259,21 @@ namespace PocApi.Data.Migrations
                     b.Navigation("Cliente");
                 });
 
+            modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
+                {
+                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
+                        .WithMany("PedidosPagamento")
+                        .HasForeignKey("PagamentoIdPagamento");
+
+                    b.HasOne("Entidades.Pedido", "Pedido")
+                        .WithMany("PedidosPagamento")
+                        .HasForeignKey("PedidoIdPedido");
+
+                    b.Navigation("Pagamento");
+
+                    b.Navigation("Pedido");
+                });
+
             modelBuilder.Entity("Entidades.Cliente", b =>
                 {
                     b.Navigation("Pedidos");
@@ -197,6 +282,13 @@ namespace PocApi.Data.Migrations
             modelBuilder.Entity("Entidades.Pedido", b =>
                 {
                     b.Navigation("ItensPedido");
+
+                    b.Navigation("PedidosPagamento");
+                });
+
+            modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
+                {
+                    b.Navigation("PedidosPagamento");
                 });
 #pragma warning restore 612, 618
         }

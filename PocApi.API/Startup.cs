@@ -26,6 +26,7 @@ namespace PocApi.API
             services.AdicionarRepositorios();
             services.AdicionarNegocios();
             services.AdicionarServicos();
+            services.AdicionarAutorizacao(_configuration);
             services.AddControllers();
             services.AddAutoMapper(typeof(PerfilDeMapeamento));
             services.AddSwaggerGen(c =>
@@ -47,6 +48,8 @@ namespace PocApi.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

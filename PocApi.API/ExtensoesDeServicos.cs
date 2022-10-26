@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using PocApi.Aplicacao.Interfaces;
 using PocApi.Aplicacao.Servicos;
 using PocApi.Data.Contexto;
@@ -9,6 +11,7 @@ using PocApi.Data.Repositorios;
 using PocApi.Data.UnidadeDeTrabalho;
 using PocApi.Negocios;
 using PocApi.Negocios.Interfaces;
+using System.Text;
 
 namespace PocApi.API
 {
@@ -27,6 +30,7 @@ namespace PocApi.API
             services.AddScoped<IPedidoServicos, PedidoServicos>();
             services.AddScoped<IUsuarioServicos, UsuarioServicos>();
             services.AddScoped<IProdutoServicos, ProdutoServicos>();
+            services.AddScoped<IPagamentoServicos, PagamentoServicos>();
             return services;
         }
 
@@ -36,6 +40,7 @@ namespace PocApi.API
             services.AddScoped<IPedidoNegocios, PedidoNegocios>();
             services.AddScoped<IUsuarioNegocios, UsuarioNegocios>();
             services.AddScoped<IProdrutoNegocios, ProdutoNegocios>();
+            services.AddScoped<IPagamentoNegocios, PagamentoNegocios>();
             return services;
         }
 
@@ -45,12 +50,28 @@ namespace PocApi.API
             services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRositorio>();
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
+            services.AddScoped<IPagamentoRepositorio, PagamentoRepositorio>();
             return services;
         }
 
         public static IServiceCollection UnidadeDeTrabalho(this IServiceCollection services)
         {
             services.AddScoped<IUnidadeDeTrabalho, UnidadeDeTrabalho>();
+            return services;
+        }
+        public static IServiceCollection AdicionarAutorizacao(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
             return services;
         }
     }

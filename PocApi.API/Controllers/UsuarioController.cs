@@ -39,7 +39,7 @@ namespace PocApi.API.Controllers
         public async Task<IActionResult> Login([FromBody] UsuarioInserirViewModel usuarioInserirViewModel)
         {
             UsuarioDTO usuarioDTO = _mapper.Map<UsuarioDTO>(usuarioInserirViewModel);
-            RespostaServicoDTO<UsuarioDTO> respostaServicoDTO = await _usuarioServicos.Login(usuarioDTO);
+            RespostaServicoDTO<string> respostaServicoDTO = await _usuarioServicos.Login(usuarioDTO);
             return Ok(respostaServicoDTO);
         }
     }

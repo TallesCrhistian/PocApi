@@ -1,10 +1,16 @@
-﻿using PocApi.Aplicacao.Interfaces;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using PocApi.Aplicacao.Interfaces;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Compartilhado.Menssagens;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using PocApi.Utils.Utils;
 using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PocApi.Aplicacao.Servicos
@@ -13,16 +19,18 @@ namespace PocApi.Aplicacao.Servicos
     {
         private readonly IUsuarioNegocios _usuarioNegocios;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
+        private readonly IConfiguration _configuration;
 
-        public UsuarioServicos(IUsuarioNegocios usuarioNegocios, IUnidadeDeTrabalho unidadeDeTrabalho)
+        public UsuarioServicos(IUsuarioNegocios usuarioNegocios, IUnidadeDeTrabalho unidadeDeTrabalho, IConfiguration configuration)
         {
             _usuarioNegocios = usuarioNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
+            _configuration = configuration;
         }
 
-        public async Task<RespostaServicoDTO<UsuarioDTO>> Login(UsuarioDTO usuarioDTO)
+        public async Task<RespostaServicoDTO<string>> Login(UsuarioDTO usuarioDTO)
         {
-            RespostaServicoDTO<UsuarioDTO> respostaServicoDTO = new RespostaServicoDTO<UsuarioDTO>();
+            RespostaServicoDTO<string> respostaServicoDTO = new RespostaServicoDTO<string>();
             try
             {
                 UsuarioDTO usuarioDTOBanco = await _usuarioNegocios.ObterPorEmail(usuarioDTO.Email);
@@ -40,8 +48,9 @@ namespace PocApi.Aplicacao.Servicos
                     return respostaServicoDTO;
                 }
 
-                respostaServicoDTO.Mensagem = "Login efetuado com sucesso";
+                string token = CriarToken(usuarioDTOBanco);
 
+                respostaServicoDTO.Dados = token;
             }
 
             catch (Exception ex)
@@ -51,6 +60,30 @@ namespace PocApi.Aplicacao.Servicos
                 _unidadeDeTrabalho.Rollback();
             }
             return respostaServicoDTO;
+        }
+
+        public  string CriarToken(UsuarioDTO usuarioDTO)
+        {
+            List<Claim> claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, usuarioDTO.IdUsuario.ToString()),
+                new Claim(ClaimTypes.Name, usuarioDTO.Email)
+            };
+
+            SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+            SigningCredentials signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha512Signature);
+           
+            SecurityTokenDescriptor securityTokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(7),
+                SigningCredentials = signingCredentials
+            };
+            
+            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();           
+            SecurityToken securityToken = jwtSecurityTokenHandler.CreateToken(securityTokenDescriptor);
+
+            return jwtSecurityTokenHandler.WriteToken(securityToken);
         }
 
         public async Task<RespostaServicoDTO<UsuarioDTO>> Registrar(UsuarioDTO usuarioDTO)

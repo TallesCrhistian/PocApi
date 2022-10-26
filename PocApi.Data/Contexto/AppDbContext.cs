@@ -1,6 +1,6 @@
 ﻿using Entidades;
 using Microsoft.EntityFrameworkCore;
-
+using PocApi.Entidades;
 
 namespace PocApi.Data.Contexto
 {
@@ -17,5 +17,7 @@ namespace PocApi.Data.Contexto
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Pagamento> Pagamentos { get; set; }
+        public DbSet<PedidoPagamento> PedidosPagamento { get; set; }
     }
 }

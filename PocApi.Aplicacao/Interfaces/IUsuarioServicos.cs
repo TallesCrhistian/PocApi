@@ -6,6 +6,6 @@ namespace PocApi.Aplicacao.Interfaces
     public interface IUsuarioServicos
     {
         Task<RespostaServicoDTO<UsuarioDTO>> Registrar(UsuarioDTO usuarioDTO);
-        Task<RespostaServicoDTO<UsuarioDTO>> Login(UsuarioDTO usuarioDTO);
+        Task<RespostaServicoDTO<string>> Login(UsuarioDTO usuarioDTO);
     }
 }
