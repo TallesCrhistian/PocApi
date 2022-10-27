@@ -3,6 +3,7 @@ using PocApi.Compartilhado.DTOs;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PocApi.Aplicacao.Servicos
@@ -16,6 +17,41 @@ namespace PocApi.Aplicacao.Servicos
         {
             _pagamentoNegocios = pagamentoNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
+        }
+
+        public async Task<RespostaServicoDTO<PagamentoDTO>> Alterar(PagamentoDTO pagamentoDTO)
+        {
+            RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = new RespostaServicoDTO<PagamentoDTO>();
+            try
+            {
+
+                respostaServicoDTO.Dados = await _pagamentoNegocios.Alterar(pagamentoDTO);
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
+
+        public async Task<RespostaServicoDTO<PagamentoDTO>> Deletar(int codigo)
+        {
+            RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = new RespostaServicoDTO<PagamentoDTO>();
+            try
+            {
+                respostaServicoDTO.Dados = await _pagamentoNegocios.Deletar(codigo);
+                await _unidadeDeTrabalho.CommitAsync();
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
+                _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
         }
 
         public async Task<RespostaServicoDTO<PagamentoDTO>> Inserir(PagamentoDTO pagamentoDTO)
@@ -32,6 +68,23 @@ namespace PocApi.Aplicacao.Servicos
                 respostaServicoDTO.Sucesso = false;
                 respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
                 _unidadeDeTrabalho.Rollback();
+            }
+            return respostaServicoDTO;
+        }
+
+        public async Task<RespostaServicoDTO<List<PagamentoDTO>>> Listar(PagamentoFiltroDTO pagamentoFiltroDTO)
+        {
+            RespostaServicoDTO<List<PagamentoDTO>> respostaServicoDTO = new RespostaServicoDTO<List<PagamentoDTO>>();
+            try
+            {
+
+                respostaServicoDTO.Dados = await _pagamentoNegocios.Listar(pagamentoFiltroDTO);
+
+            }
+            catch (Exception ex)
+            {
+                respostaServicoDTO.Sucesso = false;
+                respostaServicoDTO.Mensagem = ex.GetBaseException().Message;
             }
             return respostaServicoDTO;
         }

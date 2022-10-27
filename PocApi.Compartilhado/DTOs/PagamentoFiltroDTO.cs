@@ -1,13 +1,8 @@
-﻿using Entidades;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace PocApi.Entidades
+﻿namespace PocApi.Compartilhado.DTOs
 {
-    public class Pagamento
+    public class PagamentoFiltroDTO
     {
-        [Key]
-        public int IdPagamento { get; set; }        
+        public int IdPagamento { get; set; }
         public bool? Ativo { get; set; } = true;
         public string Descricao { get; set; }
         public int DiasPagamento { get; set; }
@@ -15,7 +10,7 @@ namespace PocApi.Entidades
         public decimal MultaAtraso { get; set; }
         public int DiasCarencia { get; set; }
         public int Parcelas { get; set; }
-        public List<PedidoPagamento> PedidosPagamento { get; set; }
-
+        public int Pagina { get; set; }
+        public int ItensPorPagina { get; set; }
     }
 }

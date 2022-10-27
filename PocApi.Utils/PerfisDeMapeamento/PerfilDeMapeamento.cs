@@ -2,6 +2,7 @@
 using Entidades;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Compartilhado.ModeloDeVisualizacao;
+using PocApi.Entidades;
 
 namespace PocApi.Utils.PerfisDeMapeamento
 {
@@ -45,7 +46,13 @@ namespace PocApi.Utils.PerfisDeMapeamento
                 .ReverseMap();
             CreateMap<ProdutoFiltroDTO, Produto>()
                 .ReverseMap();
-            
+
+            CreateMap<PagamentoDTO, Pagamento>()
+                .ReverseMap();
+            CreateMap<PagamentoInserirViewModel, PagamentoDTO>()
+                .ReverseMap();
+            CreateMap<PagamentoAlterarViewModel, PagamentoDTO>()
+                .ReverseMap();
         }
     }
 }
