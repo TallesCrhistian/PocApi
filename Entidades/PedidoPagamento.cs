@@ -1,6 +1,7 @@
 ﻿using Entidades;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PocApi.Entidades
 {
@@ -13,7 +14,9 @@ namespace PocApi.Entidades
         public DateTime DataLancamento { get; set; }
         public decimal Valor { get; set; }
         public decimal Desconto { get; set; }
+        [ForeignKey(nameof(IdPedido))]
         public Pedido Pedido { get; set; }
+        [ForeignKey(nameof(IdPagamento))]
         public Pagamento Pagamento { get; set; }
     }
 }

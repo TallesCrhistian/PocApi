@@ -140,25 +140,23 @@ namespace PocApi.Data.Migrations
                     IdPagamento = table.Column<int>(type: "int", nullable: false),
                     DataLancamento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Desconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PedidoIdPedido = table.Column<int>(type: "int", nullable: true),
-                    PagamentoIdPagamento = table.Column<int>(type: "int", nullable: true)
+                    Desconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PedidosPagamento", x => x.IdPedidoPagamento);
                     table.ForeignKey(
-                        name: "FK_PedidosPagamento_Pagamentos_PagamentoIdPagamento",
-                        column: x => x.PagamentoIdPagamento,
+                        name: "FK_PedidosPagamento_Pagamentos_IdPagamento",
+                        column: x => x.IdPagamento,
                         principalTable: "Pagamentos",
                         principalColumn: "IdPagamento",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PedidosPagamento_Pedidos_PedidoIdPedido",
-                        column: x => x.PedidoIdPedido,
+                        name: "FK_PedidosPagamento_Pedidos_IdPedido",
+                        column: x => x.IdPedido,
                         principalTable: "Pedidos",
                         principalColumn: "IdPedido",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -177,14 +175,14 @@ namespace PocApi.Data.Migrations
                 column: "IdCliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PedidosPagamento_PagamentoIdPagamento",
+                name: "IX_PedidosPagamento_IdPagamento",
                 table: "PedidosPagamento",
-                column: "PagamentoIdPagamento");
+                column: "IdPagamento");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PedidosPagamento_PedidoIdPedido",
+                name: "IX_PedidosPagamento_IdPedido",
                 table: "PedidosPagamento",
-                column: "PedidoIdPedido");
+                column: "IdPedido");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

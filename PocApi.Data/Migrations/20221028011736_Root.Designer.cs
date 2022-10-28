@@ -10,7 +10,7 @@ using PocApi.Data.Contexto;
 namespace PocApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221025195408_Root")]
+    [Migration("20221028011736_Root")]
     partial class Root
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -217,20 +217,14 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("IdPedido")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PagamentoIdPagamento")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PedidoIdPedido")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdPedidoPagamento");
 
-                    b.HasIndex("PagamentoIdPagamento");
+                    b.HasIndex("IdPagamento");
 
-                    b.HasIndex("PedidoIdPedido");
+                    b.HasIndex("IdPedido");
 
                     b.ToTable("PedidosPagamento");
                 });
@@ -265,11 +259,15 @@ namespace PocApi.Data.Migrations
                 {
                     b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
                         .WithMany("PedidosPagamento")
-                        .HasForeignKey("PagamentoIdPagamento");
+                        .HasForeignKey("IdPagamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("PedidosPagamento")
-                        .HasForeignKey("PedidoIdPedido");
+                        .HasForeignKey("IdPedido")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Pagamento");
 

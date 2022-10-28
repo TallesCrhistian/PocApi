@@ -15,7 +15,7 @@ namespace PocApi.Entidades
         public decimal MultaAtraso { get; set; }
         public int DiasCarencia { get; set; }
         public int Parcelas { get; set; }
-        public List<PedidoPagamento> PedidosPagamento { get; set; }
+        public virtual List<PedidoPagamento> PedidosPagamento { get; set; }
 
     }
 }
