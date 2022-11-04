@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PocApi.Utils.Utils
 {
@@ -16,7 +12,6 @@ namespace PocApi.Utils.Utils
                 senhaSalt = hmacsha.Key;
                 senhaHash = hmacsha.ComputeHash(Encoding.UTF8.GetBytes(senha));
             }
-
         }
 
         public static bool VerificarSenhaHash(string senha, byte[] senhaHash, byte[] senhaSalt)

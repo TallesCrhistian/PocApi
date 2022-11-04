@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using PocApi.Aplicacao.Interfaces;
 using PocApi.Aplicacao.Servicos;
 using PocApi.Data.Contexto;
@@ -11,6 +12,7 @@ using PocApi.Data.Repositorios;
 using PocApi.Data.UnidadeDeTrabalho;
 using PocApi.Negocios;
 using PocApi.Negocios.Interfaces;
+using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
 namespace PocApi.API
@@ -41,6 +43,7 @@ namespace PocApi.API
             services.AddScoped<IUsuarioNegocios, UsuarioNegocios>();
             services.AddScoped<IProdrutoNegocios, ProdutoNegocios>();
             services.AddScoped<IPagamentoNegocios, PagamentoNegocios>();
+            services.AddScoped<IPedidoPagamentoNegocios, PedidoPagamentoNegocios>();
             return services;
         }
 
@@ -51,6 +54,7 @@ namespace PocApi.API
             services.AddScoped<IUsuarioRepositorio, UsuarioRositorio>();
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             services.AddScoped<IPagamentoRepositorio, PagamentoRepositorio>();
+            services.AddScoped<IPedidoPagamentoRepositorio, PedidoPagamentoRepositorio>();
             return services;
         }
 
@@ -72,6 +76,22 @@ namespace PocApi.API
                         ValidateAudience = false
                     };
                 });
+            return services;
+        }
+        public static IServiceCollection AdicionarSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "PocApi.API", Version = "v1" });
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Header padrão de autorização usando schemma Bearer. Exemplo: \"bearer {token}\"",
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
             return services;
         }
     }

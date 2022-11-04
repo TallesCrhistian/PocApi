@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace PocApi.Negocios.Interfaces
 {
-    interface IPedidoPagamentoNegocios
+    public interface IPedidoPagamentoNegocios
     {
         Task<PedidoPagamentoDTO> Inserir(PedidoPagamentoDTO pedidoPagamentoDTO);
     }
