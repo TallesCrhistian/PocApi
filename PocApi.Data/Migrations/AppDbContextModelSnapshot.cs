@@ -45,18 +45,18 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("Entidades.ItemPedido", b =>
                 {
-                    b.Property<int>("IdPedido")
+                    b.Property<int>("IdItemPedido")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdPedido")
+                        .HasColumnType("int");
 
                     b.Property<int>("IdProduto")
                         .HasColumnType("int");
 
                     b.Property<int>("Ordem")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PedidoIdPedido")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PrecoCusto")
@@ -65,11 +65,11 @@ namespace PocApi.Data.Migrations
                     b.Property<decimal>("PrecoVenda")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("IdPedido");
+                    b.HasKey("IdItemPedido");
+
+                    b.HasIndex("IdPedido");
 
                     b.HasIndex("IdProduto");
-
-                    b.HasIndex("PedidoIdPedido");
 
                     b.ToTable("ItensPedido");
                 });
@@ -229,15 +229,19 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("Entidades.ItemPedido", b =>
                 {
+                    b.HasOne("Entidades.Pedido", "Pedido")
+                        .WithMany("ItensPedido")
+                        .HasForeignKey("IdPedido")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Entidades.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("IdProduto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entidades.Pedido", null)
-                        .WithMany("ItensPedido")
-                        .HasForeignKey("PedidoIdPedido");
+                    b.Navigation("Pedido");
 
                     b.Navigation("Produto");
                 });

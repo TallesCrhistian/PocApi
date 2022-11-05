@@ -47,11 +47,17 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<ProdutoFiltroDTO, Produto>()
                 .ReverseMap();
 
+
             CreateMap<PagamentoDTO, Pagamento>()
                 .ReverseMap();
             CreateMap<PagamentoInserirViewModel, PagamentoDTO>()
                 .ReverseMap();
             CreateMap<PagamentoAlterarViewModel, PagamentoDTO>()
+                .ReverseMap();
+
+            CreateMap<PedidoPagamentoViewModel, PedidoPagamentoDTO>()
+                .ReverseMap();
+            CreateMap<PedidoPagamentoDTO, PedidoPagamento>()
                 .ReverseMap();
         }
     }

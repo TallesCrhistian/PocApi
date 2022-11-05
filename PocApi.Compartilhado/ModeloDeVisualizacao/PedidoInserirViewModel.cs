@@ -10,5 +10,6 @@ namespace PocApi.Compartilhado.ModeloDeVisualizacao
         public DateTime Data { get; set; }
         public PedidoStatusEnum Status { get; set; }
         public List<PedidoPagamentoViewModel> PedidoPagamentoViewModels { get; set; }
+        public List<ItemPedidoViewModel> ItemPedidoViewModels { get; set; }
     }
 }

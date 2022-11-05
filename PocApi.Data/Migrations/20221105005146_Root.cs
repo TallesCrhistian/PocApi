@@ -105,23 +105,23 @@ namespace PocApi.Data.Migrations
                 name: "ItensPedido",
                 columns: table => new
                 {
-                    IdPedido = table.Column<int>(type: "int", nullable: false)
+                    IdItemPedido = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ordem = table.Column<int>(type: "int", nullable: false),
+                    IdPedido = table.Column<int>(type: "int", nullable: false),
                     IdProduto = table.Column<int>(type: "int", nullable: false),
                     PrecoCusto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PrecoVenda = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PedidoIdPedido = table.Column<int>(type: "int", nullable: true)
+                    PrecoVenda = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ItensPedido", x => x.IdPedido);
+                    table.PrimaryKey("PK_ItensPedido", x => x.IdItemPedido);
                     table.ForeignKey(
-                        name: "FK_ItensPedido_Pedidos_PedidoIdPedido",
-                        column: x => x.PedidoIdPedido,
+                        name: "FK_ItensPedido_Pedidos_IdPedido",
+                        column: x => x.IdPedido,
                         principalTable: "Pedidos",
                         principalColumn: "IdPedido",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ItensPedido_Produtos_IdProduto",
                         column: x => x.IdProduto,
@@ -160,14 +160,14 @@ namespace PocApi.Data.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ItensPedido_IdPedido",
+                table: "ItensPedido",
+                column: "IdPedido");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ItensPedido_IdProduto",
                 table: "ItensPedido",
                 column: "IdProduto");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItensPedido_PedidoIdPedido",
-                table: "ItensPedido",
-                column: "PedidoIdPedido");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_IdCliente",
