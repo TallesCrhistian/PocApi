@@ -42,8 +42,7 @@ namespace PocApi.API
             services.AddScoped<IPedidoNegocios, PedidoNegocios>();
             services.AddScoped<IUsuarioNegocios, UsuarioNegocios>();
             services.AddScoped<IProdrutoNegocios, ProdutoNegocios>();
-            services.AddScoped<IPagamentoNegocios, PagamentoNegocios>();
-            services.AddScoped<IPedidoPagamentoNegocios, PedidoPagamentoNegocios>();
+            services.AddScoped<IPagamentoNegocios, PagamentoNegocios>();            
             return services;
         }
 
@@ -53,8 +52,7 @@ namespace PocApi.API
             services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRositorio>();
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
-            services.AddScoped<IPagamentoRepositorio, PagamentoRepositorio>();
-            services.AddScoped<IPedidoPagamentoRepositorio, PedidoPagamentoRepositorio>();
+            services.AddScoped<IPagamentoRepositorio, PagamentoRepositorio>();            
             return services;
         }
 

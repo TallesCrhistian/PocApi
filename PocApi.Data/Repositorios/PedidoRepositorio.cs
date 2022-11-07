@@ -45,7 +45,9 @@ namespace PocApi.Data.Repositorios
 
         public async Task<Pedido> Inserir(Pedido pedido)
         {
-            await _appDbContext.Set<Pedido>().AddAsync(pedido);
+            if (pedido.ValorDesconto <= pedido.ValorProdutos) pedido.ValorProdutos -= pedido.ValorDesconto;
+            pedido.ValorProdutos += pedido.Frete;
+            await _appDbContext.Set<Pedido>().AddAsync(pedido);            
             await _appDbContext.SaveChangesAsync();
 
             return pedido;

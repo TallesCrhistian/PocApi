@@ -44,8 +44,8 @@ namespace PocApi.Negocios
             if (!await Validar(pedidoDTO))
             {
                 return pedidoDTO;
-            }
-            Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);
+            }            
+            Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);            
             pedido = await _pedidoRepositorio.Inserir(pedido);
             return _mapper.Map<PedidoDTO>(pedido);
         }
