@@ -10,7 +10,7 @@ using PocApi.Data.Contexto;
 namespace PocApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221107221955_Root")]
+    [Migration("20221109002114_Root")]
     partial class Root
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -200,7 +200,7 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
                 {
-                    b.Property<int?>("IdPedidoPagamento")
+                    b.Property<int>("IdPedidoPagamento")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);

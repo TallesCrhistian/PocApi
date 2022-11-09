@@ -41,6 +41,7 @@ namespace PocApi.Negocios
 
         public async Task<PedidoDTO> Inserir(PedidoDTO pedidoDTO)
         {
+
             if (!await Validar(pedidoDTO))
             {
                 return pedidoDTO;

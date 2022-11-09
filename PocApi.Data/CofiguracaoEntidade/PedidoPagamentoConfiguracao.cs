@@ -8,8 +8,6 @@ namespace PocApi.Data.CofiguracaoEntidade
     {
         public void Configure(EntityTypeBuilder<PedidoPagamento> entityTypeBuilder)
         {
-            entityTypeBuilder.HasKey(pp => new { pp.IdPedido, pp.IdPagamento });
-
             entityTypeBuilder
                 .HasOne(pp => pp.Pedido)
                 .WithMany(p => p.PedidosPagamento)
@@ -20,7 +18,6 @@ namespace PocApi.Data.CofiguracaoEntidade
                 .HasOne(pp => pp.Pagamento)
                 .WithMany(pa => pa.PedidosPagamento)
                 .HasForeignKey(pp => pp.IdPedido);
-
         }
     }
 }

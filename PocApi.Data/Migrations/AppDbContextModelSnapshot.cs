@@ -198,7 +198,7 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
                 {
-                    b.Property<int?>("IdPedidoPagamento")
+                    b.Property<int>("IdPedidoPagamento")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);

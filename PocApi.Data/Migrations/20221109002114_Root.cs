@@ -107,9 +107,9 @@ namespace PocApi.Data.Migrations
                 {
                     IdItemPedido = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Ordem = table.Column<int>(type: "int", nullable: false),
                     IdPedido = table.Column<int>(type: "int", nullable: false),
                     IdProduto = table.Column<int>(type: "int", nullable: false),
+                    Ordem = table.Column<int>(type: "int", nullable: false),
                     PrecoCusto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PrecoVenda = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
