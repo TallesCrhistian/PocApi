@@ -2,6 +2,7 @@
 using Entidades;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Compartilhado.ModeloDeVisualizacao;
+using PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber;
 using PocApi.Entidades;
 
 namespace PocApi.Utils.PerfisDeMapeamento
@@ -66,6 +67,11 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<ItemPedidoViewModel, ItemPedidoDTO>()
                 .ReverseMap();
             CreateMap<ItemPedidoDTO, ItemPedido>()
+                .ReverseMap();
+
+            CreateMap<DocumentoAReceberInserirViewModel, DocumentoAReceberDTO>()
+                .ReverseMap();
+            CreateMap<DocumentoAReceberDTO, DocumentoAReceber>()
                 .ReverseMap();
         }
     }
