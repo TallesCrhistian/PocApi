@@ -1,0 +1,125 @@
+﻿<Window
+    x:Class="PocAPI.WPF.Cadastros.FrmClienteListar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PocAPI.WPF.Cadastros"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Clientes"
+    Width="850"
+    Height="450"
+    WindowStartupLocation="CenterOwner"
+    WindowState="Normal"
+    mc:Ignorable="d">
+    <Grid x:Name="grdPrincipal">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="50px" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            x:Name="stpPesquisa"
+            Grid.Row="0"
+            Orientation="Horizontal">
+            <Label
+                Name="lblPesquisa"
+                Height="25"
+                Margin="10"
+                HorizontalContentAlignment="Left"
+                Content="Pesquisar:" />
+            <TextBox
+                x:Name="txtPesquisa"
+                Width="320"
+                Height="25"
+                Margin="10"
+                HorizontalAlignment="Stretch"
+                VerticalContentAlignment="Center" />
+            <Label
+                Name="lblPesquisarPor"
+                Height="25"
+                Margin="10"
+                HorizontalAlignment="Center"
+                Content="Pesquisar Por:" />
+            <ComboBox
+                Name="cbxPesquisarPor"
+                Width="155"
+                Height="25"
+                Margin="10" />
+            <Button
+                x:Name="btnPesquisar"
+                Width="80"
+                Height="25"
+                Margin="10"
+                HorizontalAlignment="Right"
+                Content="Pesquisar" />
+        </StackPanel>
+        <DataGrid
+            x:Name="dgvCliente"
+            Grid.Row="1"
+            Margin="10,10,10,0"
+            AlternatingRowBackground="LightGray"
+            AutoGenerateColumns="False"
+            BorderBrush="Black"
+            BorderThickness="1px"
+            CanUserAddRows="False"
+            GridLinesVisibility="Horizontal">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    x:Name="colIdCliente"
+                    Width="15"
+                    Binding="{Binding IdCliente}"
+                    Header="Id" />
+                <DataGridCheckBoxColumn
+                    x:Name="colAtivo"
+                    Width="40"
+                    Binding="{Binding Ativo}"
+                    Header="Ativo" />
+                <DataGridTextColumn
+                    x:Name="colNome"
+                    Width="1*"
+                    Binding="{Binding Name}"
+                    Header="Nome" />
+                <DataGridTextColumn
+                    x:Name="colSobreNome"
+                    Width="1*"
+                    Binding="{Binding SobreNome}"
+                    Header="Sobre Nome" />
+                <DataGridTextColumn
+                    x:Name="colCpf"
+                    Width="100"
+                    Binding="{Binding Cpf}"
+                    Header="CPF" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel
+            x:Name="stpAcoes"
+            Grid.Row="2"
+            HorizontalAlignment="Right"
+            Orientation="Horizontal">
+            <Button
+                x:Name="btnIncluir"
+                Width="80"
+                Height="25"
+                Margin="10"
+                Content="Incluir" />
+            <Button
+                x:Name="btnAlterar"
+                Width="80"
+                Height="25"
+                Margin="10"
+                Content="Alterar" />
+            <Button
+                x:Name="btnExcluir"
+                Width="80"
+                Height="25"
+                Margin="10"
+                Content="Excluir" />
+            <Button
+                x:Name="btnCancelar"
+                Width="80"
+                Height="25"
+                Margin="10"
+                Content="Cancelar" />
+        </StackPanel>
+    </Grid>
+</Window>

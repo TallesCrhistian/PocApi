@@ -20,12 +20,9 @@ namespace PocApi.Entidades
         public decimal Valor { get; set; }
         public decimal Restante { get; set; }
         public decimal PercentualJuros { get; set; }
-        public decimal ValorPago { get; set; }
-        [ForeignKey(nameof(IdCliente))]
-        public Cliente Cliente { get; set; }
-        [ForeignKey(nameof(IdPedido))]
-        public Pedido Pedido { get; set; }
-        [ForeignKey(nameof(IdPagamento))]
+        public decimal ValorPago { get; set; }        
+        public Cliente Cliente { get; set; }        
+        public Pedido Pedido { get; set; }        
         public Pagamento Pagamentos { get; set; }
     }
 }

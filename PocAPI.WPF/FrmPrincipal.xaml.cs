@@ -17,37 +17,53 @@ namespace PocAPI.WPF
 
         private void MeiCliente_Click(object sender, RoutedEventArgs e)
         {
-            FrmLogin frmLogin = new FrmLogin();
-            frmLogin.Owner = this;
-            frmLogin.ShowDialog();
+            FrmClienteListar frmClienteListar = new FrmClienteListar();
+            frmClienteListar.Owner = this;
+            frmClienteListar.Show();
         }
 
         private void Produtos_Click(object sender, RoutedEventArgs e)
         {
             Produtos produtos = new Produtos();
             produtos.Owner = this;
-            produtos.ShowDialog();
+            produtos.Show();
         }
 
         private void Pagamento_Click(object sender, RoutedEventArgs e)
         {
             Pagamentos pagamentos = new Pagamentos();
             pagamentos.Owner = this;
-            pagamentos.ShowDialog();
+            pagamentos.Show();
         }
 
         private void Pedido_Click(object sender, RoutedEventArgs e)
         {
             Pedido pedido = new Pedido();
             pedido.Owner = this;
-            pedido.ShowDialog();
+            pedido.Show();
         }
 
         private void DocumentoAReceber_Click(object sender, RoutedEventArgs e)
         {
             DocumentosAReceber documentoAReceber= new DocumentosAReceber();
             documentoAReceber.Owner = this;
-            documentoAReceber.ShowDialog();
+            documentoAReceber.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+           bool resultado = ExibirFrmLogin();
+            if (resultado == false)
+            {
+                Close();
+            }
+        }
+        private bool ExibirFrmLogin()
+        {
+            FrmLogin frmLogin = new FrmLogin();
+            frmLogin.Owner = this;
+            bool? resultado = frmLogin.ShowDialog();
+            return resultado == true;
         }
     }
 }

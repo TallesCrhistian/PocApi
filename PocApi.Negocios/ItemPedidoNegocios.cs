@@ -21,7 +21,7 @@ namespace PocApi.Negocios
         public async Task<ItemPedidoDTO> Inserir(ItemPedidoDTO itemPedidoDTO)
         {
             ItemPedido itemPedido  = _mapper.Map<ItemPedido>(itemPedidoDTO);
-            itemPedido = await _itemPedidoRepositorio.Inserir(itemPedido);
+            itemPedido = await _itemPedidoRepositorio.Inserir(itemPedido);            
             return _mapper.Map<ItemPedidoDTO>(itemPedido);
         }
     }

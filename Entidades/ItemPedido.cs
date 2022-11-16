@@ -14,8 +14,7 @@ namespace Entidades
         public decimal PrecoCusto { get; set; }
         public decimal PrecoVenda { get; set; }
         [ForeignKey(nameof(IdPedido))]
-        public virtual Pedido Pedido  { get; set; }
-        [ForeignKey(nameof(IdProduto))]
+        public virtual Pedido Pedido  { get; set; }       
         public virtual Produto Produto { get; set; }
     }
 }

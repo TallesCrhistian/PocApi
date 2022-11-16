@@ -15,25 +15,13 @@ using System.Windows.Shapes;
 namespace PocAPI.WPF.Cadastros
 {
     /// <summary>
-    /// Lógica interna para FrmLogin.xaml
+    /// Lógica interna para FrmClienteListar.xaml
     /// </summary>
-    public partial class FrmLogin : Window
+    public partial class FrmClienteListar : Window
     {
-        public FrmLogin()
+        public FrmClienteListar()
         {
             InitializeComponent();
-        }
-
-        private void btnConfirmar_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = true;
-            Close();
-        }
-
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
-        {
-            this.DialogResult = false;
-            Close();
         }
     }
 }

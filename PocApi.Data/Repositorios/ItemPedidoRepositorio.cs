@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Microsoft.EntityFrameworkCore;
 using PocApi.Data.Contexto;
 using PocApi.Data.Interfaces;
 using System;
@@ -16,10 +17,16 @@ namespace PocApi.Data.Repositorios
         public async Task<ItemPedido> Inserir(ItemPedido itemPedido)
         {   
             
-            await _appDbContext.Set<ItemPedido>().AddAsync(itemPedido);
-            await _appDbContext.SaveChangesAsync();
+            await _appDbContext.Set<ItemPedido>()                
+                .AddAsync(itemPedido);            
+
+            await _appDbContext
+                .SaveChangesAsync();
+                
 
             return itemPedido;
         }
     }
 }
+
+                

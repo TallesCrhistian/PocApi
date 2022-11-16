@@ -91,12 +91,14 @@
                 Width="100px"
                 Height="25px"
                 Margin="10.10"
+                Click="btnConfirmar_Click"
                 Content="Confirmar" />
             <Button
                 Name="btnCancelar"
                 Width="100px"
                 Height="25px"
                 Margin="10,10"
+                Click="btnCancelar_Click"
                 Content="Cancelar" />
         </StackPanel>
     </Grid>

@@ -19,5 +19,6 @@ namespace PocApi.Data.Contexto
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Pagamento> Pagamentos { get; set; }
         public DbSet<PedidoPagamento> PedidosPagamento { get; set; }
+        public DbSet<DocumentoAReceber> DocumentoAReceber { get; set; }
     }
 }
