@@ -16,23 +16,88 @@
 
     <Grid x:Name="grdPrincipal">
         <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.3*" />
         </Grid.RowDefinitions>
         <StackPanel
-            x:Name="stpTitulo"
+            Grid.Row="0"
             HorizontalAlignment="Center"
             Orientation="Horizontal">
             <Label
                 Name="lblTitulo"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Content="Efetue login para continuar"
+                Content="Efetue o login para continuar..."
                 FontSize="16"
                 FontWeight="Bold" />
-
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdLogin">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Width="100"
+                    Height="25px"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="Usuário:" />
+                <TextBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalContentAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdSenha">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Width="100"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="Senha:" />
+                <PasswordBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                Name="btnConfirmar"
+                Width="100px"
+                Height="25px"
+                Margin="10.10"
+                Content="Confirmar" />
+            <Button
+                Name="btnCancelar"
+                Width="100px"
+                Height="25px"
+                Margin="10,10"
+                Content="Cancelar" />
         </StackPanel>
     </Grid>
 </Window>
