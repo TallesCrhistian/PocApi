@@ -1,17 +1,7 @@
 ﻿using PocAPI.WPF.Cadastros;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PocAPI.WPF.Movimento;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace PocAPI.WPF
 {
@@ -30,6 +20,34 @@ namespace PocAPI.WPF
             FrmLogin frmLogin = new FrmLogin();
             frmLogin.Owner = this;
             frmLogin.ShowDialog();
+        }
+
+        private void Produtos_Click(object sender, RoutedEventArgs e)
+        {
+            Produtos produtos = new Produtos();
+            produtos.Owner = this;
+            produtos.ShowDialog();
+        }
+
+        private void Pagamento_Click(object sender, RoutedEventArgs e)
+        {
+            Pagamentos pagamentos = new Pagamentos();
+            pagamentos.Owner = this;
+            pagamentos.ShowDialog();
+        }
+
+        private void Pedido_Click(object sender, RoutedEventArgs e)
+        {
+            Pedido pedido = new Pedido();
+            pedido.Owner = this;
+            pedido.ShowDialog();
+        }
+
+        private void DocumentoAReceber_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentosAReceber documentoAReceber= new DocumentosAReceber();
+            documentoAReceber.Owner = this;
+            documentoAReceber.ShowDialog();
         }
     }
 }

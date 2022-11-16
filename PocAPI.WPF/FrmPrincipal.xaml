@@ -15,7 +15,28 @@
             Height="auto"
             VerticalAlignment="Top">
             <MenuItem Name="MeiCadastro" Header="Cadastros">
-                <MenuItem Name="MeiCliente" Header="Cliente"  Click="MeiCliente_Click"/>
+                <MenuItem
+                    Name="MeiCliente"
+                    Click="MeiCliente_Click"
+                    Header="Cliente" />
+                <MenuItem
+                    Name="Produtos"
+                    Click="Produtos_Click"
+                    Header="Produtos" />
+                <MenuItem
+                    Name="Pagamento"
+                    Click="Pagamento_Click"
+                    Header="Pagamento" />
+            </MenuItem>
+            <MenuItem Name="Mpvimento" Header="Movimento">
+                <MenuItem
+                    Name="Pedido"
+                    Click="Pedido_Click"
+                    Header="Pedido" />
+                <MenuItem
+                    Name="DocumentoAReceber"
+                    Click="DocumentoAReceber_Click"
+                    Header="DocumentoAReceber" />
             </MenuItem>
         </Menu>
     </Grid>
