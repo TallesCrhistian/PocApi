@@ -20,28 +20,28 @@ namespace PocAPI.WPF
             FrmClienteListar frmClienteListar = new FrmClienteListar();
             frmClienteListar.Owner = this;
             frmClienteListar.Show();
-        }
+        }       
 
-        private void Produtos_Click(object sender, RoutedEventArgs e)
-        {
-            Produtos produtos = new Produtos();
-            produtos.Owner = this;
-            produtos.Show();
-        }
-
-        private void Pagamento_Click(object sender, RoutedEventArgs e)
-        {
-            Pagamentos pagamentos = new Pagamentos();
-            pagamentos.Owner = this;
-            pagamentos.Show();
-        }
-
+        
         private void Pedido_Click(object sender, RoutedEventArgs e)
         {
             Pedido pedido = new Pedido();
             pedido.Owner = this;
             pedido.Show();
         }
+        private void MeiProduto_Click(object sender, RoutedEventArgs e)
+        {
+            FrmProdutosListar frmProdutosListar = new FrmProdutosListar();
+            frmProdutosListar.Owner = this;
+            frmProdutosListar.Show();
+        }
+        private void MeiPagamento_Click(object sender, RoutedEventArgs e)
+        {
+            FrmPagamentosListar frmPagamentosListar = new FrmPagamentosListar();
+            frmPagamentosListar.Owner = this;
+            frmPagamentosListar.Show();
+        }
+        
 
         private void DocumentoAReceber_Click(object sender, RoutedEventArgs e)
         {
@@ -65,5 +65,6 @@ namespace PocAPI.WPF
             bool? resultado = frmLogin.ShowDialog();
             return resultado == true;
         }
+
     }
 }

@@ -21,15 +21,15 @@
                 <MenuItem
                     Name="MeiCliente"
                     Click="MeiCliente_Click"
-                    Header="Cliente" />
+                    Header="Clientes" />
+                <MenuItem 
+                    Name="MeiProduto"
+                    Click="MeiProduto_Click"
+                    Header="Produtos"/>
                 <MenuItem
-                    Name="Produtos"
-                    Click="Produtos_Click"
-                    Header="Produtos" />
-                <MenuItem
-                    Name="Pagamento"
-                    Click="Pagamento_Click"
-                    Header="Pagamento" />
+                    Name="MeiPagamento"
+                    Click="MeiPagamento_Click"
+                    Header="Pagamentos" />
             </MenuItem>
             <MenuItem Name="Mpvimento" Header="Movimento">
                 <MenuItem
@@ -39,7 +39,7 @@
                 <MenuItem
                     Name="DocumentoAReceber"
                     Click="DocumentoAReceber_Click"
-                    Header="DocumentoAReceber" />
+                    Header="Documentos A Receber" />
             </MenuItem>
         </Menu>
     </Grid>

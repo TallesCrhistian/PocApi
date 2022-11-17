@@ -1,11 +1,11 @@
 ﻿<Window
-    x:Class="PocAPI.WPF.Cadastros.FrmProdutosListar"
+    x:Class="PocAPI.WPF.Cadastros.FrmPagamentosListar"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:PocAPI.WPF.Cadastros"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Produtos"
+    Title="Pagamentos"
     Width="850"
     Height="450"
     WindowStartupLocation="CenterOwner"
@@ -54,7 +54,7 @@
                 Content="Pesquisar" />
         </StackPanel>
         <DataGrid
-            x:Name="dgvProduto"
+            x:Name="dgvPagamento"
             Grid.Row="1"
             Margin="10,10,10,0"
             AlternatingRowBackground="LightGray"
@@ -65,9 +65,9 @@
             GridLinesVisibility="Horizontal">
             <DataGrid.Columns>
                 <DataGridTextColumn
-                    x:Name="colIdProduto"
+                    x:Name="colIdPagamento"
                     Width="15"
-                    Binding="{Binding IdProduto}"
+                    Binding="{Binding IdPagamento}"
                     Header="Id" />
                 <DataGridCheckBoxColumn
                     x:Name="colAtivo"
@@ -78,22 +78,32 @@
                     x:Name="colDescricao"
                     Width="1*"
                     Binding="{Binding Descricao}"
-                    Header="Descricao" />
+                    Header="Descrição" />
                 <DataGridTextColumn
-                    x:Name="colEAN"
+                    x:Name="colDiasPagamento"
                     Width="1*"
-                    Binding="{Binding EAN}"
-                    Header="EAN" />
+                    Binding="{Binding DiasPagamento}"
+                    Header=" Dias Pagamento" />
                 <DataGridTextColumn
-                    x:Name="colPrecoCusto"
-                    Width="1*"
-                    Binding="{Binding PrecoCusto}"
-                    Header="PrecoCusto" />
-                <DataGridTextColumn
-                    x:Name="colPrecoVenda"
+                    x:Name="colDiaJuros"
                     Width="100"
-                    Binding="{Binding PrecoVenda}"
-                    Header="PrecoVenda" />
+                    Binding="{Binding DiaJuros}"
+                    Header="Dias Juros" />
+                <DataGridTextColumn
+                    x:Name="colMultaAtraso"
+                    Width="100"
+                    Binding="{Binding MultaAtraso}"
+                    Header="Multa Atraso" />
+                <DataGridTextColumn
+                    x:Name="colDiasCarencia"
+                    Width="100"
+                    Binding="{Binding DiasCarencia}"
+                    Header="Carencia" />
+                <DataGridTextColumn
+                    x:Name="colParcelas"
+                    Width="100"
+                    Binding="{Binding Parcelas}"
+                    Header="Parcelas" />
 
             </DataGrid.Columns>
         </DataGrid>
@@ -129,3 +139,4 @@
         </StackPanel>
     </Grid>
 </Window>
+

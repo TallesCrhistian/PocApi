@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace PocAPI.WPF.Cadastros
 {
     /// <summary>
-    /// Lógica interna para Pagamentos.xaml
+    /// Lógica interna para FrmPagamentosListar.xaml
     /// </summary>
-    public partial class Pagamentos : Window
+    public partial class FrmPagamentosListar : Window
     {
-        public Pagamentos()
+        public FrmPagamentosListar()
         {
             InitializeComponent();
         }
