@@ -6,11 +6,11 @@
     xmlns:local="clr-namespace:PocAPI.WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="PocApi"
-    Opacity="100"
-    WindowState="Maximized"
-    Loaded="Window_Loaded"
     Width="800"
     Height="450"
+    Loaded="Window_Loaded"
+    Opacity="100"
+    WindowState="Maximized"
     mc:Ignorable="d">
     <Grid>
         <Menu
@@ -22,10 +22,10 @@
                     Name="MeiCliente"
                     Click="MeiCliente_Click"
                     Header="Clientes" />
-                <MenuItem 
+                <MenuItem
                     Name="MeiProduto"
                     Click="MeiProduto_Click"
-                    Header="Produtos"/>
+                    Header="Produtos" />
                 <MenuItem
                     Name="MeiPagamento"
                     Click="MeiPagamento_Click"
