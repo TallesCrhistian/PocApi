@@ -16,8 +16,7 @@ namespace PocApi.Entidades
         public decimal DiaJuros { get; set; }
         public decimal MultaAtraso { get; set; }
         public int DiasCarencia { get; set; }
-        public int Parcelas { get; set; }
-        [ForeignKey(nameof(IdDocumentoAReceber))]
+        public int Parcelas { get; set; }        
         public virtual DocumentoAReceber DocumentoAReceber { get; set; }        
         public virtual List<PedidoPagamento> PedidosPagamento { get; set; }
 

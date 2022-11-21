@@ -31,13 +31,13 @@ namespace PocApi.Negocios
         {
             DocumentoAReceberDTO documentoAReceberDTO = new DocumentoAReceberDTO();
             documentoAReceberDTO.IdPagamento = pagamentoDTO.IdPagamento;
-            documentoAReceberDTO.IdCliente = pagamentoDTO.PedidoDTO.IdCliente;
-            documentoAReceberDTO.IdPedido = pagamentoDTO.PedidoDTO.IdPedido;
+           // documentoAReceberDTO.IdCliente = pagamentoDTO.PedidoDTO.IdCliente;
+           // documentoAReceberDTO.IdPedido = pagamentoDTO.PedidoDTO.IdPedido;
             documentoAReceberDTO.QuantidadeParcela = pagamentoDTO.Parcelas;
             documentoAReceberDTO.Carencia = pagamentoDTO.DiasCarencia;
             documentoAReceberDTO.DataJuros = DateTime.Now;
             documentoAReceberDTO.Restante = documentoAReceberDTO.Valor - documentoAReceberDTO.ValorPago;
-            documentoAReceberDTO.Valor = pagamentoDTO.PedidoDTO.ValorProdutos;
+           // documentoAReceberDTO.Valor = pagamentoDTO.PedidoDTO.ValorProdutos;
 
             return _mapper.Map<DocumentoAReceber>(documentoAReceberDTO);
 

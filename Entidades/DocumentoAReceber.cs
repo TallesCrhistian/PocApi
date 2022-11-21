@@ -23,6 +23,6 @@ namespace PocApi.Entidades
         public decimal ValorPago { get; set; }           
         public Cliente Cliente { get; set; }        
         public Pedido Pedido { get; set; }         
-        public virtual Pagamento Pagamentos { get; set; }
+        public  Pagamento Pagamento { get; set; }
     }
 }

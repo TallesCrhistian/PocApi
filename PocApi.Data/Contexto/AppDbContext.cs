@@ -10,7 +10,6 @@ namespace PocApi.Data.Contexto
         {
 
         }
-
         
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<ItemPedido> ItensPedido { get; set; }
