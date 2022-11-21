@@ -1,4 +1,6 @@
-﻿namespace PocApi.Compartilhado.DTOs
+﻿using System.Collections.Generic;
+
+namespace PocApi.Compartilhado.DTOs
 {
     public class PagamentoDTO
     {
@@ -10,5 +12,7 @@
         public decimal MultaAtraso { get; set; }
         public int DiasCarencia { get; set; }
         public int Parcelas { get; set; }
+        public PedidoDTO PedidoDTO { get; set; }
+        public List<PedidoPagamentoDTO> PedidoPagamentoDTO { get; set; }
     }
 }

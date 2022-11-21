@@ -10,7 +10,7 @@ using PocApi.Data.Contexto;
 namespace PocApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221116190612_Root")]
+    [Migration("20221121001815_Root")]
     partial class Root
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,6 +34,9 @@ namespace PocApi.Data.Migrations
                     b.Property<string>("Cpf")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IdDocumentoAReceber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
@@ -41,6 +44,9 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdCliente");
+
+                    b.HasIndex("IdDocumentoAReceber")
+                        .IsUnique();
 
                     b.ToTable("Clientes");
                 });
@@ -178,9 +184,6 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("Carencia")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClienteIdCliente")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DataJuros")
                         .HasColumnType("datetime2");
 
@@ -197,9 +200,6 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("IdPedido")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PagamentosIdPagamento")
                         .HasColumnType("int");
 
                     b.Property<int?>("PedidoIdPedido")
@@ -221,10 +221,6 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdDocumentoAReceber");
-
-                    b.HasIndex("ClienteIdCliente");
-
-                    b.HasIndex("PagamentosIdPagamento");
 
                     b.HasIndex("PedidoIdPedido");
 
@@ -253,6 +249,9 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("DiasPagamento")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdDocumentoAReceber")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("MultaAtraso")
                         .HasColumnType("decimal(18,2)");
 
@@ -260,6 +259,9 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("IdPagamento");
+
+                    b.HasIndex("IdDocumentoAReceber")
+                        .IsUnique();
 
                     b.ToTable("Pagamentos");
                 });
@@ -283,16 +285,33 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("IdPedido")
                         .HasColumnType("int");
 
+                    b.Property<int?>("PagamentoIdPagamento")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PedidoIdPedido")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdPedidoPagamento");
 
-                    b.HasIndex("IdPagamento");
+                    b.HasIndex("PagamentoIdPagamento");
 
-                    b.HasIndex("IdPedido");
+                    b.HasIndex("PedidoIdPedido");
 
                     b.ToTable("PedidosPagamento");
+                });
+
+            modelBuilder.Entity("Entidades.Cliente", b =>
+                {
+                    b.HasOne("PocApi.Entidades.DocumentoAReceber", "DocumentoAReceber")
+                        .WithOne("Cliente")
+                        .HasForeignKey("Entidades.Cliente", "IdDocumentoAReceber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DocumentoAReceber");
                 });
 
             modelBuilder.Entity("Entidades.ItemPedido", b =>
@@ -325,38 +344,33 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("PocApi.Entidades.DocumentoAReceber", b =>
                 {
-                    b.HasOne("Entidades.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteIdCliente");
-
-                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamentos")
-                        .WithMany()
-                        .HasForeignKey("PagamentosIdPagamento");
-
                     b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany()
                         .HasForeignKey("PedidoIdPedido");
 
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Pagamentos");
-
                     b.Navigation("Pedido");
+                });
+
+            modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
+                {
+                    b.HasOne("PocApi.Entidades.DocumentoAReceber", "DocumentoAReceber")
+                        .WithOne("Pagamentos")
+                        .HasForeignKey("PocApi.Entidades.Pagamento", "IdDocumentoAReceber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DocumentoAReceber");
                 });
 
             modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
                 {
                     b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
                         .WithMany("PedidosPagamento")
-                        .HasForeignKey("IdPagamento")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PagamentoIdPagamento");
 
                     b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("PedidosPagamento")
-                        .HasForeignKey("IdPedido")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PedidoIdPedido");
 
                     b.Navigation("Pagamento");
 
@@ -373,6 +387,13 @@ namespace PocApi.Data.Migrations
                     b.Navigation("ItensPedido");
 
                     b.Navigation("PedidosPagamento");
+                });
+
+            modelBuilder.Entity("PocApi.Entidades.DocumentoAReceber", b =>
+                {
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Pagamentos");
                 });
 
             modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>

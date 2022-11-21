@@ -43,7 +43,7 @@ namespace PocApi.API
             services.AddScoped<IUsuarioNegocios, UsuarioNegocios>();
             services.AddScoped<IProdrutoNegocios, ProdutoNegocios>();
             services.AddScoped<IPagamentoNegocios, PagamentoNegocios>();
-            services.AddScoped<IDocumentoAReceberNegocios, DocumenoAReceberNegocios>();
+            services.AddScoped<IDocumentoAReceberNegocios, DocumentoAReceberNegocios>();
             return services;
         }
 

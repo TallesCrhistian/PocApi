@@ -12,22 +12,18 @@ namespace PocApi.Aplicacao.Servicos
     public class PedidoServicos : IPedidoServicos
     {
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
-        private readonly IPedidoNegocios _pedidoNegocios;
-        private readonly IDocumentoAReceberNegocios _documentoAReceberNegocios;
+        private readonly IPedidoNegocios _pedidoNegocios;        
 
-        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios, IDocumentoAReceberNegocios documentoAReceberNegocios)
+        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios)
         {
             _pedidoNegocios = pedidoNegocios;
-            _unidadeDeTrabalho = unidadeDeTrabalho;
-            _documentoAReceberNegocios = documentoAReceberNegocios;
+            _unidadeDeTrabalho = unidadeDeTrabalho;           
         }
         public async Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO)
         {
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
             try
-            {
-
-                await _documentoAReceberNegocios.Inserir(pedidoDTO);
+            {               
                 respostaServicoDTO.Dados = await _pedidoNegocios.Inserir(pedidoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }

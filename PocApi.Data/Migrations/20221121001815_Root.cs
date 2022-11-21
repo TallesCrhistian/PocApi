@@ -8,41 +8,6 @@ namespace PocApi.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Clientes",
-                columns: table => new
-                {
-                    IdCliente = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ativo = table.Column<bool>(type: "bit", nullable: true),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SobreNome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clientes", x => x.IdCliente);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Pagamentos",
-                columns: table => new
-                {
-                    IdPagamento = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Ativo = table.Column<bool>(type: "bit", nullable: true),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DiasPagamento = table.Column<int>(type: "int", nullable: false),
-                    DiaJuros = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MultaAtraso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DiasCarencia = table.Column<int>(type: "int", nullable: false),
-                    Parcelas = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pagamentos", x => x.IdPagamento);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Produtos",
                 columns: table => new
                 {
@@ -93,12 +58,6 @@ namespace PocApi.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pedidos", x => x.IdPedido);
-                    table.ForeignKey(
-                        name: "FK_Pedidos_Clientes_IdCliente",
-                        column: x => x.IdCliente,
-                        principalTable: "Clientes",
-                        principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,25 +78,11 @@ namespace PocApi.Data.Migrations
                     Restante = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PercentualJuros = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ValorPago = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ClienteIdCliente = table.Column<int>(type: "int", nullable: true),
-                    PedidoIdPedido = table.Column<int>(type: "int", nullable: true),
-                    PagamentosIdPagamento = table.Column<int>(type: "int", nullable: true)
+                    PedidoIdPedido = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DocumentoAReceber", x => x.IdDocumentoAReceber);
-                    table.ForeignKey(
-                        name: "FK_DocumentoAReceber_Clientes_ClienteIdCliente",
-                        column: x => x.ClienteIdCliente,
-                        principalTable: "Clientes",
-                        principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_DocumentoAReceber_Pagamentos_PagamentosIdPagamento",
-                        column: x => x.PagamentosIdPagamento,
-                        principalTable: "Pagamentos",
-                        principalColumn: "IdPagamento",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DocumentoAReceber_Pedidos_PedidoIdPedido",
                         column: x => x.PedidoIdPedido,
@@ -177,6 +122,55 @@ namespace PocApi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Clientes",
+                columns: table => new
+                {
+                    IdCliente = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdDocumentoAReceber = table.Column<int>(type: "int", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: true),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SobreNome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clientes", x => x.IdCliente);
+                    table.ForeignKey(
+                        name: "FK_Clientes_DocumentoAReceber_IdDocumentoAReceber",
+                        column: x => x.IdDocumentoAReceber,
+                        principalTable: "DocumentoAReceber",
+                        principalColumn: "IdDocumentoAReceber",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pagamentos",
+                columns: table => new
+                {
+                    IdPagamento = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IdDocumentoAReceber = table.Column<int>(type: "int", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: true),
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DiasPagamento = table.Column<int>(type: "int", nullable: false),
+                    DiaJuros = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MultaAtraso = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    DiasCarencia = table.Column<int>(type: "int", nullable: false),
+                    Parcelas = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pagamentos", x => x.IdPagamento);
+                    table.ForeignKey(
+                        name: "FK_Pagamentos_DocumentoAReceber_IdDocumentoAReceber",
+                        column: x => x.IdDocumentoAReceber,
+                        principalTable: "DocumentoAReceber",
+                        principalColumn: "IdDocumentoAReceber",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PedidosPagamento",
                 columns: table => new
                 {
@@ -186,34 +180,32 @@ namespace PocApi.Data.Migrations
                     IdPagamento = table.Column<int>(type: "int", nullable: false),
                     DataLancamento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Desconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Desconto = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PedidoIdPedido = table.Column<int>(type: "int", nullable: true),
+                    PagamentoIdPagamento = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PedidosPagamento", x => x.IdPedidoPagamento);
                     table.ForeignKey(
-                        name: "FK_PedidosPagamento_Pagamentos_IdPagamento",
-                        column: x => x.IdPagamento,
+                        name: "FK_PedidosPagamento_Pagamentos_PagamentoIdPagamento",
+                        column: x => x.PagamentoIdPagamento,
                         principalTable: "Pagamentos",
                         principalColumn: "IdPagamento",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PedidosPagamento_Pedidos_IdPedido",
-                        column: x => x.IdPedido,
+                        name: "FK_PedidosPagamento_Pedidos_PedidoIdPedido",
+                        column: x => x.PedidoIdPedido,
                         principalTable: "Pedidos",
                         principalColumn: "IdPedido",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DocumentoAReceber_ClienteIdCliente",
-                table: "DocumentoAReceber",
-                column: "ClienteIdCliente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DocumentoAReceber_PagamentosIdPagamento",
-                table: "DocumentoAReceber",
-                column: "PagamentosIdPagamento");
+                name: "IX_Clientes_IdDocumentoAReceber",
+                table: "Clientes",
+                column: "IdDocumentoAReceber",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_DocumentoAReceber_PedidoIdPedido",
@@ -231,25 +223,40 @@ namespace PocApi.Data.Migrations
                 column: "ProdutoIdProduto");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pagamentos_IdDocumentoAReceber",
+                table: "Pagamentos",
+                column: "IdDocumentoAReceber",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_IdCliente",
                 table: "Pedidos",
                 column: "IdCliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PedidosPagamento_IdPagamento",
+                name: "IX_PedidosPagamento_PagamentoIdPagamento",
                 table: "PedidosPagamento",
-                column: "IdPagamento");
+                column: "PagamentoIdPagamento");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PedidosPagamento_IdPedido",
+                name: "IX_PedidosPagamento_PedidoIdPedido",
                 table: "PedidosPagamento",
-                column: "IdPedido");
+                column: "PedidoIdPedido");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Pedidos_Clientes_IdCliente",
+                table: "Pedidos",
+                column: "IdCliente",
+                principalTable: "Clientes",
+                principalColumn: "IdCliente",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "DocumentoAReceber");
+            migrationBuilder.DropForeignKey(
+                name: "FK_Clientes_DocumentoAReceber_IdDocumentoAReceber",
+                table: "Clientes");
 
             migrationBuilder.DropTable(
                 name: "ItensPedido");
@@ -265,6 +272,9 @@ namespace PocApi.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Pagamentos");
+
+            migrationBuilder.DropTable(
+                name: "DocumentoAReceber");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");

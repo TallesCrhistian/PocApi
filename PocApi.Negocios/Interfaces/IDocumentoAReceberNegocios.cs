@@ -5,6 +5,6 @@ namespace PocApi.Negocios.Interfaces
 {
     public interface IDocumentoAReceberNegocios
     {
-        Task<DocumentoAReceberDTO> Inserir(PedidoDTO pedidoDTO);
+        Task<DocumentoAReceberDTO> Inserir(PagamentoDTO pagamentoDTO);
     }
 }

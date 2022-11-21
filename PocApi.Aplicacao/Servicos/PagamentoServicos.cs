@@ -12,11 +12,13 @@ namespace PocApi.Aplicacao.Servicos
     {
         private readonly IPagamentoNegocios _pagamentoNegocios;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
+        private readonly IDocumentoAReceberNegocios _documentoAReceberNegocios;
 
-        public PagamentoServicos(IPagamentoNegocios pagamentoNegocios, IUnidadeDeTrabalho unidadeDeTrabalho)
+        public PagamentoServicos(IPagamentoNegocios pagamentoNegocios, IUnidadeDeTrabalho unidadeDeTrabalho, IDocumentoAReceberNegocios documentoAReceberNegocios)
         {
             _pagamentoNegocios = pagamentoNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
+            _documentoAReceberNegocios = documentoAReceberNegocios;
         }
 
         public async Task<RespostaServicoDTO<PagamentoDTO>> Alterar(PagamentoDTO pagamentoDTO)
@@ -59,7 +61,7 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = new RespostaServicoDTO<PagamentoDTO>();
             try
             {
-
+                await _documentoAReceberNegocios.Inserir(pagamentoDTO);
                 respostaServicoDTO.Dados = await _pagamentoNegocios.Inserir(pagamentoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
