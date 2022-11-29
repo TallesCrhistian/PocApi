@@ -1,4 +1,5 @@
 ﻿using PocApi.Compartilhado.Enumeradores;
+using PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber;
 using System;
 using System.Collections.Generic;
 
@@ -14,5 +15,6 @@ namespace PocApi.Compartilhado.ModeloDeVisualizacao
         public PedidoStatusEnum Status { get; set; }
         public  List<PedidoPagamentoViewModel> PedidoPagamentoViewModels { get; set; }
         public  List<ItemPedidoViewModel> ItemPedidoViewModels { get; set; }
+        public virtual DocumentoAReceberInserirViewModel DocumentoAReceberInserirView { get; set; }
     }
 }

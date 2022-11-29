@@ -21,5 +21,6 @@ namespace Entidades
         public virtual Cliente Cliente { get; set; }        
         public virtual List<ItemPedido> ItensPedido { get; set; }        
         public virtual List<PedidoPagamento> PedidosPagamento { get; set; }
+        public virtual DocumentoAReceber DocumentoAReceber { get; set; }
     }
 }

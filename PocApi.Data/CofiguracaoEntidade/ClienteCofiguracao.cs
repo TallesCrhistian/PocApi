@@ -13,9 +13,9 @@ namespace PocApi.Data.CofiguracaoEntidade
             entityTypeBuilder.HasMany(x => x.Pedidos)
                 .WithOne(x => x.Cliente)
                 .HasForeignKey(x => x.IdCliente);
-
             entityTypeBuilder.HasOne(x => x.DocumentoAReceber)
-                .WithOne(x => x.Cliente);                                
+               .WithOne(x => x.Cliente)
+               .HasForeignKey<Cliente>(x => x.IdCliente);
         }
     }
 }

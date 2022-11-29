@@ -9,9 +9,15 @@ namespace PocApi.Data.CofiguracaoEntidade
         public void Configure(EntityTypeBuilder<DocumentoAReceber> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(x => x.IdDocumentoAReceber);
-            entityTypeBuilder.HasOne(x => x.Pagamento)
+            entityTypeBuilder.HasOne(x => x.Cliente)                
                 .WithOne(x => x.DocumentoAReceber)
-                .HasForeignKey(x => x.);
+                .HasForeignKey<DocumentoAReceber>(x => x.IdDocumentoAReceber);
+
+            entityTypeBuilder.HasOne(x => x.Pagamentos)
+                .WithOne(x => x.DocumentoAReceber);
+
+            entityTypeBuilder.HasOne(x => x.Pedido)
+                .WithOne(x => x.DocumentoAReceber);               
 
         }
     }

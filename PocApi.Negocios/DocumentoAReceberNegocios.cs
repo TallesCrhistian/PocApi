@@ -22,25 +22,9 @@ namespace PocApi.Negocios
         }
         public async Task<DocumentoAReceberDTO> Inserir(PagamentoDTO pagamentoDTO)
         {
-            DocumentoAReceber documentoAReceber = await ReceberValores(pagamentoDTO);
-
-            documentoAReceber = await _documentoAReceberRepositorio.Inserir(documentoAReceber);
+            DocumentoAReceber documentoAReceber = new DocumentoAReceber();
+            await _documentoAReceberRepositorio.Inserir(documentoAReceber);
             return _mapper.Map<DocumentoAReceberDTO>(documentoAReceber);
-        }
-        public async Task<DocumentoAReceber> ReceberValores(PagamentoDTO pagamentoDTO)
-        {
-            DocumentoAReceberDTO documentoAReceberDTO = new DocumentoAReceberDTO();
-            documentoAReceberDTO.IdPagamento = pagamentoDTO.IdPagamento;
-           // documentoAReceberDTO.IdCliente = pagamentoDTO.PedidoDTO.IdCliente;
-           // documentoAReceberDTO.IdPedido = pagamentoDTO.PedidoDTO.IdPedido;
-            documentoAReceberDTO.QuantidadeParcela = pagamentoDTO.Parcelas;
-            documentoAReceberDTO.Carencia = pagamentoDTO.DiasCarencia;
-            documentoAReceberDTO.DataJuros = DateTime.Now;
-            documentoAReceberDTO.Restante = documentoAReceberDTO.Valor - documentoAReceberDTO.ValorPago;
-           // documentoAReceberDTO.Valor = pagamentoDTO.PedidoDTO.ValorProdutos;
-
-            return _mapper.Map<DocumentoAReceber>(documentoAReceberDTO);
-
         }
     }
 }

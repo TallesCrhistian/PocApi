@@ -8,8 +8,7 @@ namespace PocApi.Entidades
     public class Pagamento
     {
         [Key]
-        public int IdPagamento { get; set; }
-        public int IdDocumentoAReceber  { get; set; }
+        public int IdPagamento { get; set; }        
         public bool? Ativo { get; set; } 
         public string Descricao { get; set; }
         public int DiasPagamento { get; set; }
