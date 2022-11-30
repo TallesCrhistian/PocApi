@@ -109,7 +109,8 @@ namespace PocApi.Data.Migrations
 
                     b.HasIndex("ClienteIdCliente");
 
-                    b.HasIndex("IdCliente");
+                    b.HasIndex("IdCliente")
+                        .IsUnique();
 
                     b.ToTable("Pedidos");
                 });
@@ -219,20 +220,13 @@ namespace PocApi.Data.Migrations
                     b.HasIndex("IdCliente")
                         .IsUnique();
 
-                    b.HasIndex("IdPagamento")
-                        .IsUnique();
-
-                    b.HasIndex("IdPedido");
-
                     b.ToTable("DocumentoAReceber");
                 });
 
             modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
                 {
                     b.Property<int>("IdPagamento")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<bool?>("Ativo")
                         .HasColumnType("bit");
@@ -321,8 +315,8 @@ namespace PocApi.Data.Migrations
                         .HasForeignKey("ClienteIdCliente");
 
                     b.HasOne("PocApi.Entidades.DocumentoAReceber", "DocumentoAReceber")
-                        .WithMany()
-                        .HasForeignKey("IdCliente")
+                        .WithOne("Pedido")
+                        .HasForeignKey("Entidades.Pedido", "IdCliente")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -339,23 +333,18 @@ namespace PocApi.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamentos")
-                        .WithOne("DocumentoAReceber")
-                        .HasForeignKey("PocApi.Entidades.DocumentoAReceber", "IdPagamento")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entidades.Pedido", "Pedido")
-                        .WithMany()
-                        .HasForeignKey("IdPedido")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Cliente");
+                });
 
-                    b.Navigation("Pagamentos");
+            modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
+                {
+                    b.HasOne("PocApi.Entidades.DocumentoAReceber", "DocumentoAReceber")
+                        .WithMany("Pagamentos")
+                        .HasForeignKey("IdPagamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Pedido");
+                    b.Navigation("DocumentoAReceber");
                 });
 
             modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
@@ -387,10 +376,15 @@ namespace PocApi.Data.Migrations
                     b.Navigation("PedidosPagamento");
                 });
 
+            modelBuilder.Entity("PocApi.Entidades.DocumentoAReceber", b =>
+                {
+                    b.Navigation("Pagamentos");
+
+                    b.Navigation("Pedido");
+                });
+
             modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
                 {
-                    b.Navigation("DocumentoAReceber");
-
                     b.Navigation("PedidosPagamento");
                 });
 #pragma warning restore 612, 618

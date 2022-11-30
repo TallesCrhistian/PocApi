@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber
 {
@@ -18,6 +19,6 @@ namespace PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber
         public decimal ValorPago { get; set; }
         public ClienteViewModel ClienteDTO { get; set; }
         public PedidoInserirViewModel PedidoInserirView { get; set; }
-        public PagamentoInserirViewModel PagamentoDTO { get; set; }
+        public List<PagamentoInserirViewModel> PagamentoDTO { get; set; }
     }
 }

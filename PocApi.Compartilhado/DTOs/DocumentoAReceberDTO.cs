@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PocApi.Compartilhado.DTOs
 {
@@ -19,6 +20,6 @@ namespace PocApi.Compartilhado.DTOs
         public decimal ValorPago { get; set; }
         public ClienteDTO ClienteDTO { get; set; }
         public PedidoDTO PedidoDTO { get; set; }
-        public PagamentoDTO PagamentoDTO { get; set; }
+        public List<PagamentoDTO> PagamentoDTO { get; set; }
     }
 }

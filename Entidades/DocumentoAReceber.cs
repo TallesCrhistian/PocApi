@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,9 +24,8 @@ namespace PocApi.Entidades
         public decimal ValorPago { get; set; }
         [ForeignKey(nameof(IdCliente))]
         public virtual Cliente Cliente { get; set; }
-        [ForeignKey(nameof(IdPedido))]
         public Pedido Pedido { get; set; }
         [ForeignKey(nameof(IdPagamento))]
-        public virtual Pagamento Pagamentos { get; set; }
+        public virtual List<Pagamento> Pagamentos { get; set; }
     }
 }
