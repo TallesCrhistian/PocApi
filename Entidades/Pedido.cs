@@ -18,9 +18,9 @@ namespace Entidades
         public decimal Frete { get; set; }
         public PedidoStatusEnum Status { get; set; }
         [ForeignKey(nameof(IdCliente))]
+        public DocumentoAReceber DocumentoAReceber { get; set; }
         public virtual Cliente Cliente { get; set; }        
         public virtual List<ItemPedido> ItensPedido { get; set; }        
         public virtual List<PedidoPagamento> PedidosPagamento { get; set; }
-        public virtual DocumentoAReceber DocumentoAReceber { get; set; }
     }
 }

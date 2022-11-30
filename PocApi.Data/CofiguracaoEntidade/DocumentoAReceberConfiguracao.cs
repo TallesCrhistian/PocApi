@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Entidades;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using PocApi.Entidades;
 
@@ -9,16 +10,17 @@ namespace PocApi.Data.CofiguracaoEntidade
         public void Configure(EntityTypeBuilder<DocumentoAReceber> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(x => x.IdDocumentoAReceber);
-            entityTypeBuilder.HasOne(x => x.Cliente)                
+            entityTypeBuilder.HasOne(x => x.Cliente)
                 .WithOne(x => x.DocumentoAReceber)
-                .HasForeignKey<DocumentoAReceber>(x => x.IdDocumentoAReceber);
+                .HasForeignKey<DocumentoAReceber>(x => x.IdCliente);
 
             entityTypeBuilder.HasOne(x => x.Pagamentos)
-                .WithOne(x => x.DocumentoAReceber);
+                .WithOne(x => x.DocumentoAReceber)
+                .HasForeignKey<DocumentoAReceber>(x => x.IdPagamento);
 
             entityTypeBuilder.HasOne(x => x.Pedido)
-                .WithOne(x => x.DocumentoAReceber);               
-
+                .WithOne(x => x.DocumentoAReceber)
+                .HasForeignKey<DocumentoAReceber>(x => x.IdPedido);
         }
     }
 }

@@ -24,8 +24,8 @@ namespace PocApi.Entidades
         [ForeignKey(nameof(IdCliente))]
         public virtual Cliente Cliente { get; set; }
         [ForeignKey(nameof(IdPedido))]
-        public virtual Pedido Pedido { get; set; }
+        public Pedido Pedido { get; set; }
         [ForeignKey(nameof(IdPagamento))]
-        public virtual Pagamento Pagamentos { get; set; }        
+        public virtual Pagamento Pagamentos { get; set; }
     }
 }

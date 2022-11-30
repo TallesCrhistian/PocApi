@@ -84,6 +84,9 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ClienteIdCliente")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
@@ -103,6 +106,8 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("IdPedido");
+
+                    b.HasIndex("ClienteIdCliente");
 
                     b.HasIndex("IdCliente");
 
@@ -217,8 +222,7 @@ namespace PocApi.Data.Migrations
                     b.HasIndex("IdPagamento")
                         .IsUnique();
 
-                    b.HasIndex("IdPedido")
-                        .IsUnique();
+                    b.HasIndex("IdPedido");
 
                     b.ToTable("DocumentoAReceber");
                 });
@@ -314,11 +318,17 @@ namespace PocApi.Data.Migrations
                 {
                     b.HasOne("Entidades.Cliente", "Cliente")
                         .WithMany("Pedidos")
+                        .HasForeignKey("ClienteIdCliente");
+
+                    b.HasOne("PocApi.Entidades.DocumentoAReceber", "DocumentoAReceber")
+                        .WithMany()
                         .HasForeignKey("IdCliente")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("DocumentoAReceber");
                 });
 
             modelBuilder.Entity("PocApi.Entidades.DocumentoAReceber", b =>
@@ -336,8 +346,8 @@ namespace PocApi.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Entidades.Pedido", "Pedido")
-                        .WithOne("DocumentoAReceber")
-                        .HasForeignKey("PocApi.Entidades.DocumentoAReceber", "IdPedido")
+                        .WithMany()
+                        .HasForeignKey("IdPedido")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -372,8 +382,6 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("Entidades.Pedido", b =>
                 {
-                    b.Navigation("DocumentoAReceber");
-
                     b.Navigation("ItensPedido");
 
                     b.Navigation("PedidosPagamento");

@@ -17,7 +17,7 @@ namespace PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber
         public decimal PercentualJuros { get; set; }
         public decimal ValorPago { get; set; }
         public ClienteViewModel ClienteDTO { get; set; }
-        public PedidoInserirViewModel PedidoDTO { get; set; }
+        public PedidoInserirViewModel PedidoInserirView { get; set; }
         public PagamentoInserirViewModel PagamentoDTO { get; set; }
     }
 }
