@@ -12,7 +12,7 @@ namespace PocApi.Compartilhado.DTOs
         public decimal MultaAtraso { get; set; }
         public int DiasCarencia { get; set; }
         public int Parcelas { get; set; }
-        public PedidoDTO PedidoDTO { get; set; }
-        public List<PedidoPagamentoDTO> PedidoPagamentoDTO { get; set; }
+        public virtual PedidoDTO PedidoDTO { get; set; }
+        public virtual List<PedidoPagamentoDTO> PedidoPagamentoDTO { get; set; }
     }
 }

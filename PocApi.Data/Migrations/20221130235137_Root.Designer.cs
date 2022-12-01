@@ -10,7 +10,7 @@ using PocApi.Data.Contexto;
 namespace PocApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221130202819_Root")]
+    [Migration("20221130235137_Root")]
     partial class Root
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -61,7 +61,7 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = new RespostaServicoDTO<PagamentoDTO>();
             try
             {
-                await _documentoAReceberNegocios.Inserir(pagamentoDTO);
+                //await _documentoAReceberNegocios.Inserir(pagamentoDTO);
                 respostaServicoDTO.Dados = await _pagamentoNegocios.Inserir(pagamentoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }

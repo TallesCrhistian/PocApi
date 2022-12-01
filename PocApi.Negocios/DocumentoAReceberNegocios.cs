@@ -11,8 +11,7 @@ namespace PocApi.Negocios
 {
     public class DocumentoAReceberNegocios : IDocumentoAReceberNegocios
     {
-        private readonly IDocumentoAReceberRepositorio _documentoAReceberRepositorio;
-        private readonly IPagamentoNegocios _pagamentoNegocios;
+        private readonly IDocumentoAReceberRepositorio _documentoAReceberRepositorio;        
         private readonly IMapper _mapper;
 
         public DocumentoAReceberNegocios(IDocumentoAReceberRepositorio documentoAReceberRepositorio, IMapper mapper)

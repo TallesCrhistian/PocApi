@@ -11,12 +11,6 @@ namespace PocApi.Data.CofiguracaoEntidade
         {
             entityTypeBuilder.HasKey(x => x.IdDocumentoAReceber);
             entityTypeBuilder.HasOne(x => x.Cliente)
-                .WithOne(x => x.DocumentoAReceber);                
-
-            entityTypeBuilder.HasMany(x => x.Pagamentos)
-                .WithOne(x => x.DocumentoAReceber);                
-
-            entityTypeBuilder.HasOne(x => x.Pedido)
                 .WithOne(x => x.DocumentoAReceber);
         }
     }
