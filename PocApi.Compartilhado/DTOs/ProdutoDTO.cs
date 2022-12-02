@@ -2,7 +2,6 @@
 {
     public class ProdutoDTO
     {
-        public int IdProduto { get; set; }
         public string Descricao { get; set; }
         public string EAN { get; set; }
         public decimal PrecoCusto { get; set; }

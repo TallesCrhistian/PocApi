@@ -43,6 +43,7 @@ namespace PocApi.API
             services.AddScoped<IUsuarioNegocios, UsuarioNegocios>();
             services.AddScoped<IProdrutoNegocios, ProdutoNegocios>();
             services.AddScoped<IPagamentoNegocios, PagamentoNegocios>();
+            services.AddScoped<IItemPedidosNegocios, ItemPedidoNegocios>();
             services.AddScoped<IDocumentoAReceberNegocios, DocumentoAReceberNegocios>();
             return services;
         }
@@ -54,6 +55,7 @@ namespace PocApi.API
             services.AddScoped<IUsuarioRepositorio, UsuarioRositorio>();
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             services.AddScoped<IPagamentoRepositorio, PagamentoRepositorio>();
+            services.AddScoped<IItemPedidoRepositorio, ItemPedidoRepositorio>();
             services.AddScoped<IDocumentoAReceberRepositorio, DocumentoAReceberRepositorio>();
             return services;
         }
@@ -63,6 +65,7 @@ namespace PocApi.API
             services.AddScoped<IUnidadeDeTrabalho, UnidadeDeTrabalho>();
             return services;
         }
+
         public static IServiceCollection AdicionarAutorizacao(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -78,6 +81,7 @@ namespace PocApi.API
                 });
             return services;
         }
+
         public static IServiceCollection AdicionarSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>

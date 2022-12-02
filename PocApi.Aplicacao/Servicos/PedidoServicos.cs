@@ -12,18 +12,19 @@ namespace PocApi.Aplicacao.Servicos
     public class PedidoServicos : IPedidoServicos
     {
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
-        private readonly IPedidoNegocios _pedidoNegocios;        
+        private readonly IPedidoNegocios _pedidoNegocios;
 
         public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios)
         {
             _pedidoNegocios = pedidoNegocios;
-            _unidadeDeTrabalho = unidadeDeTrabalho;           
+            _unidadeDeTrabalho = unidadeDeTrabalho;
         }
+
         public async Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO)
         {
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
             try
-            {               
+            {
                 respostaServicoDTO.Dados = await _pedidoNegocios.Inserir(pedidoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
@@ -34,7 +35,6 @@ namespace PocApi.Aplicacao.Servicos
                 _unidadeDeTrabalho.Rollback();
             }
             return respostaServicoDTO;
-
         }
 
         public async Task<RespostaServicoDTO<List<PedidoDTO>>> Listar(PedidoFiltroDTO pedidoFiltroDTO)
@@ -42,9 +42,7 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<List<PedidoDTO>> respostaServicoDTO = new RespostaServicoDTO<List<PedidoDTO>>();
             try
             {
-
                 respostaServicoDTO.Dados = await _pedidoNegocios.Listar(pedidoFiltroDTO);
-
             }
             catch (Exception ex)
             {
@@ -71,7 +69,6 @@ namespace PocApi.Aplicacao.Servicos
             {
                 respostaServicoDTO.Sucesso = false;
                 respostaServicoDTO.Mensagem = ex.Message;
-
             }
             return respostaServicoDTO;
         }
@@ -85,7 +82,6 @@ namespace PocApi.Aplicacao.Servicos
                 pedidoDTO = await _pedidoNegocios.ObterPorCodigo(pedidoDTO.IdPedido);
                 respostaServicoDTO.Dados = await _pedidoNegocios.Alterar(pedidoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
-
             }
             catch (Exception ex)
             {
@@ -104,7 +100,6 @@ namespace PocApi.Aplicacao.Servicos
             {
                 respostaServicoDTO.Dados = await _pedidoNegocios.Deletar(codigo);
                 await _unidadeDeTrabalho.CommitAsync();
-
             }
             catch (Exception ex)
             {

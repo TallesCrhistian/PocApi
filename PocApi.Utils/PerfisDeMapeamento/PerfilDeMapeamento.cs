@@ -16,11 +16,8 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<ClienteDTO, Cliente>()
                 .ReverseMap();
 
-
             CreateMap<PedidoInserirViewModel, PedidoDTO>()
-                .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItemPedidoViewModels))
-                .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidoPagamentoViewModels));
-
+                .ReverseMap();
             CreateMap<PedidoAlterarViewModel, PedidoDTO>()
                 .ReverseMap();
 
@@ -32,13 +29,11 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<Pedido, PedidoDTO>()
                 .ForMember(dest => dest.ClienteDTO, opt => opt.MapFrom(src => src.Cliente));
 
-
             CreateMap<UsuarioInserirViewModel, UsuarioDTO>()
                 .ReverseMap();
 
             CreateMap<UsuarioDTO, Usuario>()
                 .ReverseMap();
-
 
             CreateMap<ProdutoInserirViewModel, ProdutoDTO>()
                 .ReverseMap();
@@ -50,7 +45,6 @@ namespace PocApi.Utils.PerfisDeMapeamento
                 .ReverseMap();
             CreateMap<ProdutoFiltroDTO, Produto>()
                 .ReverseMap();
-
 
             CreateMap<PagamentoDTO, Pagamento>()
                 .ReverseMap();

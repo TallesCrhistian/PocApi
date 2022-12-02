@@ -46,33 +46,18 @@ namespace PocApi.Data.Migrations
             modelBuilder.Entity("Entidades.ItemPedido", b =>
                 {
                     b.Property<int>("IdItemPedido")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("IdPedido")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdProduto")
                         .HasColumnType("int");
 
                     b.Property<int>("Ordem")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PrecoCusto")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<decimal>("PrecoVenda")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("ProdutoIdProduto")
-                        .HasColumnType("int");
+                        .HasColumnType("decimal(18,3)");
 
                     b.HasKey("IdItemPedido");
-
-                    b.HasIndex("IdPedido");
-
-                    b.HasIndex("ProdutoIdProduto");
 
                     b.ToTable("ItensPedido");
                 });
@@ -84,33 +69,30 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClienteIdCliente")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Frete")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<int>("IdCliente")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdItemPedido")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<decimal>("ValorDesconto")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<decimal>("ValorProdutos")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.HasKey("IdPedido");
 
-                    b.HasIndex("ClienteIdCliente");
-
-                    b.HasIndex("IdCliente")
-                        .IsUnique();
+                    b.HasIndex("IdCliente");
 
                     b.ToTable("Pedidos");
                 });
@@ -132,10 +114,10 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("PrecoCusto")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<decimal>("PrecoVenda")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.HasKey("IdProduto");
 
@@ -201,24 +183,28 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("PercentualJuros")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<int>("QuantidadeParcela")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Restante")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<decimal>("ValorPago")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.HasKey("IdDocumentoAReceber");
 
-                    b.HasIndex("IdCliente")
-                        .IsUnique();
+                    b.HasIndex("IdCliente");
+
+                    b.HasIndex("IdPagamento");
+
+                    b.HasIndex("IdPedido");
 
                     b.ToTable("DocumentoAReceber");
                 });
@@ -226,7 +212,9 @@ namespace PocApi.Data.Migrations
             modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
                 {
                     b.Property<int>("IdPagamento")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool?>("Ativo")
                         .HasColumnType("bit");
@@ -235,7 +223,7 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("DiaJuros")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<int>("DiasCarencia")
                         .HasColumnType("int");
@@ -244,7 +232,7 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("MultaAtraso")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<int>("Parcelas")
                         .HasColumnType("int");
@@ -265,7 +253,7 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Desconto")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.Property<int>("IdPagamento")
                         .HasColumnType("int");
@@ -273,20 +261,14 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("IdPedido")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PagamentoIdPagamento")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PedidoIdPedido")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,3)");
 
                     b.HasKey("IdPedidoPagamento");
 
-                    b.HasIndex("PagamentoIdPagamento");
+                    b.HasIndex("IdPagamento");
 
-                    b.HasIndex("PedidoIdPedido");
+                    b.HasIndex("IdPedido");
 
                     b.ToTable("PedidosPagamento");
                 });
@@ -295,67 +277,64 @@ namespace PocApi.Data.Migrations
                 {
                     b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("ItensPedido")
-                        .HasForeignKey("IdPedido")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("IdItemPedido")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Entidades.Produto", "Produto")
-                        .WithMany()
-                        .HasForeignKey("ProdutoIdProduto");
-
                     b.Navigation("Pedido");
-
-                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("Entidades.Pedido", b =>
                 {
                     b.HasOne("Entidades.Cliente", "Cliente")
                         .WithMany("Pedidos")
-                        .HasForeignKey("ClienteIdCliente");
-
-                    b.HasOne("PocApi.Entidades.DocumentoAReceber", "DocumentoAReceber")
-                        .WithOne("Pedido")
-                        .HasForeignKey("Entidades.Pedido", "IdCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Cliente");
-
-                    b.Navigation("DocumentoAReceber");
                 });
 
             modelBuilder.Entity("PocApi.Entidades.DocumentoAReceber", b =>
                 {
                     b.HasOne("Entidades.Cliente", "Cliente")
-                        .WithOne("DocumentoAReceber")
-                        .HasForeignKey("PocApi.Entidades.DocumentoAReceber", "IdCliente")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("DocumentoAReceber")
+                        .HasForeignKey("IdCliente")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
+                        .WithMany("DocumentoAReceber")
+                        .HasForeignKey("IdPagamento")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Entidades.Pedido", "Pedido")
+                        .WithMany("DocumentoAReceber")
+                        .HasForeignKey("IdPedido")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Cliente");
-                });
 
-            modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
-                {
-                    b.HasOne("PocApi.Entidades.DocumentoAReceber", "DocumentoAReceber")
-                        .WithMany("Pagamentos")
-                        .HasForeignKey("IdPagamento")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("Pagamento");
 
-                    b.Navigation("DocumentoAReceber");
+                    b.Navigation("Pedido");
                 });
 
             modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
                 {
-                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
-                        .WithMany("PedidosPagamento")
-                        .HasForeignKey("PagamentoIdPagamento");
-
                     b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("PedidosPagamento")
-                        .HasForeignKey("PedidoIdPedido");
+                        .HasForeignKey("IdPagamento")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
+                        .WithMany("PedidosPagamento")
+                        .HasForeignKey("IdPedido")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Pagamento");
 
@@ -371,20 +350,17 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("Entidades.Pedido", b =>
                 {
+                    b.Navigation("DocumentoAReceber");
+
                     b.Navigation("ItensPedido");
 
                     b.Navigation("PedidosPagamento");
                 });
 
-            modelBuilder.Entity("PocApi.Entidades.DocumentoAReceber", b =>
-                {
-                    b.Navigation("Pagamentos");
-
-                    b.Navigation("Pedido");
-                });
-
             modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
                 {
+                    b.Navigation("DocumentoAReceber");
+
                     b.Navigation("PedidosPagamento");
                 });
 #pragma warning restore 612, 618

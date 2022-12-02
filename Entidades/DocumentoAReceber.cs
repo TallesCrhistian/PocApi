@@ -1,14 +1,11 @@
 ﻿using Entidades;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PocApi.Entidades
 {
     public class DocumentoAReceber
     {
-        [Key]
         public int IdDocumentoAReceber { get; set; }
         public int IdCliente { get; set; }
         public int IdPedido { get; set; }
@@ -22,10 +19,8 @@ namespace PocApi.Entidades
         public decimal Restante { get; set; }
         public decimal PercentualJuros { get; set; }
         public decimal ValorPago { get; set; }
-        [ForeignKey(nameof(IdCliente))]
         public virtual Cliente Cliente { get; set; }
-        public Pedido Pedido { get; set; }
-        [ForeignKey(nameof(IdPagamento))]
-        public virtual List<Pagamento> Pagamentos { get; set; }
+        public virtual Pedido Pedido { get; set; }
+        public virtual Pagamento Pagamento { get; set; }
     }
 }

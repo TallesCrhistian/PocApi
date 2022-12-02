@@ -8,13 +8,11 @@ namespace PocApi.Compartilhado.ModeloDeVisualizacao
     public class PedidoInserirViewModel
     {
         public int IdCliente { get; set; }
+        public int IdItemPedido { get; set; }
         public DateTime Data { get; set; }
         public decimal ValorProdutos { get; set; }
         public decimal ValorDesconto { get; set; }
         public decimal Frete { get; set; }
         public PedidoStatusEnum Status { get; set; }
-        public  List<PedidoPagamentoViewModel> PedidoPagamentoViewModels { get; set; }
-        public  List<ItemPedidoViewModel> ItemPedidoViewModels { get; set; }
-        public virtual DocumentoAReceberInserirViewModel DocumentoAReceberInserirView { get; set; }
     }
 }

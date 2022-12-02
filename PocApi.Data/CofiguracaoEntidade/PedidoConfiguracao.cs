@@ -1,7 +1,6 @@
 ﻿using Entidades;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PocApi.Entidades;
 
 namespace PocApi.Data.CofiguracaoEntidade
 {
@@ -12,12 +11,19 @@ namespace PocApi.Data.CofiguracaoEntidade
             entityTypeBuilder.HasKey(x => x.IdPedido);
             entityTypeBuilder.HasOne(x => x.Cliente)
                 .WithMany(x => x.Pedidos)
-                .HasForeignKey(x => x.Cliente.IdCliente)
-                .IsRequired();
+                .HasForeignKey(x => x.IdCliente)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
 
-            entityTypeBuilder.HasOne(x => x.DocumentoAReceber)
+            entityTypeBuilder.HasMany(x => x.ItensPedido)
                 .WithOne(x => x.Pedido)
-                .HasForeignKey<DocumentoAReceber>(x => x.IdDocumentoAReceber);
+                .HasForeignKey(x => x.IdItemPedido)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            entityTypeBuilder.Property(x => x.ValorProdutos).HasColumnType("decimal(18,3)");
+            entityTypeBuilder.Property(x => x.ValorDesconto).HasColumnType("decimal(18,3)");
+            entityTypeBuilder.Property(x => x.Frete).HasColumnType("decimal(18,3)");
         }
     }
 }

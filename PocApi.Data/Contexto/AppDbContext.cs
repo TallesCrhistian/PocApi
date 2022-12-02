@@ -11,7 +11,12 @@ namespace PocApi.Data.Contexto
 
         }
 
-        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        }
+
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<ItemPedido> ItensPedido { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }

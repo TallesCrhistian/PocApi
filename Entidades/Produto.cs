@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Entidades
+﻿namespace Entidades
 {
     public class Produto
     {
-        [Key]
         public int IdProduto { get; set; }
         public bool? Ativo { get; set; } = true;
         public string Descricao { get; set; }

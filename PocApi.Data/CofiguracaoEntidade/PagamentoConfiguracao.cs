@@ -9,9 +9,8 @@ namespace PocApi.Data.CofiguracaoEntidade
         public void Configure(EntityTypeBuilder<Pagamento> entityTypeBuilder)
         {
             entityTypeBuilder.HasKey(x => x.IdPagamento);
-            entityTypeBuilder.HasOne(x => x.DocumentoAReceber)
-                .WithMany(x => x.Pagamentos)
-                .HasForeignKey(x => x.DocumentoAReceber.IdDocumentoAReceber);                
+            entityTypeBuilder.Property(x => x.DiaJuros).HasColumnType("decimal(18,3)");
+            entityTypeBuilder.Property(x => x.MultaAtraso).HasColumnType("decimal(18,3)");
         }
     }
 }

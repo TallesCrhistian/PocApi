@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Entidades
+﻿namespace Entidades
 {
     public class Usuario
     {
-        [Key]
         public int IdUsuario { get; set; }
         public string Nome { get; set; }
         public string Senha { get; set; }

@@ -5,6 +5,6 @@ namespace PocApi.Negocios.Interfaces
 {
     public interface IItemPedidosNegocios
     {
-        Task<ItemPedidoDTO> Inserir(ItemPedidoDTO itemPedidoDTO);
+        Task<ProdutoDTO> Inserir(ProdutoDTO produtoDTO);
     }
 }
