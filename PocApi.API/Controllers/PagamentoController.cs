@@ -29,12 +29,14 @@ namespace PocApi.API.Controllers
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = await _pagamentoServico.Inserir(pagamentoDTO);
             return Ok(respostaServicoDTO);
         }
+
         [HttpPost("{codigo:int}")]
         public async Task<IActionResult> ObeterPorCodigo(int codigo)
         {
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = await _pagamentoServico.ObterPorCodigo(codigo);
             return Ok(respostaServicoDTO);
         }
+
         [HttpPost]
         [Route(nameof(Listar))]
         public async Task<IActionResult> Listar(PagamentoFiltroDTO pagamentoFiltroDTO)
@@ -42,12 +44,14 @@ namespace PocApi.API.Controllers
             RespostaServicoDTO<List<PagamentoDTO>> respostaServicoDTO = await _pagamentoServico.Listar(pagamentoFiltroDTO);
             return Ok(respostaServicoDTO);
         }
+
         [HttpDelete("{codigo:int}")]
         public async Task<IActionResult> Deletar(int codigo)
         {
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = await _pagamentoServico.Deletar(codigo);
             return Ok(respostaServicoDTO);
         }
+
         [HttpPut]
         [Route(nameof(Alterar))]
         public async Task<IActionResult> Alterar(PagamentoAlterarViewModel pagamentoAlterarViewModel)

@@ -46,6 +46,11 @@ namespace PocApi.Data.Migrations
             modelBuilder.Entity("Entidades.ItemPedido", b =>
                 {
                     b.Property<int>("IdItemPedido")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdPedido")
                         .HasColumnType("int");
 
                     b.Property<int>("Ordem")
@@ -58,6 +63,8 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("decimal(18,3)");
 
                     b.HasKey("IdItemPedido");
+
+                    b.HasIndex("IdPedido");
 
                     b.ToTable("ItensPedido");
                 });
@@ -76,9 +83,6 @@ namespace PocApi.Data.Migrations
                         .HasColumnType("decimal(18,3)");
 
                     b.Property<int>("IdCliente")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdItemPedido")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -277,7 +281,7 @@ namespace PocApi.Data.Migrations
                 {
                     b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("ItensPedido")
-                        .HasForeignKey("IdItemPedido")
+                        .HasForeignKey("IdPedido")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

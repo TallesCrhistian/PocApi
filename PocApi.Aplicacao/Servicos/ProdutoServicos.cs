@@ -60,8 +60,8 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<ProdutoDTO> respostaServicoDTO = new RespostaServicoDTO<ProdutoDTO>();
             try
             {
-                respostaServicoDTO.Dados = await _itemPedidosNegocios.Inserir(produtoDTO);
                 respostaServicoDTO.Dados = await _prodrutoNegocios.Inserir(produtoDTO);
+                respostaServicoDTO.Dados = await _itemPedidosNegocios.Inserir(produtoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
             catch (Exception ex)

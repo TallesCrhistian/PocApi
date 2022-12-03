@@ -12,6 +12,7 @@ namespace PocApi.Data.Repositorios
     public class ProdutoRepositorio : IProdutoRepositorio
     {
         private readonly AppDbContext _appDbContext;
+
         public ProdutoRepositorio(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -67,7 +68,6 @@ namespace PocApi.Data.Repositorios
                 .FirstOrDefaultAsync();
 
             if (produto != null) await _appDbContext.SaveChangesAsync();
-
 
             return produto;
         }
