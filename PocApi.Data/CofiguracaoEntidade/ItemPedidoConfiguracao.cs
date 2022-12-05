@@ -10,6 +10,11 @@ namespace PocApi.Data.CofiguracaoEntidade
         {
             entityTypeBuilder.HasKey(x => x.IdItemPedido);
 
+            entityTypeBuilder.HasOne(x => x.Pedido)
+             .WithMany(x => x.ItensPedido)
+             .IsRequired()
+             .OnDelete(DeleteBehavior.NoAction);
+
             entityTypeBuilder.Property(x => x.PrecoCusto).HasColumnType("decimal(18,3)");
             entityTypeBuilder.Property(x => x.PrecoVenda).HasColumnType("decimal(18,3)");
         }

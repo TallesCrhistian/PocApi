@@ -148,14 +148,15 @@ namespace PocApi.Data.Migrations
                     IdPedido = table.Column<int>(type: "int", nullable: false),
                     Ordem = table.Column<int>(type: "int", nullable: false),
                     PrecoCusto = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
-                    PrecoVenda = table.Column<decimal>(type: "decimal(18,3)", nullable: false)
+                    PrecoVenda = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
+                    PedidoIdPedido = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ItensPedido", x => x.IdItemPedido);
                     table.ForeignKey(
-                        name: "FK_ItensPedido_Pedidos_IdPedido",
-                        column: x => x.IdPedido,
+                        name: "FK_ItensPedido_Pedidos_PedidoIdPedido",
+                        column: x => x.PedidoIdPedido,
                         principalTable: "Pedidos",
                         principalColumn: "IdPedido");
                 });
@@ -203,9 +204,9 @@ namespace PocApi.Data.Migrations
                 column: "IdPedido");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItensPedido_IdPedido",
+                name: "IX_ItensPedido_PedidoIdPedido",
                 table: "ItensPedido",
-                column: "IdPedido");
+                column: "PedidoIdPedido");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_IdCliente",

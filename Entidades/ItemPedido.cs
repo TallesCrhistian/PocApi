@@ -7,6 +7,6 @@
         public int Ordem { get; set; }
         public decimal PrecoCusto { get; set; }
         public decimal PrecoVenda { get; set; }
-        public virtual Pedido Pedido { get; set; }
+        public Pedido Pedido { get; set; }
     }
 }

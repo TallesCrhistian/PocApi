@@ -1,17 +1,16 @@
 ﻿using PocApi.Compartilhado.Enumeradores;
-using PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber;
 using System;
-using System.Collections.Generic;
 
-namespace PocApi.Compartilhado.ModeloDeVisualizacao
+namespace PocApi.Compartilhado.ModeloDeVisualizacao.Pedido
 {
-    public class PedidoInserirViewModel
+    public class PedidoViewModel
     {
-        public int IdCliente { get; set; }
         public DateTime Data { get; set; }
         public decimal ValorProdutos { get; set; }
         public decimal ValorDesconto { get; set; }
         public decimal Frete { get; set; }
         public PedidoStatusEnum Status { get; set; }
+        public ClienteViewModel ClienteViewModel { get; set; }
+        public ItemPedidoViewModel ItemPedidoViewModel { get; set; }
     }
 }

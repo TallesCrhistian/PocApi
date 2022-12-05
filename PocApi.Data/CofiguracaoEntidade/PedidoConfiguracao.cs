@@ -15,12 +15,6 @@ namespace PocApi.Data.CofiguracaoEntidade
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
 
-            entityTypeBuilder.HasMany(x => x.ItensPedido)
-                .WithOne(x => x.Pedido)
-                .HasForeignKey(x => x.IdPedido)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
-
             entityTypeBuilder.Property(x => x.ValorProdutos).HasColumnType("decimal(18,3)");
             entityTypeBuilder.Property(x => x.ValorDesconto).HasColumnType("decimal(18,3)");
             entityTypeBuilder.Property(x => x.Frete).HasColumnType("decimal(18,3)");

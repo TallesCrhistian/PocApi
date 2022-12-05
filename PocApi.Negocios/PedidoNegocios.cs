@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entidades;
 using PocApi.Compartilhado.DTOs;
+using PocApi.Compartilhado.ModeloDeVisualizacao.Pedido;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System.Collections.Generic;
@@ -41,12 +42,11 @@ namespace PocApi.Negocios
 
         public async Task<PedidoDTO> Inserir(PedidoDTO pedidoDTO)
         {
-
             if (!await Validar(pedidoDTO))
             {
                 return pedidoDTO;
-            }            
-            Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);            
+            }
+            Pedido pedido = _mapper.Map<Pedido>(pedidoDTO);
             pedido = await _pedidoRepositorio.Inserir(pedido);
             return _mapper.Map<PedidoDTO>(pedido);
         }
@@ -75,6 +75,5 @@ namespace PocApi.Negocios
             }
             return pedidoValido;
         }
-
     }
 }

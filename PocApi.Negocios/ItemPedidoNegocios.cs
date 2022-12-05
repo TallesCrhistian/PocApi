@@ -29,6 +29,7 @@ namespace PocApi.Negocios
         public ItemPedidoDTO AdicionaValores(ProdutoDTO produtoDTO)
         {
             ItemPedidoDTO itemPedidoDTO = new ItemPedidoDTO();
+            itemPedidoDTO.IdPedido = 1;
             itemPedidoDTO.PrecoCusto = produtoDTO.PrecoCusto;
             itemPedidoDTO.PrecoVenda = produtoDTO.PrecoVenda;
             itemPedidoDTO.Ordem += 1;

@@ -61,7 +61,9 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<ItemPedidoViewModel, ItemPedidoDTO>()
                 .ReverseMap();
             CreateMap<ItemPedidoDTO, ItemPedido>()
-                .ReverseMap();
+                .ForMember(dest => dest.Pedido, opt => opt.MapFrom(src => src.PedidoDTO));
+            CreateMap<ItemPedido, ItemPedidoDTO>()
+               .ForMember(dest => dest.PedidoDTO, opt => opt.MapFrom(src => src.Pedido));
 
             CreateMap<DocumentoAReceberInserirViewModel, DocumentoAReceberDTO>()
                 .ReverseMap();

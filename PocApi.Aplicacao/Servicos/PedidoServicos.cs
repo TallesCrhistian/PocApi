@@ -1,6 +1,7 @@
 ﻿using PocApi.Aplicacao.Interfaces;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Compartilhado.Menssagens;
+using PocApi.Compartilhado.ModeloDeVisualizacao.Pedido;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
