@@ -34,6 +34,8 @@ namespace PocApi.Negocios
 
             documentoAReceberDTO.QuantidadeParcela = pagamentoDTO.Parcelas;
             documentoAReceberDTO.Carencia = pagamentoDTO.DiasCarencia;
+            documentoAReceberDTO.IdCliente = 1;
+            documentoAReceberDTO.IdPedido = 1;
 
             return documentoAReceberDTO;
         }

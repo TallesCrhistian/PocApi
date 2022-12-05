@@ -26,7 +26,6 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = new RespostaServicoDTO<PagamentoDTO>();
             try
             {
-
                 respostaServicoDTO.Dados = await _pagamentoNegocios.Alterar(pagamentoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
@@ -61,8 +60,8 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = new RespostaServicoDTO<PagamentoDTO>();
             try
             {
-                //await _documentoAReceberNegocios.Inserir(pagamentoDTO);
                 respostaServicoDTO.Dados = await _pagamentoNegocios.Inserir(pagamentoDTO);
+                await _documentoAReceberNegocios.Inserir(pagamentoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
             catch (Exception ex)
@@ -79,9 +78,7 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<List<PagamentoDTO>> respostaServicoDTO = new RespostaServicoDTO<List<PagamentoDTO>>();
             try
             {
-
                 respostaServicoDTO.Dados = await _pagamentoNegocios.Listar(pagamentoFiltroDTO);
-
             }
             catch (Exception ex)
             {
@@ -96,7 +93,6 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<PagamentoDTO> respostaServicoDTO = new RespostaServicoDTO<PagamentoDTO>();
             try
             {
-
                 respostaServicoDTO.Dados = await _pagamentoNegocios.ObterPorCodigo(codigo);
                 await _unidadeDeTrabalho.CommitAsync();
             }

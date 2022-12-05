@@ -183,10 +183,10 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("IdCliente")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPagamento")
+                    b.Property<int>("IdPedido")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdPedido")
+                    b.Property<int?>("PagamentoIdPagamento")
                         .HasColumnType("int");
 
                     b.Property<decimal>("PercentualJuros")
@@ -209,9 +209,9 @@ namespace PocApi.Data.Migrations
 
                     b.HasIndex("IdCliente");
 
-                    b.HasIndex("IdPagamento");
-
                     b.HasIndex("IdPedido");
+
+                    b.HasIndex("PagamentoIdPagamento");
 
                     b.ToTable("DocumentoAReceber");
                 });
@@ -310,17 +310,15 @@ namespace PocApi.Data.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
-                        .WithMany("DocumentoAReceber")
-                        .HasForeignKey("IdPagamento")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("DocumentoAReceber")
                         .HasForeignKey("IdPedido")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
+                        .WithMany("DocumentoAReceber")
+                        .HasForeignKey("PagamentoIdPagamento");
 
                     b.Navigation("Cliente");
 

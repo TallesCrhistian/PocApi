@@ -15,12 +15,6 @@ namespace PocApi.Data.CofiguracaoEntidade
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
 
-            entityTypeBuilder.HasOne(x => x.Pagamento)
-                .WithMany(x => x.DocumentoAReceber)
-                .HasForeignKey(x => x.IdPagamento)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.NoAction);
-
             entityTypeBuilder.HasOne(x => x.Pedido)
                 .WithMany(x => x.DocumentoAReceber)
                 .HasForeignKey(x => x.IdPedido)

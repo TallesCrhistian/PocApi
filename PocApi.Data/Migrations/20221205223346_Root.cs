@@ -108,7 +108,6 @@ namespace PocApi.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdCliente = table.Column<int>(type: "int", nullable: false),
                     IdPedido = table.Column<int>(type: "int", nullable: false),
-                    IdPagamento = table.Column<int>(type: "int", nullable: false),
                     QuantidadeParcela = table.Column<int>(type: "int", nullable: false),
                     DataLancamento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataVencimento = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -117,7 +116,8 @@ namespace PocApi.Data.Migrations
                     Valor = table.Column<decimal>(type: "decimal(18,3)", precision: 18, scale: 3, nullable: false),
                     Restante = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
                     PercentualJuros = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
-                    ValorPago = table.Column<decimal>(type: "decimal(18,3)", nullable: false)
+                    ValorPago = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
+                    PagamentoIdPagamento = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -128,10 +128,11 @@ namespace PocApi.Data.Migrations
                         principalTable: "Clientes",
                         principalColumn: "IdCliente");
                     table.ForeignKey(
-                        name: "FK_DocumentoAReceber_Pagamentos_IdPagamento",
-                        column: x => x.IdPagamento,
+                        name: "FK_DocumentoAReceber_Pagamentos_PagamentoIdPagamento",
+                        column: x => x.PagamentoIdPagamento,
                         principalTable: "Pagamentos",
-                        principalColumn: "IdPagamento");
+                        principalColumn: "IdPagamento",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_DocumentoAReceber_Pedidos_IdPedido",
                         column: x => x.IdPedido,
@@ -194,14 +195,14 @@ namespace PocApi.Data.Migrations
                 column: "IdCliente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DocumentoAReceber_IdPagamento",
-                table: "DocumentoAReceber",
-                column: "IdPagamento");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DocumentoAReceber_IdPedido",
                 table: "DocumentoAReceber",
                 column: "IdPedido");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DocumentoAReceber_PagamentoIdPagamento",
+                table: "DocumentoAReceber",
+                column: "PagamentoIdPagamento");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItensPedido_PedidoIdPedido",
