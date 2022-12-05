@@ -14,9 +14,9 @@ namespace Entidades
         public decimal ValorDesconto { get; set; }
         public decimal Frete { get; set; }
         public PedidoStatusEnum Status { get; set; }
-        public List<DocumentoAReceber> DocumentoAReceber { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual List<ItemPedido> ItensPedido { get; set; }
+        public List<DocumentoAReceber> DocumentoAReceber { get; set; }
         public virtual List<PedidoPagamento> PedidosPagamento { get; set; }
     }
 }

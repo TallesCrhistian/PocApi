@@ -11,7 +11,7 @@ namespace PocApi.Negocios
 {
     public class DocumentoAReceberNegocios : IDocumentoAReceberNegocios
     {
-        private readonly IDocumentoAReceberRepositorio _documentoAReceberRepositorio;        
+        private readonly IDocumentoAReceberRepositorio _documentoAReceberRepositorio;
         private readonly IMapper _mapper;
 
         public DocumentoAReceberNegocios(IDocumentoAReceberRepositorio documentoAReceberRepositorio, IMapper mapper)
@@ -19,6 +19,7 @@ namespace PocApi.Negocios
             _documentoAReceberRepositorio = documentoAReceberRepositorio;
             _mapper = mapper;
         }
+
         public async Task<DocumentoAReceberDTO> Inserir(PagamentoDTO pagamentoDTO)
         {
             DocumentoAReceberDTO documentoAReceberDTO = AdicionaValores(pagamentoDTO);
@@ -26,6 +27,7 @@ namespace PocApi.Negocios
             await _documentoAReceberRepositorio.Inserir(documentoAReceber);
             return _mapper.Map<DocumentoAReceberDTO>(documentoAReceber);
         }
+
         public DocumentoAReceberDTO AdicionaValores(PagamentoDTO pagamentoDTO)
         {
             DocumentoAReceberDTO documentoAReceberDTO = new DocumentoAReceberDTO();
@@ -37,4 +39,3 @@ namespace PocApi.Negocios
         }
     }
 }
-
