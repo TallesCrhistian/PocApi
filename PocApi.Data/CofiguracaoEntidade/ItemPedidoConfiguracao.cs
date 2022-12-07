@@ -12,6 +12,7 @@ namespace PocApi.Data.CofiguracaoEntidade
 
             entityTypeBuilder.HasOne(x => x.Pedido)
              .WithMany(x => x.ItensPedido)
+             .HasForeignKey(x => x.IdPedido)
              .IsRequired()
              .OnDelete(DeleteBehavior.NoAction);
 

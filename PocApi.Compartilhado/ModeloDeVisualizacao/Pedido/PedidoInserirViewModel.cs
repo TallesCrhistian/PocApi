@@ -13,5 +13,7 @@ namespace PocApi.Compartilhado.ModeloDeVisualizacao
         public decimal ValorDesconto { get; set; }
         public decimal Frete { get; set; }
         public PedidoStatusEnum Status { get; set; }
+        public List<ItemPedidoViewModel> ItemPedidoViewModels { get; set; }
+        public List<PedidoPagamentoViewModel> PedidoPagamentoViewModels { get; set; }
     }
 }

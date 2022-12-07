@@ -18,20 +18,18 @@ namespace PocApi.Negocios
             _mapper = mapper;
         }
 
-        public async Task<ProdutoDTO> Inserir(ProdutoDTO produtoDTO)
+        public async Task<PedidoDTO> Inserir(PedidoDTO pedidoDTO)
         {
-            ItemPedidoDTO itemPedidoDTO = AdicionaValores(produtoDTO);
+            ItemPedidoDTO itemPedidoDTO = AdicionaValores(pedidoDTO);
             ItemPedido itemPedido = _mapper.Map<ItemPedido>(itemPedidoDTO);
             await _itemPedidoRepositorio.Inserir(itemPedido);
-            return produtoDTO;
+            return pedidoDTO;
         }
 
-        public ItemPedidoDTO AdicionaValores(ProdutoDTO produtoDTO)
+        public ItemPedidoDTO AdicionaValores(PedidoDTO pedidoDTO)
         {
             ItemPedidoDTO itemPedidoDTO = new ItemPedidoDTO();
-            itemPedidoDTO.IdPedido = 1;
-            itemPedidoDTO.PrecoCusto = produtoDTO.PrecoCusto;
-            itemPedidoDTO.PrecoVenda = produtoDTO.PrecoVenda;
+            itemPedidoDTO.IdPedido = pedidoDTO.IdPedido;
             itemPedidoDTO.Ordem += 1;
 
             return itemPedidoDTO;

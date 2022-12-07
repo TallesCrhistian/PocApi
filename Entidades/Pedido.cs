@@ -9,6 +9,7 @@ namespace Entidades
     {
         public int IdPedido { get; set; }
         public int IdCliente { get; set; }
+        public string FormaPagamento { get; set; }
         public DateTime Data { get; set; }
         public decimal ValorProdutos { get; set; }
         public decimal ValorDesconto { get; set; }

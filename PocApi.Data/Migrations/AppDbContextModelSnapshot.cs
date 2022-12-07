@@ -56,9 +56,6 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("Ordem")
                         .HasColumnType("int");
 
-                    b.Property<int>("PedidoIdPedido")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("PrecoCusto")
                         .HasColumnType("decimal(18,3)");
 
@@ -67,7 +64,7 @@ namespace PocApi.Data.Migrations
 
                     b.HasKey("IdItemPedido");
 
-                    b.HasIndex("PedidoIdPedido");
+                    b.HasIndex("IdPedido");
 
                     b.ToTable("ItensPedido");
                 });
@@ -81,6 +78,9 @@ namespace PocApi.Data.Migrations
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("FormaPagamento")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Frete")
                         .HasColumnType("decimal(18,3)");
@@ -284,7 +284,7 @@ namespace PocApi.Data.Migrations
                 {
                     b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("ItensPedido")
-                        .HasForeignKey("PedidoIdPedido")
+                        .HasForeignKey("IdPedido")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

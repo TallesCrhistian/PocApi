@@ -14,11 +14,13 @@ namespace PocApi.Aplicacao.Servicos
     {
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
         private readonly IPedidoNegocios _pedidoNegocios;
+        private readonly IItemPedidosNegocios _itemPedidosNegocios;
 
-        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios)
+        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios, IItemPedidosNegocios itemPedidosNegocios)
         {
             _pedidoNegocios = pedidoNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
+            _itemPedidosNegocios = itemPedidosNegocios;
         }
 
         public async Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO)
@@ -27,6 +29,7 @@ namespace PocApi.Aplicacao.Servicos
             try
             {
                 respostaServicoDTO.Dados = await _pedidoNegocios.Inserir(pedidoDTO);
+                //respostaServicoDTO.Dados = await _itemPedidosNegocios.Inserir(pedidoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
             catch (Exception ex)
