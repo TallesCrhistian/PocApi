@@ -17,9 +17,12 @@ namespace PocApi.Utils.PerfisDeMapeamento
                 .ReverseMap();
 
             CreateMap<PedidoInserirViewModel, PedidoDTO>()
-                .ReverseMap();
-            CreateMap<PedidoAlterarViewModel, PedidoDTO>()
-                .ReverseMap();
+                 .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItemPedidoViewModels))
+                .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidoPagamentoViewModels));
+
+            CreateMap<PedidoDTO, PedidoInserirViewModel>()
+                .ForMember(dest => dest.ItemPedidoViewModels, opt => opt.MapFrom(src => src.ItemPedidoDTO))
+                .ForMember(dest => dest.PedidoPagamentoViewModels, opt => opt.MapFrom(src => src.PedidosPagamentoDTO));
 
             CreateMap<PedidoDTO, Pedido>()
                 .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.ClienteDTO))
@@ -27,7 +30,9 @@ namespace PocApi.Utils.PerfisDeMapeamento
                 .ForMember(dest => dest.PedidosPagamento, opt => opt.MapFrom(src => src.PedidosPagamentoDTO));
 
             CreateMap<Pedido, PedidoDTO>()
-                .ForMember(dest => dest.ClienteDTO, opt => opt.MapFrom(src => src.Cliente));
+                .ForMember(dest => dest.ClienteDTO, opt => opt.MapFrom(src => src.Cliente))
+                 .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItensPedido))
+                .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidosPagamento));
 
             CreateMap<UsuarioInserirViewModel, UsuarioDTO>()
                 .ReverseMap();
@@ -51,11 +56,6 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<PagamentoInserirViewModel, PagamentoDTO>()
                 .ReverseMap();
             CreateMap<PagamentoAlterarViewModel, PagamentoDTO>()
-                .ReverseMap();
-
-            CreateMap<PedidoPagamentoViewModel, PedidoPagamentoDTO>()
-                .ReverseMap();
-            CreateMap<PedidoPagamentoDTO, PedidoPagamento>()
                 .ReverseMap();
 
             CreateMap<ItemPedidoViewModel, ItemPedidoDTO>()

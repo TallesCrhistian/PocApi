@@ -1,5 +1,4 @@
 ﻿using PocApi.Compartilhado.Enumeradores;
-using PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber;
 using System;
 using System.Collections.Generic;
 

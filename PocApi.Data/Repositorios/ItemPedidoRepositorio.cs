@@ -13,16 +13,5 @@ namespace PocApi.Data.Repositorios
         {
             _appDbContext = appDbContext;
         }
-
-        public async Task<ItemPedido> Inserir(ItemPedido itemPedido)
-        {
-            await _appDbContext.Set<ItemPedido>()
-                .AddAsync(itemPedido);
-
-            await _appDbContext
-                .SaveChangesAsync();
-
-            return itemPedido;
-        }
     }
 }

@@ -29,7 +29,6 @@ namespace PocApi.Aplicacao.Servicos
             try
             {
                 respostaServicoDTO.Dados = await _pedidoNegocios.Inserir(pedidoDTO);
-                //respostaServicoDTO.Dados = await _itemPedidosNegocios.Inserir(pedidoDTO);
                 await _unidadeDeTrabalho.CommitAsync();
             }
             catch (Exception ex)
