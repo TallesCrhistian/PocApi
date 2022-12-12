@@ -17,22 +17,22 @@ namespace PocApi.Utils.PerfisDeMapeamento
                 .ReverseMap();
 
             CreateMap<PedidoInserirViewModel, PedidoDTO>()
-                 .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItemPedidoViewModels))
-                .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidoPagamentoViewModels));
+                 .ReverseMap();
 
             CreateMap<PedidoDTO, PedidoInserirViewModel>()
-                .ForMember(dest => dest.ItemPedidoViewModels, opt => opt.MapFrom(src => src.ItemPedidoDTO))
-                .ForMember(dest => dest.PedidoPagamentoViewModels, opt => opt.MapFrom(src => src.PedidosPagamentoDTO));
+                .ReverseMap();
 
             CreateMap<PedidoDTO, Pedido>()
-                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.ClienteDTO))
-                .ForMember(dest => dest.ItensPedido, opt => opt.MapFrom(src => src.ItemPedidoDTO))
-                .ForMember(dest => dest.PedidosPagamento, opt => opt.MapFrom(src => src.PedidosPagamentoDTO));
+                .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.ClienteDTO));
 
             CreateMap<Pedido, PedidoDTO>()
-                .ForMember(dest => dest.ClienteDTO, opt => opt.MapFrom(src => src.Cliente))
-                 .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItensPedido))
-                .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidosPagamento));
+                .ForMember(dest => dest.ClienteDTO, opt => opt.MapFrom(src => src.Cliente));
+
+            CreateMap<PedidoPagamentoViewModel, PedidoPagamentoDTO>()
+                .ReverseMap();
+
+            CreateMap<PedidoPagamentoDTO, PedidoPagamento>()
+                .ReverseMap();
 
             CreateMap<UsuarioInserirViewModel, UsuarioDTO>()
                 .ReverseMap();

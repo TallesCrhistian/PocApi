@@ -10,5 +10,7 @@ namespace PocApi.Compartilhado.DTOs
         public DateTime DataLancamento { get; set; }
         public decimal Valor { get; set; }
         public decimal Desconto { get; set; }
+        public PagamentoDTO PagamentoDTO { get; set; }
+        public PedidoDTO PedidoDTO { get; set; }
     }
 }
