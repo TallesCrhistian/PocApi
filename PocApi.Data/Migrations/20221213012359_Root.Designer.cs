@@ -10,7 +10,7 @@ using PocApi.Data.Contexto;
 namespace PocApi.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221208161525_Root")]
+    [Migration("20221213012359_Root")]
     partial class Root
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -331,13 +331,13 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
                 {
-                    b.HasOne("Entidades.Pedido", "Pedido")
+                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
                         .WithMany("PedidosPagamento")
                         .HasForeignKey("IdPagamento")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
+                    b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("PedidosPagamento")
                         .HasForeignKey("IdPedido")
                         .OnDelete(DeleteBehavior.NoAction)

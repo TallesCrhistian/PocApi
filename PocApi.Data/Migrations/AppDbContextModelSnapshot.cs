@@ -329,13 +329,13 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("PocApi.Entidades.PedidoPagamento", b =>
                 {
-                    b.HasOne("Entidades.Pedido", "Pedido")
+                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
                         .WithMany("PedidosPagamento")
                         .HasForeignKey("IdPagamento")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
+                    b.HasOne("Entidades.Pedido", "Pedido")
                         .WithMany("PedidosPagamento")
                         .HasForeignKey("IdPedido")
                         .OnDelete(DeleteBehavior.NoAction)

@@ -12,14 +12,14 @@ namespace PocApi.Data.CofiguracaoEntidade
             entityTypeBuilder
                 .HasOne(x => x.Pedido)
                 .WithMany(x => x.PedidosPagamento)
-                .HasForeignKey(x => x.IdPagamento)
+                .HasForeignKey(x => x.IdPedido)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
 
             entityTypeBuilder
                 .HasOne(x => x.Pagamento)
                 .WithMany(x => x.PedidosPagamento)
-                .HasForeignKey(x => x.IdPedido)
+                .HasForeignKey(x => x.IdPagamento)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
 

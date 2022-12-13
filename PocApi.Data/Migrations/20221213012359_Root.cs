@@ -178,13 +178,13 @@ namespace PocApi.Data.Migrations
                 {
                     table.PrimaryKey("PK_PedidosPagamento", x => x.IdPedidoPagamento);
                     table.ForeignKey(
-                        name: "FK_PedidosPagamento_Pagamentos_IdPedido",
-                        column: x => x.IdPedido,
+                        name: "FK_PedidosPagamento_Pagamentos_IdPagamento",
+                        column: x => x.IdPagamento,
                         principalTable: "Pagamentos",
                         principalColumn: "IdPagamento");
                     table.ForeignKey(
-                        name: "FK_PedidosPagamento_Pedidos_IdPagamento",
-                        column: x => x.IdPagamento,
+                        name: "FK_PedidosPagamento_Pedidos_IdPedido",
+                        column: x => x.IdPedido,
                         principalTable: "Pedidos",
                         principalColumn: "IdPedido");
                 });
