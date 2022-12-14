@@ -35,14 +35,12 @@ namespace PocApi.Utils.PerfisDeMapeamento
             .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItensPedido));
 
             CreateMap<PedidoPagamentoViewModel, PedidoPagamentoDTO>()
-                .ReverseMap();
-
+                 .ForMember(dest => dest.PagamentoDTO, opt => opt.MapFrom(src => src.PagamentoViewModel));
             CreateMap<PedidoPagamentoDTO, PedidoPagamento>()
-                .ReverseMap();
+                 .ForMember(dest => dest.Pagamento, opt => opt.MapFrom(src => src.PagamentoDTO));
 
             CreateMap<UsuarioInserirViewModel, UsuarioDTO>()
                 .ReverseMap();
-
             CreateMap<UsuarioDTO, Usuario>()
                 .ReverseMap();
 

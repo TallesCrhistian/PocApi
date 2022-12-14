@@ -13,8 +13,8 @@ namespace PocApi.Compartilhado.DTOs
         public DateTime Data { get; set; }
         public int Status { get; set; }
         public ClienteDTO ClienteDTO { get; set; }
-        public virtual List<PedidoPagamentoDTO> PedidosPagamentoDTO { get; set; }
-        public virtual List<ItemPedidoDTO> ItemPedidoDTO { get; set; }
-        public virtual DocumentoAReceberDTO DocumentoAReceberDTO { get; set; }
+        public List<PedidoPagamentoDTO> PedidosPagamentoDTO { get; set; }
+        public List<ItemPedidoDTO> ItemPedidoDTO { get; set; }
+        public List<DocumentoAReceberDTO> DocumentoAReceberDTOs { get; set; }
     }
 }

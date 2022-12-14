@@ -14,13 +14,13 @@ namespace PocApi.Aplicacao.Servicos
     {
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
         private readonly IPedidoNegocios _pedidoNegocios;
-        private readonly IItemPedidosNegocios _itemPedidosNegocios;
+        private readonly IDocumentoAReceberNegocios _documentoAReceberNegocios;
 
-        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios, IItemPedidosNegocios itemPedidosNegocios)
+        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios, IDocumentoAReceberNegocios documentoAReceberNegocios)
         {
             _pedidoNegocios = pedidoNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
-            _itemPedidosNegocios = itemPedidosNegocios;
+            _documentoAReceberNegocios = documentoAReceberNegocios;
         }
 
         public async Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO)
@@ -28,7 +28,9 @@ namespace PocApi.Aplicacao.Servicos
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
             try
             {
+                pedidoDTO.DocumentoAReceberDTOs = _documentoAReceberNegocios.CriarDocumentoAReceberDTO(pedidoDTO);
                 respostaServicoDTO.Dados = await _pedidoNegocios.Inserir(pedidoDTO);
+
                 await _unidadeDeTrabalho.CommitAsync();
             }
             catch (Exception ex)

@@ -7,8 +7,9 @@ namespace PocApi.Compartilhado.DTOs
     {
         public int IdDocumentoAReceber { get; set; }
         public int IdCliente { get; set; }
-        public int IdPedido { get; set; }       
+        public int IdPedido { get; set; }
         public int QuantidadeParcela { get; set; }
+        public int NumeroParcela { get; set; }
         public DateTime DataLancamento { get; set; } = DateTime.Now;
         public DateTime DataVencimento { get; set; }
         public DateTime DataJuros { get; set; }
@@ -17,8 +18,8 @@ namespace PocApi.Compartilhado.DTOs
         public decimal Restante { get; set; }
         public decimal PercentualJuros { get; set; }
         public decimal ValorPago { get; set; }
-        public virtual ClienteDTO ClienteDTO { get; set; }
-        public virtual PedidoDTO PedidoDTO { get; set; }
-        public virtual List<PagamentoDTO> PagamentoDTO { get; set; }
+        public ClienteDTO ClienteDTO { get; set; }
+        public PedidoDTO PedidoDTO { get; set; }
+        public PagamentoDTO PagamentoDTO { get; set; }
     }
 }

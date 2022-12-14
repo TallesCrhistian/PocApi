@@ -183,6 +183,9 @@ namespace PocApi.Data.Migrations
                     b.Property<int>("IdCliente")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdPagamento")
+                        .HasColumnType("int");
+
                     b.Property<int>("IdPedido")
                         .HasColumnType("int");
 
@@ -240,6 +243,9 @@ namespace PocApi.Data.Migrations
 
                     b.Property<decimal>("MultaAtraso")
                         .HasColumnType("decimal(18,3)");
+
+                    b.Property<int>("PagamentoForma")
+                        .HasColumnType("int");
 
                     b.Property<int>("Parcelas")
                         .HasColumnType("int");
@@ -317,7 +323,7 @@ namespace PocApi.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("PocApi.Entidades.Pagamento", "Pagamento")
-                        .WithMany("DocumentoAReceber")
+                        .WithMany()
                         .HasForeignKey("PagamentoIdPagamento");
 
                     b.Navigation("Cliente");
@@ -364,8 +370,6 @@ namespace PocApi.Data.Migrations
 
             modelBuilder.Entity("PocApi.Entidades.Pagamento", b =>
                 {
-                    b.Navigation("DocumentoAReceber");
-
                     b.Navigation("PedidosPagamento");
                 });
 #pragma warning restore 612, 618

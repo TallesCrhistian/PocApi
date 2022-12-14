@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PocApi.Data.Migrations
 {
-    public partial class Root : Migration
+    public partial class root : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,7 @@ namespace PocApi.Data.Migrations
                     IdPagamento = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ativo = table.Column<bool>(type: "bit", nullable: true),
+                    PagamentoForma = table.Column<int>(type: "int", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DiasPagamento = table.Column<int>(type: "int", nullable: false),
                     DiaJuros = table.Column<decimal>(type: "decimal(18,3)", nullable: false),
@@ -109,6 +110,7 @@ namespace PocApi.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdCliente = table.Column<int>(type: "int", nullable: false),
                     IdPedido = table.Column<int>(type: "int", nullable: false),
+                    IdPagamento = table.Column<int>(type: "int", nullable: false),
                     QuantidadeParcela = table.Column<int>(type: "int", nullable: false),
                     DataLancamento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataVencimento = table.Column<DateTime>(type: "datetime2", nullable: false),

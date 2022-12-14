@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PocApi.Compartilhado.Enumeradores;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace PocApi.Compartilhado.ModeloDeVisualizacao
 {
     public class PagamentoInserirViewModel
     {
+        public PagamentoFormaEnum PagamentoForma { get; set; }
         public string Descricao { get; set; }
         public int DiasPagamento { get; set; }
         public decimal DiaJuros { get; set; }

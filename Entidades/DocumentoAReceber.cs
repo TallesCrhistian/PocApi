@@ -9,6 +9,7 @@ namespace PocApi.Entidades
         public int IdDocumentoAReceber { get; set; }
         public int IdCliente { get; set; }
         public int IdPedido { get; set; }
+        public int IdPagamento { get; set; }
         public int QuantidadeParcela { get; set; }
         public DateTime DataLancamento { get; set; }
         public DateTime DataVencimento { get; set; }
@@ -18,8 +19,8 @@ namespace PocApi.Entidades
         public decimal Restante { get; set; }
         public decimal PercentualJuros { get; set; }
         public decimal ValorPago { get; set; }
-        public virtual Cliente Cliente { get; set; }
-        public virtual Pedido Pedido { get; set; }
-        public virtual Pagamento Pagamento { get; set; }
+        public Cliente Cliente { get; set; }
+        public Pedido Pedido { get; set; }
+        public Pagamento Pagamento { get; set; }
     }
 }

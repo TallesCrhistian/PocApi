@@ -1,7 +1,10 @@
-﻿namespace PocApi.Compartilhado.ModeloDeVisualizacao.Pagamento
+﻿using PocApi.Compartilhado.Enumeradores;
+
+namespace PocApi.Compartilhado.ModeloDeVisualizacao.Pagamento
 {
     public class PagamentoViewModel
     {
+        public PagamentoFormaEnum PagamentoForma { get; set; }
         public string Descricao { get; set; }
         public int DiasPagamento { get; set; }
         public decimal DiaJuros { get; set; }
