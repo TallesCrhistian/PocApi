@@ -15,6 +15,6 @@ namespace PocApi.Compartilhado.DTOs
         public ClienteDTO ClienteDTO { get; set; }
         public List<PedidoPagamentoDTO> PedidosPagamentoDTO { get; set; }
         public List<ItemPedidoDTO> ItemPedidoDTO { get; set; }
-        public List<DocumentoAReceberDTO> DocumentoAReceberDTOs { get; set; }
+        public List<DocumentoAReceberDTO> DocumentoAReceberDTO { get; set; }
     }
 }

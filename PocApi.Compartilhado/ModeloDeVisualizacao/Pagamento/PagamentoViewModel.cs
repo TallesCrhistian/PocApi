@@ -4,6 +4,7 @@ namespace PocApi.Compartilhado.ModeloDeVisualizacao.Pagamento
 {
     public class PagamentoViewModel
     {
+        public int IdPagamento { get; set; }
         public PagamentoFormaEnum PagamentoForma { get; set; }
         public string Descricao { get; set; }
         public int DiasPagamento { get; set; }

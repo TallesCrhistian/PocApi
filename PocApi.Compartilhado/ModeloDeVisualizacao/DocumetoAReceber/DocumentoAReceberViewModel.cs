@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber
 {
-    public class DocumentoAReceberInserirViewModel
+    public class DocumentoAReceberViewModel
     {
         public int IdCliente { get; set; }
         public int IdPedido { get; set; }

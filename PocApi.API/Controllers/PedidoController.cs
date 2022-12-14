@@ -28,8 +28,7 @@ namespace PocApi.API.Controllers
         [Route(nameof(Inserir))]
         public async Task<IActionResult> Inserir([FromBody] PedidoInserirViewModel pedidoInserirViewModel)
         {
-            PedidoDTO pedidoDTO = _mapper.Map<PedidoDTO>(pedidoInserirViewModel);
-            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = await _pedidoServicos.Inserir(pedidoDTO);
+            RespostaServicoDTO<PedidoDTO> respostaServicoDTO = await _pedidoServicos.Inserir(pedidoInserirViewModel);
             return Ok(respostaServicoDTO);
         }
 

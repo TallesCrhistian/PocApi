@@ -1,6 +1,5 @@
 ﻿using Entidades;
 using System;
-using System.Collections.Generic;
 
 namespace PocApi.Entidades
 {

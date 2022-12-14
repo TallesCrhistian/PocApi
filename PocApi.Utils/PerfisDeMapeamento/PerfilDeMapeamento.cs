@@ -3,6 +3,7 @@ using Entidades;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Compartilhado.ModeloDeVisualizacao;
 using PocApi.Compartilhado.ModeloDeVisualizacao.DocumetoAReceber;
+using PocApi.Compartilhado.ModeloDeVisualizacao.Pagamento;
 using PocApi.Entidades;
 
 namespace PocApi.Utils.PerfisDeMapeamento
@@ -17,27 +18,30 @@ namespace PocApi.Utils.PerfisDeMapeamento
                 .ReverseMap();
 
             CreateMap<PedidoInserirViewModel, PedidoDTO>()
-                 .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidoPagamentoViewModels))
-             .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItemPedidoViewModels));
+                .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidoPagamentoViewModels))
+                .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItemPedidoViewModels));
 
             CreateMap<PedidoDTO, PedidoInserirViewModel>()
-               .ForMember(dest => dest.PedidoPagamentoViewModels, opt => opt.MapFrom(src => src.PedidosPagamentoDTO))
-            .ForMember(dest => dest.ItemPedidoViewModels, opt => opt.MapFrom(src => src.ItemPedidoDTO));
+                .ForMember(dest => dest.PedidoPagamentoViewModels, opt => opt.MapFrom(src => src.PedidosPagamentoDTO))
+                .ForMember(dest => dest.ItemPedidoViewModels, opt => opt.MapFrom(src => src.ItemPedidoDTO));
 
             CreateMap<PedidoDTO, Pedido>()
                 .ForMember(dest => dest.Cliente, opt => opt.MapFrom(src => src.ClienteDTO))
-                 .ForMember(dest => dest.PedidosPagamento, opt => opt.MapFrom(src => src.PedidosPagamentoDTO))
-            .ForMember(dest => dest.ItensPedido, opt => opt.MapFrom(src => src.ItemPedidoDTO));
+                .ForMember(dest => dest.PedidosPagamento, opt => opt.MapFrom(src => src.PedidosPagamentoDTO))
+                .ForMember(dest => dest.ItensPedido, opt => opt.MapFrom(src => src.ItemPedidoDTO))
+                .ForMember(dest => dest.DocumentoAReceber, opt => opt.MapFrom(src => src.DocumentoAReceberDTO));
 
             CreateMap<Pedido, PedidoDTO>()
                 .ForMember(dest => dest.ClienteDTO, opt => opt.MapFrom(src => src.Cliente))
-             .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidosPagamento))
-            .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItensPedido));
+                .ForMember(dest => dest.PedidosPagamentoDTO, opt => opt.MapFrom(src => src.PedidosPagamento))
+                .ForMember(dest => dest.ItemPedidoDTO, opt => opt.MapFrom(src => src.ItensPedido))
+                .ForMember(dest => dest.DocumentoAReceberDTO, opt => opt.MapFrom(src => src.DocumentoAReceber));
 
             CreateMap<PedidoPagamentoViewModel, PedidoPagamentoDTO>()
-                 .ForMember(dest => dest.PagamentoDTO, opt => opt.MapFrom(src => src.PagamentoViewModel));
+                .ForMember(dest => dest.PagamentoDTO, opt => opt.MapFrom(src => src.PagamentoViewModel));
+
             CreateMap<PedidoPagamentoDTO, PedidoPagamento>()
-                 .ForMember(dest => dest.Pagamento, opt => opt.MapFrom(src => src.PagamentoDTO));
+                .ReverseMap();
 
             CreateMap<UsuarioInserirViewModel, UsuarioDTO>()
                 .ReverseMap();
@@ -57,6 +61,8 @@ namespace PocApi.Utils.PerfisDeMapeamento
 
             CreateMap<PagamentoDTO, Pagamento>()
                 .ReverseMap();
+            CreateMap<PagamentoViewModel, PagamentoDTO>()
+                .ReverseMap();
             CreateMap<PagamentoInserirViewModel, PagamentoDTO>()
                 .ReverseMap();
             CreateMap<PagamentoAlterarViewModel, PagamentoDTO>()
@@ -67,7 +73,7 @@ namespace PocApi.Utils.PerfisDeMapeamento
             CreateMap<ItemPedidoDTO, ItemPedido>()
                 .ReverseMap();
 
-            CreateMap<DocumentoAReceberInserirViewModel, DocumentoAReceberDTO>()
+            CreateMap<DocumentoAReceberViewModel, DocumentoAReceberDTO>()
                 .ReverseMap();
             CreateMap<DocumentoAReceberDTO, DocumentoAReceber>()
                 .ReverseMap();

@@ -1,4 +1,5 @@
-﻿using PocApi.Compartilhado.Enumeradores;
+﻿using Newtonsoft.Json;
+using PocApi.Compartilhado.Enumeradores;
 using System;
 using System.Collections.Generic;
 

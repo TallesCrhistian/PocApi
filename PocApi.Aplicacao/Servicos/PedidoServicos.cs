@@ -1,7 +1,8 @@
-﻿using PocApi.Aplicacao.Interfaces;
+﻿using AutoMapper;
+using PocApi.Aplicacao.Interfaces;
 using PocApi.Compartilhado.DTOs;
 using PocApi.Compartilhado.Menssagens;
-using PocApi.Compartilhado.ModeloDeVisualizacao.Pedido;
+using PocApi.Compartilhado.ModeloDeVisualizacao;
 using PocApi.Data.Interfaces;
 using PocApi.Negocios.Interfaces;
 using System;
@@ -15,20 +16,23 @@ namespace PocApi.Aplicacao.Servicos
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
         private readonly IPedidoNegocios _pedidoNegocios;
         private readonly IDocumentoAReceberNegocios _documentoAReceberNegocios;
+        private readonly IMapper _mapper;
 
-        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios, IDocumentoAReceberNegocios documentoAReceberNegocios)
+        public PedidoServicos(IUnidadeDeTrabalho unidadeDeTrabalho, IPedidoNegocios pedidoNegocios, IClienteNegocios clienteNegocios, IDocumentoAReceberNegocios documentoAReceberNegocios, IMapper mapper)
         {
             _pedidoNegocios = pedidoNegocios;
             _unidadeDeTrabalho = unidadeDeTrabalho;
             _documentoAReceberNegocios = documentoAReceberNegocios;
+            _mapper = mapper;
         }
 
-        public async Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoDTO pedidoDTO)
+        public async Task<RespostaServicoDTO<PedidoDTO>> Inserir(PedidoInserirViewModel pedidoInserirViewModel)
         {
             RespostaServicoDTO<PedidoDTO> respostaServicoDTO = new RespostaServicoDTO<PedidoDTO>();
             try
             {
-                pedidoDTO.DocumentoAReceberDTOs = _documentoAReceberNegocios.CriarDocumentoAReceberDTO(pedidoDTO);
+                PedidoDTO pedidoDTO = _mapper.Map<PedidoDTO>(pedidoInserirViewModel);
+                pedidoDTO.DocumentoAReceberDTO = _documentoAReceberNegocios.CriarDocumentoAReceberDTO(pedidoDTO);
                 respostaServicoDTO.Dados = await _pedidoNegocios.Inserir(pedidoDTO);
 
                 await _unidadeDeTrabalho.CommitAsync();
