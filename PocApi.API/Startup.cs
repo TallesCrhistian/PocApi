@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using PocApi.Utils.PerfisDeMapeamento;
 
 namespace PocApi.API
@@ -14,7 +13,8 @@ namespace PocApi.API
         {
             _configuration = configuration;
         }
-        public IConfiguration  _configuration {get;}
+
+        public IConfiguration _configuration { get; }
 
         public IConfiguration Configuration { get; }
 

@@ -1,7 +1,9 @@
-﻿using PocAPI.WPF.Cadastros;
+﻿using Newtonsoft.Json;
+using PocAPI.WPF.Cadastros;
+using PocAPI.WPF.Configuracoes;
 using PocAPI.WPF.Movimento;
+using System.IO;
 using System.Windows;
-
 
 namespace PocAPI.WPF
 {
@@ -20,44 +22,60 @@ namespace PocAPI.WPF
             FrmClienteListar frmClienteListar = new FrmClienteListar();
             frmClienteListar.Owner = this;
             frmClienteListar.Show();
-        }       
+        }
 
-        
         private void Pedido_Click(object sender, RoutedEventArgs e)
         {
             Pedido pedido = new Pedido();
             pedido.Owner = this;
             pedido.Show();
         }
+
         private void MeiProduto_Click(object sender, RoutedEventArgs e)
         {
             FrmProdutosListar frmProdutosListar = new FrmProdutosListar();
             frmProdutosListar.Owner = this;
             frmProdutosListar.Show();
         }
+
         private void MeiPagamento_Click(object sender, RoutedEventArgs e)
         {
             FrmPagamentosListar frmPagamentosListar = new FrmPagamentosListar();
             frmPagamentosListar.Owner = this;
             frmPagamentosListar.Show();
         }
-        
 
         private void DocumentoAReceber_Click(object sender, RoutedEventArgs e)
         {
-            DocumentosAReceber documentoAReceber= new DocumentosAReceber();
+            DocumentosAReceber documentoAReceber = new DocumentosAReceber();
             documentoAReceber.Owner = this;
             documentoAReceber.Show();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-           bool resultado = ExibirFrmLogin();
+            using StreamReader file = File.OpenText(@"C:\Users\Talles\source\repos\PocApi\PocAPI.WPF\PocAPI\ConfiguracoesClientePocAPI.json");
+            {
+                if (file == null)
+                {
+                    JsonSerializer serializer = new JsonSerializer();
+                    ConfiguracoesClientePocAPI configuracoesClientePocAPI = (ConfiguracoesClientePocAPI)serializer.Deserialize(file, typeof(ConfiguracoesClientePocAPI));
+                }
+                else
+                {
+                    FrmValidar frmValidar = new FrmValidar();
+                    frmValidar.Owner = this;
+                    frmValidar.Show();
+                }
+            }
+
+            bool resultado = ExibirFrmLogin();
             if (resultado == false)
             {
                 Close();
             }
         }
+
         private bool ExibirFrmLogin()
         {
             FrmLogin frmLogin = new FrmLogin();
@@ -65,6 +83,5 @@ namespace PocAPI.WPF
             bool? resultado = frmLogin.ShowDialog();
             return resultado == true;
         }
-
     }
 }
