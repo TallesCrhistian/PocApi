@@ -2,10 +2,7 @@
 {
     public class ConfiguracoesClientePocAPI
     {
-        public class ConfiguracaoAPI
-        {
-            public string EnderecoBase { get; set; }
-            public int TimeOutSegundos { get; set; }
-        }
+        public string EnderecoBase { get; set; }
+        public string TimeOutSegundos { get; set; }
     }
 }

@@ -52,21 +52,31 @@ namespace PocAPI.WPF
             documentoAReceber.Show();
         }
 
+        private bool AbrirFrmConfiguracao()
+        {
+            bool? resultado = false;
+
+            ConfiguracoesClientePocAPI configuracoesClientePocAPI = Utils.JsonUtils.RetornaObjeto<ConfiguracoesClientePocAPI>(ConstantesWPF.CaminhoPastaConfiguracao + "\\" + nameof(ConfiguracoesClientePocAPI) + ".txt");
+            if (configuracoesClientePocAPI == null)
+            {
+                FrmConfiguracao frmConfiguracao = new FrmConfiguracao();
+                frmConfiguracao.Owner = this;
+                resultado = frmConfiguracao.ShowDialog();
+            }
+            else
+            {
+                ConfiguracoesWPF.EnderecoBase = configuracoesClientePocAPI.EnderecoBase;
+                ConfiguracoesWPF.TimeOutSegundos = configuracoesClientePocAPI.TimeOutSegundos;
+                resultado = true;
+            }
+            return resultado == true;
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using StreamReader file = File.OpenText(@"C:\Users\Talles\source\repos\PocApi\PocAPI.WPF\PocAPI\ConfiguracoesClientePocAPI.json");
+            if (!AbrirFrmConfiguracao())
             {
-                if (file == null)
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    ConfiguracoesClientePocAPI configuracoesClientePocAPI = (ConfiguracoesClientePocAPI)serializer.Deserialize(file, typeof(ConfiguracoesClientePocAPI));
-                }
-                else
-                {
-                    FrmValidar frmValidar = new FrmValidar();
-                    frmValidar.Owner = this;
-                    frmValidar.Show();
-                }
+                Close();
             }
 
             bool resultado = ExibirFrmLogin();
