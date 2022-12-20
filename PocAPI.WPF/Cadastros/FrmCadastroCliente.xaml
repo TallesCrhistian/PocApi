@@ -1,0 +1,125 @@
+﻿<Window
+    x:Class="PocAPI.WPF.Cadastros.FrmCadastroCliente"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PocAPI.WPF.Cadastros"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="FrmCadastroCliente"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Grid x:Name="grdCadastroCliente">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Label
+                Name="lblTitulo"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="Preencha seus dados para cadastrar..."
+                FontSize="16"
+                FontWeight="Bold" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdNome">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Width="100"
+                    Height="25px"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="Nome:" />
+                <TextBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalContentAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdSobreNome">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Width="100"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="Sobre Nome:" />
+                <PasswordBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdCPF">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Width="100"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="CPF:" />
+                <PasswordBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="4"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                Name="btnSalvar"
+                Width="100px"
+                Height="25px"
+                Margin="10.10"
+                Click="btnSalvar_Click"
+                Content="Salvar" />
+            <Button
+                Name="btnCancelar"
+                Width="100px"
+                Height="25px"
+                Margin="10,10"
+                Click="btnCancelar_Click"
+                Content="Cancelar" />
+        </StackPanel>
+    </Grid>
+</Window>

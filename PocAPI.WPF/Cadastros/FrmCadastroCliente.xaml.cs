@@ -15,26 +15,21 @@ using System.Windows.Shapes;
 namespace PocAPI.WPF.Cadastros
 {
     /// <summary>
-    /// Lógica interna para FrmClienteListar.xaml
+    /// Lógica interna para FrmCadastroCliente.xaml
     /// </summary>
-    public partial class FrmClienteListar : Window
+    public partial class FrmCadastroCliente : Window
     {
-        public FrmClienteListar()
+        public FrmCadastroCliente()
         {
             InitializeComponent();
         }
 
-        private void btnIncluir_Click(object sender, RoutedEventArgs e)
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
-            ExibirCadastroCliente();
         }
 
-        private bool ExibirCadastroCliente()
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            FrmCadastroCliente frmCadastroCliente = new FrmCadastroCliente();
-            frmCadastroCliente.Owner = this;
-            bool? resultado = frmCadastroCliente.ShowDialog();
-            return resultado == true;
         }
     }
 }

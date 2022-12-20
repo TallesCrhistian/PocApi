@@ -101,6 +101,7 @@
                 Width="80"
                 Height="25"
                 Margin="10"
+                Click="btnIncluir_Click"
                 Content="Incluir" />
             <Button
                 x:Name="btnAlterar"
