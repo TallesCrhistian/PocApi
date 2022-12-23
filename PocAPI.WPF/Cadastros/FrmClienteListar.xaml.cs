@@ -36,5 +36,9 @@ namespace PocAPI.WPF.Cadastros
             bool? resultado = frmCadastroCliente.ShowDialog();
             return resultado == true;
         }
+
+        private void dgvCliente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
     }
 }

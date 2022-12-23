@@ -62,7 +62,7 @@
             BorderBrush="Black"
             BorderThickness="1px"
             CanUserAddRows="False"
-            GridLinesVisibility="Horizontal">
+            GridLinesVisibility="Horizontal" SelectionChanged="dgvCliente_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     x:Name="colIdCliente"
