@@ -15,26 +15,21 @@ using System.Windows.Shapes;
 namespace PocAPI.WPF.Cadastros
 {
     /// <summary>
-    /// Lógica interna para FrmProdutosListar.xaml
+    /// Lógica interna para FrmCadastroProduto.xaml
     /// </summary>
-    public partial class FrmProdutosListar : Window
+    public partial class FrmCadastroProduto : Window
     {
-        public FrmProdutosListar()
+        public FrmCadastroProduto()
         {
             InitializeComponent();
         }
 
-        private void btnIncluir_Click(object sender, RoutedEventArgs e)
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
-            ExibirCadastroProduto();
         }
 
-        private bool ExibirCadastroProduto()
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
         {
-            FrmCadastroProduto frmCadastroProduto = new FrmCadastroProduto();
-            frmCadastroProduto.Owner = this;
-            bool? resultado = frmCadastroProduto.ShowDialog();
-            return resultado == true;
         }
     }
 }

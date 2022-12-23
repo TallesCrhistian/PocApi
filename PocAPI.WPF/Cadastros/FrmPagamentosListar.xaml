@@ -104,7 +104,6 @@
                     Width="100"
                     Binding="{Binding Parcelas}"
                     Header="Parcelas" />
-
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel
@@ -117,6 +116,7 @@
                 Width="80"
                 Height="25"
                 Margin="10"
+                Click="btnIncluir_Click"
                 Content="Incluir" />
             <Button
                 x:Name="btnAlterar"
@@ -139,4 +139,3 @@
         </StackPanel>
     </Grid>
 </Window>
-

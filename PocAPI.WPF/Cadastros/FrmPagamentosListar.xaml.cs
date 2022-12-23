@@ -23,5 +23,18 @@ namespace PocAPI.WPF.Cadastros
         {
             InitializeComponent();
         }
+
+        private void btnIncluir_Click(object sender, RoutedEventArgs e)
+        {
+            ExibirCadastroPagamento();
+        }
+
+        private bool ExibirCadastroPagamento()
+        {
+            FrmCadastroPagamento frmCadastroPagamento = new FrmCadastroPagamento();
+            frmCadastroPagamento.Owner = this;
+            bool? resultado = frmCadastroPagamento.ShowDialog();
+            return resultado == true;
+        }
     }
 }

@@ -1,0 +1,150 @@
+﻿<Window
+    x:Class="PocAPI.WPF.Cadastros.FrmCadastroProduto"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PocAPI.WPF.Cadastros"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="FrmCadastroProduto"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Grid Name="grdCadastroProduto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Label
+                Name="lblTitulo"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Content="Preencha para cadastrar um Produto..."
+                FontSize="16"
+                FontWeight="Bold" />
+        </StackPanel>
+        <StackPanel
+            Grid.Row="1"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdDescricao">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Width="100"
+                    Height="25px"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="Descricao:" />
+                <TextBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalContentAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="2"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdEAN">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Width="100"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="EAN:" />
+                <TextBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="3"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdPrecoCusto">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Width="100"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="Preço Custo:" />
+                <TextBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="4"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Grid Name="grdPrecoVenda">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="0.6*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Column="0"
+                    Width="100"
+                    Margin="10,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Content="Preço Venda:" />
+                <TextBox
+                    Grid.Column="1"
+                    Width="200px"
+                    Height="25px"
+                    VerticalAlignment="Center" />
+            </Grid>
+        </StackPanel>
+        <StackPanel
+            Grid.Row="5"
+            HorizontalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                Name="btnSalvar"
+                Width="100px"
+                Height="25px"
+                Margin="10.10"
+                Click="btnSalvar_Click"
+                Content="Salvar" />
+            <Button
+                Name="btnCancelar"
+                Width="100px"
+                Height="25px"
+                Margin="10,10"
+                Click="btnCancelar_Click"
+                Content="Cancelar" />
+        </StackPanel>
+    </Grid>
+</Window>
