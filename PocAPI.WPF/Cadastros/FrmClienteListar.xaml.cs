@@ -1,4 +1,7 @@
-﻿using System;
+﻿using PocApi.Compartilhado.DTOs;
+using PocApi.Compartilhado.ModeloDeVisualizacao;
+using PocAPI.WPF.ChamadaAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,6 +42,14 @@ namespace PocAPI.WPF.Cadastros
 
         private void dgvCliente_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ClienteChamadaAPI clienteChamadaAPI = new ClienteChamadaAPI();
+            RespostaServicoDTO<ClienteViewModel> respostaServicoDTO = await clienteChamadaAPI.ObterPorCodigo(1);
+
+            MessageBox.Show("Nome: " + respostaServicoDTO.Dados.Nome);
         }
     }
 }

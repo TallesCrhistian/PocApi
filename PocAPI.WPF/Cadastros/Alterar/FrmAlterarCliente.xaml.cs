@@ -23,5 +23,17 @@ namespace PocAPI.WPF.Cadastros.Alterar
         {
             InitializeComponent();
         }
+
+        private void dgvCliente_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private void btnSalvar_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

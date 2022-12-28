@@ -15,7 +15,6 @@ namespace PocApi.API.Controllers
         private IClienteServicos _clienteServicos;
         private IMapper _mapper;
 
-
         public ClienteController(IClienteServicos clienteServicos, IMapper mapper)
         {
             _clienteServicos = clienteServicos;
@@ -24,13 +23,12 @@ namespace PocApi.API.Controllers
 
         [HttpPost]
         [Route(nameof(Inserir))]
-        public async Task<IActionResult> Inserir([FromBody] ClienteViewModel  clienteViewModel)
+        public async Task<IActionResult> Inserir([FromBody] ClienteViewModel clienteViewModel)
         {
             ClienteDTO clienteDTO = _mapper.Map<ClienteDTO>(clienteViewModel);
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.Inserir(clienteDTO);
 
             return Ok(respostaServicoDTO);
-
         }
 
         [HttpPut]
@@ -56,7 +54,8 @@ namespace PocApi.API.Controllers
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.Deletar(idCliente);
             return Ok(respostaServicoDTO);
         }
-        [HttpPost("{idCliente:int}")]
+
+        [HttpGet("{idCliente}")]
         public async Task<IActionResult> ObterPorCodigo(int idCliente)
         {
             RespostaServicoDTO<ClienteDTO> respostaServicoDTO = await _clienteServicos.ObterPorCodigo(idCliente);
