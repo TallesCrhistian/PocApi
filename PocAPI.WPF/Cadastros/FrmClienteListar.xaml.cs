@@ -47,7 +47,8 @@ namespace PocAPI.WPF.Cadastros
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ClienteChamadaAPI clienteChamadaAPI = new ClienteChamadaAPI();
-            RespostaServicoDTO<ClienteViewModel> respostaServicoDTO = await clienteChamadaAPI.ObterPorCodigo(1);
+            ClienteDTO clienteDTO = new ClienteDTO { IdCliente = 1, Cpf = "112", Nome = "talles", SobreNome = " arriel" };
+            RespostaServicoDTO<ClienteViewModel> respostaServicoDTO = await clienteChamadaAPI.Alterar(clienteDTO);
 
             MessageBox.Show("Nome: " + respostaServicoDTO.Dados.Nome);
         }
