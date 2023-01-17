@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Entidades\PocApi.Entidades.csproj" />
     <ProjectReference Include="..\PocAPI.ClienteAPI\PocAPI.ClienteAPI.csproj" />
+    <ProjectReference Include="..\PocApi.Utils\PocApi.Utils.csproj" />
   </ItemGroup>
 
 </Project>

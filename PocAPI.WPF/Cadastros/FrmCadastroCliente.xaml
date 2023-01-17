@@ -8,6 +8,7 @@
     Title="FrmCadastroCliente"
     Width="800"
     Height="450"
+    Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Grid x:Name="grdCadastroCliente">
         <Grid.RowDefinitions>
@@ -51,7 +52,8 @@
                     Grid.Column="1"
                     Width="200px"
                     Height="25px"
-                    VerticalContentAlignment="Center" />
+                    VerticalContentAlignment="Center"
+                    Text="{Binding Nome, Mode=TwoWay}" />
             </Grid>
         </StackPanel>
         <StackPanel
@@ -71,11 +73,12 @@
                     VerticalAlignment="Center"
                     HorizontalContentAlignment="Center"
                     Content="Sobre Nome:" />
-                <PasswordBox
+                <TextBox
                     Grid.Column="1"
                     Width="200px"
                     Height="25px"
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    Text="{Binding SobreNome, Mode=TwoWay}" />
             </Grid>
         </StackPanel>
         <StackPanel
@@ -95,11 +98,12 @@
                     VerticalAlignment="Center"
                     HorizontalContentAlignment="Center"
                     Content="CPF:" />
-                <PasswordBox
+                <TextBox
                     Grid.Column="1"
                     Width="200px"
                     Height="25px"
-                    VerticalAlignment="Center" />
+                    VerticalAlignment="Center"
+                    Text="{Binding Cpf, Mode=TwoWay}" />
             </Grid>
         </StackPanel>
         <StackPanel

@@ -1,5 +1,4 @@
-﻿
-namespace PocApi.Compartilhado.Menssagens
+﻿namespace PocApi.Compartilhado.Menssagens
 {
     public static class ConstantesMensagens
     {
@@ -8,7 +7,9 @@ namespace PocApi.Compartilhado.Menssagens
         public const string ClienteNaoLocalizado = "Cliente não localizado";
         public const string PedidoNaoEncontrado = "Pedido não encontrado";
         public const string SenhaInvalida = "Senha inválida";
-        public static  string EmailJaExiste(string email) => $"Email {email} já cadastrado!";
-        
+        public const string NenhumRegistroSelecionado = "Nenhum registro selecionado!";
+        public const string NaoFoiPossivelConcluirOperacao = "Não foi possivel concluir operação";
+
+        public static string EmailJaExiste(string email) => $"Email {email} já cadastrado!";
     }
 }

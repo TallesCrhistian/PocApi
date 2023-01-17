@@ -6,9 +6,9 @@
     xmlns:local="clr-namespace:PocAPI.WPF.Cadastros"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Clientes"
-    Loaded="Window_Loaded"
     Width="850"
     Height="450"
+    Loaded="Window_Loaded"
     WindowStartupLocation="CenterOwner"
     WindowState="Normal"
     mc:Ignorable="d">
@@ -52,6 +52,7 @@
                 Height="25"
                 Margin="10"
                 HorizontalAlignment="Right"
+                Click="btnPesquisar_Click"
                 Content="Pesquisar" />
         </StackPanel>
         <DataGrid
@@ -63,7 +64,8 @@
             BorderBrush="Black"
             BorderThickness="1px"
             CanUserAddRows="False"
-            GridLinesVisibility="Horizontal" SelectionChanged="dgvCliente_SelectionChanged">
+            GridLinesVisibility="Horizontal"
+            SelectionChanged="dgvCliente_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     x:Name="colIdCliente"
@@ -78,7 +80,7 @@
                 <DataGridTextColumn
                     x:Name="colNome"
                     Width="1*"
-                    Binding="{Binding Name}"
+                    Binding="{Binding Nome}"
                     Header="Nome" />
                 <DataGridTextColumn
                     x:Name="colSobreNome"
@@ -109,6 +111,7 @@
                 Width="80"
                 Height="25"
                 Margin="10"
+                Click="btnAlterar_Click"
                 Content="Alterar" />
             <Button
                 x:Name="btnExcluir"

@@ -1,19 +1,15 @@
 ﻿using PocApi.Compartilhado.DTOs;
+using PocApi.Compartilhado.Enumeradores;
+using PocApi.Compartilhado.Menssagens;
 using PocApi.Compartilhado.ModeloDeVisualizacao;
+using PocApi.Utils.Extencoes;
 using PocAPI.WPF.ChamadaAPI;
+using PocAPI.WPF.Utils;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PocAPI.WPF.Cadastros
 {
@@ -29,13 +25,15 @@ namespace PocAPI.WPF.Cadastros
 
         private void btnIncluir_Click(object sender, RoutedEventArgs e)
         {
-            ExibirCadastroCliente();
+            if (ExibirFrmClienteCadastrar(new ClienteViewModel()))
+            {
+                btnPesquisar.PerformClick();
+            }
         }
 
-        private bool ExibirCadastroCliente()
+        private bool ExibirFrmClienteCadastrar(ClienteViewModel clienteViewModel)
         {
-            FrmCadastroCliente frmCadastroCliente = new FrmCadastroCliente();
-            frmCadastroCliente.Owner = this;
+            FrmCadastroCliente frmCadastroCliente = new FrmCadastroCliente(clienteViewModel);
             bool? resultado = frmCadastroCliente.ShowDialog();
             return resultado == true;
         }
@@ -44,13 +42,85 @@ namespace PocAPI.WPF.Cadastros
         {
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            ClienteChamadaAPI clienteChamadaAPI = new ClienteChamadaAPI();
-            ClienteDTO clienteDTO = new ClienteDTO { IdCliente = 1, Cpf = "112", Nome = "talles", SobreNome = " arriel" };
-            RespostaServicoDTO<ClienteViewModel> respostaServicoDTO = await clienteChamadaAPI.Alterar(clienteDTO);
+            PopularComboBoxTipoPesquisa();
+        }
 
-            MessageBox.Show("Nome: " + respostaServicoDTO.Dados.Nome);
+        private void PopularComboBoxTipoPesquisa()
+        {
+            List<string> tipoPesquisa = new List<string>();
+            tipoPesquisa.Add(TipoPesquisaClienteEnum.Id.ObterDescricao());
+            tipoPesquisa.Add(TipoPesquisaClienteEnum.Nome.ObterDescricao());
+            tipoPesquisa.Add(TipoPesquisaClienteEnum.SobreNome.ObterDescricao());
+            tipoPesquisa.Add(TipoPesquisaClienteEnum.Cpf.ObterDescricao());
+
+            cbxPesquisarPor.ItemsSource = tipoPesquisa;
+            cbxPesquisarPor.SelectedIndex = 0;
+        }
+
+        private async void btnPesquisar_Click(object sender, RoutedEventArgs e)
+        {
+            ClienteFiltroViewModel clienteFiltroViewModel = CriarClienteFiltroViewModel();
+            List<ClienteViewModel> clienteViewModels = await Listar(clienteFiltroViewModel);
+
+            dgvCliente.ItemsSource = clienteViewModels;
+        }
+
+        private ClienteFiltroViewModel CriarClienteFiltroViewModel()
+        {
+            string pesquisa = txtPesquisa.Text;
+            TipoPesquisaClienteEnum tipoPesquisa = cbxPesquisarPor.SelectedValue.ToString().ObterValorPorDescricao<TipoPesquisaClienteEnum>();
+
+            ClienteFiltroViewModel clienteFiltroViewModel = new ClienteFiltroViewModel
+            {
+                IdCliente = tipoPesquisa == TipoPesquisaClienteEnum.Id && Int32.TryParse(pesquisa, out int i) ? i : 0,
+                Nome = tipoPesquisa == TipoPesquisaClienteEnum.Nome ? pesquisa : string.Empty,
+                SobreNome = tipoPesquisa == TipoPesquisaClienteEnum.SobreNome ? pesquisa : string.Empty,
+                Cpf = tipoPesquisa == TipoPesquisaClienteEnum.Cpf ? pesquisa : string.Empty
+            };
+
+            return clienteFiltroViewModel;
+        }
+
+        private async Task<List<ClienteViewModel>> Listar(ClienteFiltroViewModel clienteFiltroViewModel)
+         {
+            ClienteChamadaAPI clienteChamadaAPI = new ClienteChamadaAPI();
+            RespostaServicoDTO<List<ClienteViewModel>> respostaServicoDTO = await clienteChamadaAPI.Listar(clienteFiltroViewModel);
+            List<ClienteViewModel> clienteViewModels = respostaServicoDTO.Dados;
+
+            return clienteViewModels;
+        }
+
+        private ClienteViewModel RetornaClienteViewModelSelecionado()
+        {
+            ClienteViewModel clienteViewModel = (ClienteViewModel)dgvCliente.SelectedItem;
+
+            return clienteViewModel;
+        }
+
+        private bool ValidaClienteSelecionado(ClienteViewModel clienteViewModel)
+        {
+            if (clienteViewModel == null)
+            {
+                MessageBox.Show(this, ConstantesMensagens.NenhumRegistroSelecionado, "Aviso", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void btnAlterar_Click(object sender, RoutedEventArgs e)
+        {
+            ClienteViewModel clienteViewModel = RetornaClienteViewModelSelecionado();
+            if (ValidaClienteSelecionado(clienteViewModel))
+            {
+                bool resultado = ExibirFrmClienteCadastrar(clienteViewModel);
+                if (resultado)
+                {
+                    btnPesquisar.PerformClick();
+                }
+            }
         }
     }
 }
