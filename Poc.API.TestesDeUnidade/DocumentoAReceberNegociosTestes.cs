@@ -11,8 +11,7 @@ namespace Poc.API.TestesDeUnidade
     public class DocumentoAReceberNegociosTestes
     {
         private IDocumentoAReceberNegocios _documentoAReceberNegocios;
-
-        private List<decimal> parcelasDivisaoNaoExatas = new List<decimal> { 3.33M, 3.33M, 3.34M };
+        
 
         [SetUp]
         public void Setup()
@@ -39,7 +38,7 @@ namespace Poc.API.TestesDeUnidade
             Assert.That(resultado.Count == parcelasDivisaoExatas.Count);
             Assert.That(parcelasDivisaoExatas[0] == resultado[0]);
             Assert.That(parcelasDivisaoExatas[1] == resultado[1]);
-            Assert.That(parcelasDivisaoExatas[2] == resultado[2]);
+            Assert.That(parcelasDivisaoExatas[2] == resultado[2]);            
         }
 
         [Test]
