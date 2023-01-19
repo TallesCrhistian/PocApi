@@ -63,5 +63,23 @@ namespace PocApi.Negocios
 
             return documentoAReceberDTO;
         }
+
+        public List<decimal> RatearParcela(int quantidadeDeParcela, decimal valorTotalDasParcelas)
+        {
+            decimal valorRestante = valorTotalDasParcelas;
+            decimal valorParcela = decimal.Divide(valorRestante, quantidadeDeParcela);
+            valorParcela = Math.Round(valorParcela, 2);
+
+            List<decimal> parcelasRateadas = new List<decimal>();
+
+            for (int numeroParcela = 1; numeroParcela <= quantidadeDeParcela; numeroParcela++)
+            {
+                decimal valor = (numeroParcela != quantidadeDeParcela) ? valorParcela : valorRestante;
+                parcelasRateadas.Add(valor);
+                valorRestante -= valor;
+            }
+
+            return parcelasRateadas;
+        }
     }
 }

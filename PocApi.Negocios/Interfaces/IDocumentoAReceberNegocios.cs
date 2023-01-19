@@ -9,5 +9,7 @@ namespace PocApi.Negocios.Interfaces
         Task<DocumentoAReceberDTO> Inserir(DocumentoAReceberDTO documentoAReceberDTO);
 
         List<DocumentoAReceberDTO> CriarDocumentoAReceberDTO(PedidoDTO pedidoDTO);
+
+        List<decimal> RatearParcela(int quantidadeDeParcela, decimal valorTotalDasParcelas);
     }
 }
